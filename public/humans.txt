@@ -1,0 +1,17 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    <name> -- <role> -- <twitter>
+    Mnqobi -- Lead Developer -- @MnqobiSB
+
+# THANKS
+
+    <name>
+    #
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5, JavaScript, Bootstrap 4, NodeJS, Express
+    MongoDB, jQuery, Modernizr, Normalize.css, Cloudinary

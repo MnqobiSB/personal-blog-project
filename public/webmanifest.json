@@ -1,0 +1,13 @@
+{
+  "short_name": "Suburban-Hustle",
+  "name": "Suburban Digi Hustle",
+  "icons": [{
+    "src": "icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#rgb(16, 172, 132)",
+  "background_color": "#rgb(16, 172, 132)"
+}
