@@ -1,22 +1,97 @@
 <% layout('layouts/boilerplate') -%>
-<h1>New Post!</h1>
-
-<form action="/posts" method="POST" enctype="multipart/form-data">
-	<div>
-		<input type="text" name="post[title]" placeholder="Title">
+<main>
+	<div class="container">
+		<h1>Create New Post!</h1>
+		<form action="/posts" method="POST" enctype="multipart/form-data">
+			<div class="form-group">
+				<input 
+					type="text"
+					name="post[title]"
+					id="title"
+					class="form-control"  
+					placeholder="Title"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<input 
+					type="file" 
+					name="images"
+					id="images"
+					class="form-control"
+					accept="images/*"  
+					multiple
+				/>
+			</div>
+			<div class="form-group">
+				<select 
+					name="post[mainPost]" 
+					id="main"
+					class="form-control">
+					<option disabled selected>Main Post...</option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<select 
+					name="post[featuredPost]" 
+					id="featured"
+					class="form-control">
+					<option disabled selected>Featured Post...</option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<select 
+					name="post[category]" 
+					id="category"
+					class="form-control">
+					<option disabled selected>Choose Category...</option>
+					<option value="Web Development">Web Development</option>
+					<option value="Social Media">Social Media</option>
+					<option value="Sofware">Sofware</option>
+					<option value="Digital Marketing">Digital Marketing</option>
+					<option value="Make Money Online">Make Money Online</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<textarea 
+					name="post[body]"
+					id="body"
+					class="form-control"
+					rows="5" 
+					placeholder="Post Body"></textarea>
+			</div>
+			<div class="form-group">
+				<textarea 
+					name="post[footer]"
+					id="footer"
+					class="form-control"
+					rows="5" 
+					placeholder="Post Footer"></textarea>
+			</div>
+			<div class="form-group">
+				<input 
+					type="number" 
+					name="post[read]" 
+					id="read"
+					class="form-control" 
+					step="1" 
+					min="1"
+					max="15" 
+					placeholder="Read time(min)"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<button 
+					type="submit"
+					id="submit">
+					Create Post!
+				</button>
+			</div>
+		</form>
 	</div>
-	<div>
-		<input type="number" name="post[price]" step=".01" min="0.01" placeholder="Price">
-	</div>
-	<div>
-		<input type="file" accept="images/*" name="images" multiple/>
-	</div>
-	<div>
-		<textarea name="post[description]" placeholder="Description"></textarea>
-	</div>
-	<div>
-		<input type="text" name="post[location]" placeholder="Location">
-	</div>
-
-	<input type="submit">
-</form>
+</main>

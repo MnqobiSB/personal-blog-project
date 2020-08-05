@@ -2,6 +2,24 @@ const Post = require('../models/post');
 const { cloudinary } = require('../cloudinary');
 
 module.exports = {
+	// Posts Index
+	async postIndex(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 10,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/index', { 
+			posts, 
+			title: 'Posts Index' 
+		});
+	},
 	// Posts New
 	postNew(req, res, next) {
 		res.render('posts/new');
@@ -17,7 +35,6 @@ module.exports = {
 		}
 		req.body.post.author = req.user._id;
 		let post = new Post(req.body.post);
-		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 		await post.save();
 		req.session.success = 'Post created successfully!';
 		res.redirect(`/posts/${post.id}`);

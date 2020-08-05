@@ -23,14 +23,20 @@ module.exports = {
 		}
 		res.render('index', { 
 			posts, 
-			title: 'Suburban Digi Hustle - Home' 
+			title: 'Suburban Digi Hustle - Home',
+			page: 'home'
 		});
 	},
-	// GET /register
+	// GET /sign-up
 	getRegister(req, res, next) {
-		res.render('register', { title: 'Register', username: '', email: '' });
+		res.render('sign-up', { 
+			title: 'Sign Up',
+			page: 'sign-up', 
+			username: '', 
+			email: '' 
+		});
 	},
-	// POST /register
+	// POST /sign-up
 	async postRegister(req, res, next){
 		try {
 			if (req.file) {
@@ -40,7 +46,7 @@ module.exports = {
 			const user = await User.register(new User(req.body), req.body.password);
 			req.login(user, function(err) {
 				if (err) return next(err);
-				req.session.success = `Welcome to Skate Shop, ${user.username}!`;
+				req.session.success = `You have successfully signed up, ${user.username}! Welcome on board`;
 				res.redirect('/');
 			});
 		} catch(err) {
@@ -50,37 +56,48 @@ module.exports = {
 			if (error.includes('E11000 duplicate key error') && error.includes('index: email_1 dup key')) {
 				error = 'A user with the given email is already registered!';
 			}
-			res.render('register', { title: 'Register', username, email, error });
+			res.render('sign-up', { 
+				title: 'Sign Up', 
+				username, 
+				email, 
+				error 
+			});
 		}
 	},
-	// GET /login
+	// GET /sign-in
 	getLogin(req, res, next) {
 		if (req.isAuthenticated()) return res.redirect('/');
 		if (req.query.returnTo) req.session.redirectTo = req.headers.referer;
-		res.render('login', { title: 'Login' });
+		res.render('sign-in', { 
+			title: 'Sign In',
+			page: 'sign-in' 
+		});
 	},
-	// POST /login
+	// POST /sign-in
 	async postLogin(req, res, next) {
 		const { username, password } = req.body;
 		const { user, error } = await User.authenticate()(username, password);
 		if (!user && error) return next(error);
 		req.login(user, function(err) {
 			if (err) return next(err);
-			req.session.success = `Welcome back, ${username}!`;
+			req.session.success = `Welcome back ${username}, We missed you!`;
 			const redirectUrl = req.session.redirectTo || '/';
 			delete req.session.redirectTo;
 			res.redirect(redirectUrl);
 		});
 	},
-	// GET /logout
+	// GET /sign-out
 	getLogout(req, res, next) {
 		req.logout();
+		req.session.success = `Goodbye, come back soon!`;
 		res.redirect('/');
 	},
 	// GET /profile
 	async getProfile(req, res, next) {
-		const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
-		res.render('profile', {posts});
+		res.render('profile', {
+			title: 'My Profile',
+			page: 'profile'
+		});
 	},
 	// PUT /profile
 	async updateProfile(req, res, next) {
@@ -104,7 +121,10 @@ module.exports = {
 	},
 	// GET /users/forgot
 	getForgotPw(req, res, next) {
-		res.render('users/forgot');
+		res.render('users/forgot', {
+			title: 'Forgot Password',
+			page: 'forgot'
+		});
 	},
 	// PUT /users/forgot
 	async putForgotPw(req, res, next) {
@@ -112,7 +132,7 @@ module.exports = {
 		const { email } = req.body;
 		const user = await User.findOne({ email });
 		if (!user) {
-			req.session.error = 'No account with that email.';
+			req.session.error = 'No account with that email exists.';
 			return res.redirect('/forgot-password');
 		}
 		user.resetPasswordToken = token;
@@ -132,8 +152,8 @@ module.exports = {
 
 		const msg = {
 			to: email,
-			from: '"Skate Shop Admin" <amandlamm1@gmail.com>',
-			subject: 'Skate Shop - Forgot Password / Reset',
+			from: '"Suburban Digi Hustle Admin" <amandlamm1@gmail.com>',
+			subject: 'Suburban Digi Hustle - Forgot Password / Reset',
 			text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           		'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           		'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -158,7 +178,11 @@ module.exports = {
 			return res.redirect('/forgot-password');
 		}
 
-		res.render('users/reset', { token });
+		res.render('users/reset', { 
+			title: 'Reset Password',
+			page: 'reset',
+			token 
+		});
 	},
 	// PUT /users/reset
 	async putReset(req, res, next) {
@@ -198,8 +222,8 @@ module.exports = {
 
 		const msg = {
 	    to: user.email,
-	    from: '"Skate Shop Admin" <amandlamm1@gmail.com>',
-	    subject: 'Skate Shop - Password Reset successful!',
+	    from: '"Suburban Digi Hustle Admin" <amandlamm1@gmail.com>',
+	    subject: 'Suburban Digi Hustle - Password Reset successful!',
 	    text: `Hello,
 		  	This email is to confirm that the password for your account has just been changed.
 		  	If you did not make this change, please hit reply and notify us at once.`.replace(/		  	/g, '')

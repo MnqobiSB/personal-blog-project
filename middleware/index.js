@@ -23,7 +23,7 @@ const middleware = {
 	},
 	isLoggedIn: (req, res, next) => {
 		if (req.isAuthenticated()) return next();
-		req.session.error = 'You need to be logged in to do that!';
+		req.session.error = 'You need to be signed in to do that!';
 		req.session.redirectTo = req.originalUrl;
 		res.redirect('/login');
 	},
@@ -34,6 +34,12 @@ const middleware = {
 			return next();
 		}
 		req.session.error = 'Access denied!';
+		res.redirect('back');
+	},
+	isRegisteredAdmin: (req, res, next) => {
+		if (req.user.isAdmin) return next();
+		req.session.error = 'Access Denied! Bye Bye';
+		req.session.redirectTo = req.originalUrl;
 		res.redirect('back');
 	},
 	isValidPassword: async (req, res, next) => {

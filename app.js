@@ -66,6 +66,8 @@ passport.deserializeUser(User.deserializeUser());
 
 // set local variables middleware
 app.use(function(req, res, next) {
+  //require moment
+  app.locals.moment = require('moment');
   // req.user = {
   //   '_id' : '5eb4439c7f321211888ea8b9',
   //   // '_id' : '5eb4f6dd36cefc1e10a23e49',

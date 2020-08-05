@@ -4,10 +4,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-4">
-			<% include ../partials/searchFilter %>
-		</div>
-		<div class="col-8">
-			<div id="map"></div>
+		
 		</div>
 	</div>
 </div>
@@ -27,7 +24,5 @@
 <% include ../partials/paginatePosts %>
 
 <script>
-	mapboxgl.accessToken = "<%= mapBoxToken %>";
 	var posts = { features: <%- JSON.stringify(posts.docs) %> };
 </script>
-<script src="/javascripts/allPostsClusterMap.js"></script>

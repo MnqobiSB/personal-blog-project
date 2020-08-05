@@ -27,20 +27,20 @@ const {
 /* GET home/landing page. */
 router.get('/', asyncErrorHandler(landingPage));
 
-/* GET /register */
-router.get('/register', getRegister);
+/* GET /sign-up */
+router.get('/sign-up', getRegister);
 
-/* POST /register */
-router.post('/register', upload.single('image'), asyncErrorHandler(postRegister));
+/* POST /sign-up */
+router.post('/sign-up', upload.single('image'), asyncErrorHandler(postRegister));
 
 /* GET /login */
-router.get('/login', getLogin);
+router.get('/sign-in', getLogin);
 
 /* POST /login */
-router.post('/login', asyncErrorHandler(postLogin));
+router.post('/sign-in', asyncErrorHandler(postLogin));
 
 /* GET /logout */
-router.get('/logout', getLogout);
+router.get('/sign-out', getLogout);
 
 /* GET /profile */
 router.get('/profile', isLoggedIn, asyncErrorHandler(getProfile));
