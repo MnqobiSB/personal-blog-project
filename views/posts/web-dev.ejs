@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') -%>
 <section id="featured">
 	<div class="container">
-		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark web-dev-jumbotron">
 			<% posts.docs.forEach(function(post){ %>
 				<% if (post.mainPost) { %>
 				    <div class="col-md-7 px-0">
@@ -16,35 +16,6 @@
 			    <% } %>
 		    <% }); %>
 		</div>
-
-	  	<div class="row mb-2">
-	  		<% posts.docs.forEach(function(post){ %>
-				<% if (post.featuredPost) { %>
-	    			<div class="col-md-6"> 		
-			      		<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-			        		<div class="col p-4 d-flex flex-column position-static">
-			          			<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-			          			<h2 class="mb-0"><%= post.title %></h2>
-			          			<div class="mb-1 text-muted"><%= moment(post.createdAt).format('MMM DD') %></div>
-			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
-			          			<a href="/posts/<%= post.id %>" class="stretched-link">Continue reading</a>
-			        		</div>
-			        		<div class="col-auto d-none d-lg-block">
-			        			<% post.images.forEach(function(image){ %>	
-				          			<img 
-				          				src="<%= image.url %>"
-				          				class="img-responsive" 
-				          				width="200" height="250" 
-				          				alt="<%= post.title %>'s image" 
-				          				title="<%= post.title %>'s image"
-				          			/>
-			          			<% }) %>
-			        		</div>
-			      		</div>
-	    			</div>
-	    		<% } %>
-		    <% }); %>
-	  	</div>
 	</div>
 </section>
 
@@ -56,11 +27,12 @@
   	<div class="row">
     	<div class="col-md-8 blog-main">
       		<h3 class="pb-4 mb-4 font-italic border-bottom">
-        		Latest Posts
+        		Latest Web Development Posts
       		</h3>
 
       		<div class="blog-post">
       			<% posts.docs.forEach(function(post){ %>
+      				<% if (post.category === 'Web Development') { %>
 	      			<article>
 	      				<header class="blog-post-header">
 			        		<h2 class="blog-post-title"><%= post.title %></h2>
@@ -76,13 +48,14 @@
 				        	<p class="read text-muted"><%= post.read %> min read</p>
 				        </footer>
 			        </article>
+			        <% } %>
 		        <% }); %>
       		</div><!-- /.blog-post -->
-			<% include ./partials/paginatePosts %>
+			<% include ../partials/paginatePosts %>
     	</div><!-- /.blog-main -->
 
     	<aside class="col-md-4 blog-sidebar">
-    		<% include ./partials/sidebar %>	
+    		<% include ../partials/sidebar %>	
     	</aside><!-- /.blog-sidebar -->
   	</div><!-- /.row -->
 </main><!-- /.container -->

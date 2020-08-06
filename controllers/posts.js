@@ -2,8 +2,8 @@ const Post = require('../models/post');
 const { cloudinary } = require('../cloudinary');
 
 module.exports = {
-	// Posts Index
-	async postIndex(req, res, next) {
+	// Posts Web-Development
+	async postWeb(req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -15,9 +15,9 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/index', { 
+		res.render('posts/web-dev', { 
 			posts, 
-			title: 'Posts Index' 
+			title: 'Web Development' 
 		});
 	},
 	// Posts New
