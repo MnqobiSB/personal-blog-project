@@ -17,7 +17,8 @@ module.exports = {
 		}
 		res.render('posts/web-dev', { 
 			posts, 
-			title: 'Web Development' 
+			title: 'Web Development',
+			page: 'web-dev' 
 		});
 	},
 	// Posts New
@@ -49,13 +50,18 @@ module.exports = {
 				model: 'User'
 			}
 		});
-		// const floorRating = post.calculateAvgRating();
-		const floorRating = post.avgRating;
-		res.render('posts/show', { post, floorRating });
+		res.render('posts/show', { 
+			post,
+			title: 'View Post',
+			page: 'post-show'
+		});
 	},
 	// Posts Edit
 	postEdit(req, res, next) {
-		res.render('posts/edit');
+		res.render('posts/edit', {
+			title: 'Edit Post',
+			page: 'edit-post'
+		});
 	},
 	// Posts Update
 	async postUpdate(req, res, next) {
