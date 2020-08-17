@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') -%>
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main">
+  	<div class="row">
+    	<div class="col-md-8 blog-main">
+      		<h3 class="pb-4 mb-4 font-italic border-bottom">
+        		Latest Posts
+      		</h3>
+
+      		<div class="blog-post">
+      			<% posts.docs.forEach(function(post) { %>
+	      			<article>
+	      				<header class="blog-post-header">
+			        		<h2 class="blog-post-title"><%= post.title %></h2>
+			        		<p class="blog-post-meta"><%= moment(post.createdAt).format('MMMM DD, YYYY') %></p>
+			        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+						</header>
+						<section class="blog-post-body">	
+		        			<p><%= post.body.substring(0, 300) %>...</p>
+				        </section>
+				        <footer class="blog-post-footer">
+				        	<p><%= post.body.substring(0, 200) %>...</p>
+				        	<a href="/posts/<%= post.id %>" class="">
+				        		Continue reading
+				        	</a>
+				        	<p class="read text-muted"><%= post.read %> min read</p>
+				        </footer>
+			        </article>
+		        <% }); %>
+      		</div><!-- /.blog-post -->
+			<% include ../partials/paginatePosts %>
+    	</div><!-- /.blog-main -->
+
+    	<aside class="col-md-4 blog-sidebar">
+    		<% include ../partials/sidebar %>	
+    	</aside><!-- /.blog-sidebar -->
+  	</div><!-- /.row -->
+</main><!-- /.container -->
+
+<script>
+	const posts = { features: <%- JSON.stringify(posts) %> };
+</script>

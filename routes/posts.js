@@ -11,6 +11,7 @@ const {
 	searchAndFilterPosts 
 } = require('../middleware');
 const { 
+	postIndex,
 	postWeb, 
 	postNew, 
 	postCreate,
@@ -22,6 +23,13 @@ const {
 
 
 /* GET posts Index /posts */
+router.get(
+	'/', 
+	asyncErrorHandler(searchAndFilterPosts), 
+	asyncErrorHandler(postIndex)
+);
+
+/* GET posts Web-Development /posts */
 router.get(
 	'/web-development', 
 	asyncErrorHandler(searchAndFilterPosts), 

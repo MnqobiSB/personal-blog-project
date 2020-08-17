@@ -23,7 +23,7 @@ module.exports = {
 		}
 		res.render('index', { 
 			posts, 
-			title: 'Suburban Digi Hustle - Home',
+			title: 'Suburban Digi Hustle - Get Valuable Digital Husting Insights & Tips',
 			page: 'home'
 		});
 	},

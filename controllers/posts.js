@@ -2,6 +2,25 @@ const Post = require('../models/post');
 const { cloudinary } = require('../cloudinary');
 
 module.exports = {
+	// Posts Index
+	async postIndex(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 3,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/index', { 
+			posts,  
+			title: 'All Articles',
+			page: 'all-posts' 
+		});
+	},
 	// Posts Web-Development
 	async postWeb(req, res, next) {
 		const { dbQuery } = res.locals;
@@ -50,9 +69,11 @@ module.exports = {
 				model: 'User'
 			}
 		});
+		let relatedPosts = await Post.find({ category: post.category });
 		res.render('posts/show', { 
 			post,
-			title: 'View Post',
+			relatedPosts,
+			title: post.title,
 			page: 'post-show'
 		});
 	},

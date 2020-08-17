@@ -16,9 +16,9 @@
 
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <form 
-                    class="form-inline ml-auto my-2 my-lg-0"
+                    class="form-inline ml-4 my-2 my-lg-0"
                     method="GET"
-                    action="/"
+                    action="/posts"
                     role="search">
                     <input 
                         type="search"
@@ -26,6 +26,7 @@
                         id="search-query" 
                         class="form-control mr-sm-2"  
                         placeholder="Search" 
+                        value="<%= typeof page !== 'undefined' && page === 'all-posts' ? query.search : '' %>"
                         aria-label="Search"
                         autofocus 
                     />
@@ -39,6 +40,18 @@
                         <a  class="nav-link" 
                             href="/">
                             Home <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" 
+                            href="/posts">
+                            Blog
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" 
+                            href="/products">
+                            Products
                         </a>
                     </li>
                     <li class="nav-item">
