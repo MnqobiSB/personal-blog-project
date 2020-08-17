@@ -1,23 +1,14 @@
 <% layout('layouts/boilerplate') -%>
-<section id="featured">
+<header>
 	<div class="container">
-		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark web-dev-jumbotron">
-			<% posts.docs.forEach(function(post){ %>
-				<% if (post.mainPost) { %>
-				    <div class="col-md-7 px-0">
-				      	<h1 class="main-post-title font-italic"><%= post.title %></h1>
-				      	<p class="lead my-3"><%= post.body.substring(0, 200) %>...</p>
-				      	<p class="lead mb-0">
-				      		<a href="/posts/<%= post.id %>" class="text-white font-weight-bold stretched-link">
-				      			Continue reading...
-				      		</a>
-				      	</p>
-				    </div>
-			    <% } %>
-		    <% }); %>
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-header">#Web Development Articles</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
 		</div>
 	</div>
-</section>
+</header>
 
 <main
 	id="main" 
@@ -26,10 +17,6 @@
 	role="main">
   	<div class="row">
     	<div class="col-md-8 blog-main">
-      		<h3 class="pb-4 mb-4 font-italic border-bottom">
-        		Latest Web Development Posts
-      		</h3>
-
       		<div class="blog-post">
       			<% posts.docs.forEach(function(post){ %>
       				<% if (post.category === 'Web Development') { %>

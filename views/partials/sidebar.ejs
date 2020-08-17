@@ -17,7 +17,7 @@
 		<h3 class="font-italic">Popular Articles</h3>
 		<ul class="list-unstyled">
 			<% posts.docs.forEach(function(post){ %>
-				<% if (post.reviews.length >= 0) { %>	
+				<% if (post.reviews.length >= 1) { %>	
 					<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
 				<% } %>
 			<% }); %>

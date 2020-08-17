@@ -14,7 +14,7 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 10,
+			limit: 5,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
@@ -23,7 +23,7 @@ module.exports = {
 		}
 		res.render('index', { 
 			posts, 
-			title: 'Suburban Digi Hustle - Get Valuable Digital Husting Insights & Tips',
+			title: 'Suburban Digi Hustle - Get Valuable Digital Hustle Insights',
 			page: 'home'
 		});
 	},

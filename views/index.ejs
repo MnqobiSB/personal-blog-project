@@ -55,33 +55,56 @@
 	tabindex="-1"
 	role="main">
   	<div class="row">
-    	<div class="col-md-8 blog-main">
-      		<h3 class="pb-4 mb-4 font-italic border-bottom">
-        		Popular Articles!
-      		</h3>
+    	<div class="col-md-8 main-div">
+    		<section class="trending-posts">
+	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-header">
+	        		Trending Articles!
+	      		</h2>
 
-      		<div class="blog-post">
-      			<% posts.docs.forEach(function(post){ %>
-	      			<article>
-	      				<header class="blog-post-header">
-			        		<h2 class="blog-post-title"><%= post.title %></h2>
-			        		<p class="blog-post-meta"><%= moment(post.createdAt).format('MMMM DD, YYYY') %></p>
-			        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-						</header>
-						<section class="blog-post-body">	
-		        			<p><%= post.body.substring(0, 300) %>...</p>
-				        </section>
-				        <footer class="blog-post-footer">
-				        	<p><%= post.body.substring(0, 200) %>...</p>
-				        	<a href="/posts/<%= post.id %>" class="">
-				        		Continue reading
-				        	</a>
-				        	<p class="read text-muted"><%= post.read %> min read</p>
-				        </footer>
-			        </article>
-		        <% }); %>
-      		</div><!-- /.blog-post -->
-    	</div><!-- /.blog-main -->
+	      		<div class="trending-article">
+	      			<% posts.docs.forEach(function(post){ %>
+		      			<% if (post.reviews.length > 1) { %>
+		      				<article>
+			      				<header class="blog-post-header">
+					        		<h3 class="blog-post-title"><%= post.title %></h3>
+					        		<p class="read text-muted"><%= post.read %> min read</p>
+					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+								</header>
+				        		<p><%= post.body.substring(0, 300) %>...</p>
+				        		<p class="blog-post-meta"><%= moment(post.createdAt).format('MMMM DD, YYYY') %></p>
+				        		<p class="blog-post-meta"><i class="fas fa-comments"></i> <%= post.reviews.length %> Comments</p>
+					        	<a href="/posts/<%= post.id %>" class="">
+					        		Continue reading
+					        	</a>
+					        </article>
+						<% } %>
+			        <% }); %>
+	      		</div><!-- /.blog-post -->
+			</section>
+			<section class="top-products">
+	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-header">
+	        		Top Products!
+	      		</h2>
+				
+	      		<div class="product">
+	      			<div class="card" style="width: 18rem;">
+					  	<img 
+					  		src="https://images.unsplash.com/photo-1543185377-99cd16011803?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30" 
+					  		class="card-img-top" 
+					  		class="img-responsive"
+							title="Product image"
+							loading="lazy"
+					  		alt="Product image"
+					  	/>
+					  	<div class="card-body">
+					    	<h3 class="card-title">Video Maker</h3>
+					    	<p class="card-text">Make awesome, professional videos easily for your YouTube channel or anything you want.</p>
+					    	<a href="#" class="btn btn-primary">View Product</a>
+					  	</div>
+					</div>
+	      		</div><!-- /.blog-post -->
+			</section>
+    	</div><!-- /.main-div -->
 
     	<aside class="col-md-4 blog-sidebar">
     		<% include ./partials/sidebar %>	

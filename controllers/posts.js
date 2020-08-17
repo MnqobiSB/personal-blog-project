@@ -8,7 +8,7 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 3,
+			limit: 5,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);

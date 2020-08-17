@@ -1,4 +1,14 @@
 <% layout('layouts/boilerplate') -%>
+<header id="page-header">
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-header">View All Of Our Awesome Posts</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
 <main
 	id="main" 
 	class="main container"
@@ -6,10 +16,6 @@
 	role="main">
   	<div class="row">
     	<div class="col-md-8 blog-main">
-      		<h3 class="pb-4 mb-4 font-italic border-bottom">
-        		Latest Posts
-      		</h3>
-
       		<div class="blog-post">
       			<% posts.docs.forEach(function(post) { %>
 	      			<article>
