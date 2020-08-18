@@ -1,31 +1,167 @@
 <% layout('layouts/boilerplate') -%>
-<h1>Edit Post!</h1>
-
-<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
-	<div>
-		<input type="text" name="post[title]" placeholder="Title" value="<%= post.title  %>">
+<main>
+	<div class="container">
+		<h1>Edit Post!</h1>
+		<form 
+			action="/posts/<%= post.id %>?_method=PUT" 
+			method="POST" 
+			id="postEditForm" 
+			enctype="multipart/form-data"
+		>
+			<div class="form-group">
+				<label for="title">Post Title</label>
+				<input 
+					type="text"
+					name="post[title]"
+					id="title"
+					class="form-control"  
+					placeholder="Title"
+					value="<%= post.title %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="imageUpload">Image</label>
+				<input 
+					type="file" 
+					name="images"
+					id="imageUpload"
+					class="form-control"
+					accept="images/*"  
+					multiple
+				/>
+				<div>
+					<% post.images.forEach(function(image, i) { %>
+						<img src="<%= image.url %>" width="80px" />
+						<label for="image<%= i %>">Delete</label>
+						<input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
+					<% }); %>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="main">Is Main Post?</label>
+				<select 
+					name="post[mainPost]" 
+					id="main"
+					class="form-control">
+					<option selected value="<%= post.mainPost %>"><%= post.mainPost %></option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="featured">Is Featured Post?</label>
+				<select 
+					name="post[featuredPost]" 
+					id="featured"
+					class="form-control">
+					<option selected value="<%= post.featuredPost %>"><%= post.featuredPost %></option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="homeArticle">Is Home Article?</label>
+				<select 
+					name="post[homeArticle]" 
+					id="homeArticle"
+					class="form-control">
+					<option selected value="<%= post.homeArticle %>"><%= post.homeArticle %></option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="popularArticle">Is Popular Article?</label>
+				<select 
+					name="post[popularArticle]" 
+					id="popularArticle"
+					class="form-control">
+					<option selected value="<%= post.popularArticle %>"><%= post.popularArticle %></option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="category">Category</label>
+				<select 
+					name="post[category]" 
+					id="category"
+					class="form-control">
+					<option selected value="<%= post.category %>"><%= post.category %></option>
+					<option value="Web Development">Web Development</option>
+					<option value="Social Media">Social Media</option>
+					<option value="Sofware">Sofware</option>
+					<option value="Digital Marketing">Digital Marketing</option>
+					<option value="Make Money Online">Make Money Online</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="tag">Tag</label>
+				<input 
+					type="text"
+					name="post[tag]"
+					id="tag"
+					class="form-control"  
+					placeholder="Tag"
+					value="<%= post.tag %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="url">Url</label>
+				<input 
+					type="text"
+					name="post[url]"
+					id="url"
+					class="form-control"  
+					placeholder="Url"
+					value="<%= post.url %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="body">Body</label>
+				<textarea 
+					name="post[body]"
+					id="body"
+					class="form-control"
+					rows="5" 
+					placeholder="Post Body"><%= post.body %></textarea>
+			</div>
+			<div class="form-group">
+				<label for="footer">Footer</label>
+				<textarea 
+					name="post[footer]"
+					id="footer"
+					class="form-control"
+					rows="5" 
+					placeholder="Post Footer"><%= post.footer %></textarea>
+			</div>
+			<div class="form-group">
+				<label for="read">Read Time</label>
+				<input 
+					type="number" 
+					name="post[read]" 
+					id="read"
+					class="form-control" 
+					step="1" 
+					min="1"
+					max="15" 
+					placeholder="Read time(min)"
+					value="<%= post.read %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<button 
+					type="submit"
+					id="submit">
+					Update Post!
+				</button>
+			</div>
+		</form>
 	</div>
-	<div>
-		<input type="number" name="post[price]" step=".01" placeholder="Price" value="<%= post.price  %>">
-	</div>
-	<div>
-		<input type="file" id="imageUpload" accept="images/*" name="images" multiple/>
-		<div>
-			<% post.images.forEach(function(image, i) { %>
-				<img src="<%= image.url %>" width="80px" />
-				<label for="image<%= i %>">Delete</label>
-				<input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
-			<% }); %>
-		</div>
-	</div>
-	<div>
-		<textarea name="post[description]" placeholder="Description"><%= post.description  %></textarea>
-	</div>
-	<div>
-		<input type="text" name="post[location]" placeholder="Location" value="<%= post.location  %>">
-	</div>
-
-	<input type="submit">
-</form>
+</main>
 
 <script src="/javascripts/post-edit.js"></script>

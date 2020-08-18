@@ -25,7 +25,7 @@
 			        		<div class="col p-4 d-flex flex-column position-static">
 			          			<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
 			          			<h2 class="mb-0"><%= post.title %></h2>
-			          			<div class="mb-1 text-muted"><%= moment(post.createdAt).format('MMM DD') %></div>
+			          			<div class="mb-1 text-muted"><small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small></div>
 			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
 			          			<a href="/posts/<%= post.id %>" class="stretched-link">Continue reading</a>
 			        		</div>
@@ -58,24 +58,32 @@
     	<div class="col-md-8 main-div">
     		<section class="trending-posts">
 	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-header">
-	        		Trending Articles!
+	        		Featured Articles!
 	      		</h2>
 
 	      		<div class="trending-article">
 	      			<% posts.docs.forEach(function(post){ %>
-		      			<% if (post.reviews.length > 1) { %>
+		      			<% if (post.homeArticle) { %>
 		      				<article>
 			      				<header class="blog-post-header">
 					        		<h3 class="blog-post-title"><%= post.title %></h3>
-					        		<p class="read text-muted"><%= post.read %> min read</p>
-					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+					        		<p class="article-meta text-muted">
+					        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+					        		</p>
+					        		<small class="article-meta">
+						        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+					        		</small>
 								</header>
-				        		<p><%= post.body.substring(0, 300) %>...</p>
-				        		<p class="blog-post-meta"><%= moment(post.createdAt).format('MMMM DD, YYYY') %></p>
-				        		<p class="blog-post-meta"><i class="fas fa-comments"></i> <%= post.reviews.length %> Comments</p>
-					        	<a href="/posts/<%= post.id %>" class="">
-					        		Continue reading
-					        	</a>
+				        		<section class="blog-post-body">	
+				        			<p><%= post.body.substring(0, 300) %>...</p>
+						        </section>
+						        <footer class="blog-post-footer">
+						        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
+						        	<a href="/posts/<%= post.id %>" class="">
+						        		Continue reading
+						        	</a>
+						        </footer>
 					        </article>
 						<% } %>
 			        <% }); %>

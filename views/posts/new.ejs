@@ -4,6 +4,7 @@
 		<h1>Create New Post!</h1>
 		<form action="/posts" method="POST" enctype="multipart/form-data">
 			<div class="form-group">
+				<label for="title">Post Title</label>
 				<input 
 					type="text"
 					name="post[title]"
@@ -14,6 +15,7 @@
 				/>
 			</div>
 			<div class="form-group">
+				<label for="images">Image</label>
 				<input 
 					type="file" 
 					name="images"
@@ -24,26 +26,51 @@
 				/>
 			</div>
 			<div class="form-group">
+				<label for="main">Is Main Post?</label>
 				<select 
 					name="post[mainPost]" 
 					id="main"
 					class="form-control">
-					<option disabled selected>Main Post...</option>
+					<option disabled selected>Choose...</option>
 					<option value="true">Yes</option>
 					<option value="false">No</option>
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="featured">Is Featured Post?</label>
 				<select 
 					name="post[featuredPost]" 
 					id="featured"
 					class="form-control">
-					<option disabled selected>Featured Post...</option>
+					<option disabled selected>Choose...</option>
 					<option value="true">Yes</option>
 					<option value="false">No</option>
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="homeArticle">Is Home Article?</label>
+				<select 
+					name="post[homeArticle]" 
+					id="homeArticle"
+					class="form-control">
+					<option disabled selected>Choose...</option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="popularArticle">Is Popular Article?</label>
+				<select 
+					name="post[popularArticle]" 
+					id="popularArticle"
+					class="form-control">
+					<option disabled selected>Choose...</option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="category">Category</label>
 				<select 
 					name="post[category]" 
 					id="category"
@@ -54,10 +81,32 @@
 					<option value="Sofware">Sofware</option>
 					<option value="Digital Marketing">Digital Marketing</option>
 					<option value="Make Money Online">Make Money Online</option>
-					<option value="Online Learning">Online Learning</option>
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="tag">Tag</label>
+				<input 
+					type="text"
+					name="post[tag]"
+					id="tag"
+					class="form-control"  
+					placeholder="Tag"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="url">Url</label>
+				<input 
+					type="text"
+					name="post[url]"
+					id="url"
+					class="form-control"  
+					placeholder="Url"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="body">Body</label>
 				<textarea 
 					name="post[body]"
 					id="body"
@@ -66,6 +115,7 @@
 					placeholder="Post Body"></textarea>
 			</div>
 			<div class="form-group">
+				<label for="footer">Footer</label>
 				<textarea 
 					name="post[footer]"
 					id="footer"
@@ -74,6 +124,7 @@
 					placeholder="Post Footer"></textarea>
 			</div>
 			<div class="form-group">
+				<label for="read">Read Time</label>
 				<input 
 					type="number" 
 					name="post[read]" 

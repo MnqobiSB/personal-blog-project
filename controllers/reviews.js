@@ -11,7 +11,7 @@ module.exports = {
 			return review.author.equals(req.user._id);
 		}).length;
 		if (haveReviewed) {
-			req.session.error = 'Sorry, you can only create one review per post.';
+			req.session.error = 'Sorry, you can only create one comment per post.';
 			return res.redirect(`/posts/${post.id}`);
 		}
 		// create the review
@@ -22,13 +22,13 @@ module.exports = {
 		// save the post
 		await post.save();
 		// redirect to the post
-		req.session.success = 'Review created successfully!';
+		req.session.success = 'Comment submitted successfully!';
 		res.redirect(`/posts/${post.id}`)
 	},
 	// Reviews Update
 	async reviewUpdate(req, res, next) {
 		await Review.findByIdAndUpdate(req.params.review_id, req.body.review);
-		req.session.success = 'Review updated successfully!';
+		req.session.success = 'Comment updated successfully!';
 		res.redirect(`/posts/${req.params.id}`);
 	},
 	// Reviews Destroy
@@ -37,7 +37,7 @@ module.exports = {
 			$pull: { reviews: req.params.review_id }
 		});
 		await Review.findByIdAndRemove(req.params.review_id);
-		req.session.success = 'Review deleted successfully!';
+		req.session.success = 'Comment deleted successfully!';
 		res.redirect(`/posts/${req.params.id}`);
 	}
 }

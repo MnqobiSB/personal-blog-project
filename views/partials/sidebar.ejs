@@ -5,7 +5,7 @@
 
 <div class="p-4">
 	<h3 class="font-italic">Resources</h3>
-	<ul class="list-unstyled mb-0">
+	<ul class="">
 	  	<li><a href="#">Free E-book</a></li>
 	  	<li><a href="#">Free E-book</a></li>
 	  	<li><a href="#">Free E-book</a></li>
@@ -15,9 +15,9 @@
 <% if (page !== 'post-show') { %>
 	<div class="p-4">
 		<h3 class="font-italic">Popular Articles</h3>
-		<ul class="list-unstyled">
+		<ul class="">
 			<% posts.docs.forEach(function(post){ %>
-				<% if (post.reviews.length >= 1) { %>	
+				<% if (post.popularArticle) { %>	
 					<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
 				<% } %>
 			<% }); %>

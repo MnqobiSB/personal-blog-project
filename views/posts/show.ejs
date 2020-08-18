@@ -21,10 +21,13 @@
 		      			<article>
 		      				<header class="single-article-header">
 				        		<h1 class="card-title single-blog-post-title"><%= post.title %></h1>
-				        		<p class="single-blog-post-meta">
-				        			<%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><%= post.read %> min read</span>
+				        		<p class="article-meta text-muted">
+				        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
 				        		</p>
-				        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+				        		<small class="article-meta">
+					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+					        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+				        		</small>
 							</header>
 							<section class="single-article-body">	
 			        			<p><%- post.body %></p>
@@ -50,7 +53,7 @@
 										</button>
 									</form>
 								<% } %>
-					        	<a href="/">Go Back</a>
+					        	<a href="/posts">Go Back</a>
 					        </div>
 				        </article>
 			        </div>
@@ -96,7 +99,7 @@
 							</p>
 						<% } %>
 				    	<!-- display all reviews -->
-				    	<p class="recent-comments"><i class="fas fa-comments"></i> <strong>Recent Comments</strong></p>
+				    	<p class="recent-comments"><i class="fas fa-comments"></i> <strong>Recent Comments (<%= post.reviews.length %>)</strong></p>
 				    	<% if (post.reviews.length === 0) { %>
 							<em class="no-comments">No comments yet.</em>
 						<% } %>

@@ -13,6 +13,8 @@ const {
 const { 
 	postIndex,
 	postWeb, 
+	postSocial,
+	postSoftware,
 	postNew, 
 	postCreate,
 	postShow,
@@ -34,6 +36,20 @@ router.get(
 	'/web-development', 
 	asyncErrorHandler(searchAndFilterPosts), 
 	asyncErrorHandler(postWeb)
+);
+
+/* GET posts Social-Media /posts */
+router.get(
+	'/social-media', 
+	asyncErrorHandler(searchAndFilterPosts), 
+	asyncErrorHandler(postSocial)
+);
+
+/* GET posts Software /posts */
+router.get(
+	'/software', 
+	asyncErrorHandler(searchAndFilterPosts), 
+	asyncErrorHandler(postSoftware)
 );
 
 /* GET posts New /posts/new */

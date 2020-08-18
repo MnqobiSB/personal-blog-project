@@ -8,7 +8,7 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 5,
+			limit: 3,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
@@ -27,7 +27,7 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 10,
+			limit: 1000,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
@@ -38,6 +38,44 @@ module.exports = {
 			posts, 
 			title: 'Web Development',
 			page: 'web-dev' 
+		});
+	},
+	// Posts Social-Media
+	async postSocial(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/social-media', { 
+			posts, 
+			title: 'Social Media',
+			page: 'social-media' 
+		});
+	},
+	// Posts Social-Media
+	async postSoftware(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/software', { 
+			posts, 
+			title: 'Software',
+			page: 'software' 
 		});
 	},
 	// Posts New
@@ -118,9 +156,18 @@ module.exports = {
 		}
 		// update the post with any new properties
 		post.title = req.body.post.title;
-		post.description = req.body.post.description;
-		post.price = req.body.post.price;
-		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
+		post.createdAt = req.body.post.createdAt;
+		post.mainPostd = req.body.post.mainPostd;
+		post.featuredPost = req.body.post.featuredPost;
+		post.homeArticle = req.body.post.homeArticle;
+		post.popularArticle = req.body.post.popularArticle;
+		post.category = req.body.post.category;
+		post.tag = req.body.post.tag;
+		post.url = req.body.post.url;
+		post.body = req.body.post.body;
+		post.footer = req.body.post.footer;
+		post.read = req.body.post.read;
+		
 		// save the updated post into the db
 		await post.save();
 		req.session.success = 'Post updated successfully!';

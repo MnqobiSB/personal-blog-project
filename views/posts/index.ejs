@@ -21,18 +21,22 @@
 	      			<article>
 	      				<header class="blog-post-header">
 			        		<h2 class="blog-post-title"><%= post.title %></h2>
-			        		<p class="blog-post-meta"><%= moment(post.createdAt).format('MMMM DD, YYYY') %></p>
-			        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+			        		<p class="article-meta text-muted">
+			        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+			        		</p>
+			        		<small class="article-meta">
+				        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+				        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+			        		</small>
 						</header>
 						<section class="blog-post-body">	
-		        			<p><%= post.body.substring(0, 300) %>...</p>
+		        			<p><%= post.body.substring(0, 500) %>...</p>
 				        </section>
 				        <footer class="blog-post-footer">
-				        	<p><%= post.body.substring(0, 200) %>...</p>
+				        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
 				        	<a href="/posts/<%= post.id %>" class="">
 				        		Continue reading
 				        	</a>
-				        	<p class="read text-muted"><%= post.read %> min read</p>
 				        </footer>
 			        </article>
 		        <% }); %>

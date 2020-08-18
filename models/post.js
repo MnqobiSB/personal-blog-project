@@ -11,7 +11,7 @@ const PostSchema = new Schema({
 	},
 	images: [ 
 		{
-			url: String, 
+			url: String,  
 			public_id: String
 		} 
 	],
@@ -23,7 +23,17 @@ const PostSchema = new Schema({
 		type: Boolean, 
 		default: false
 	},
+	homeArticle: {
+		type: Boolean, 
+		default: false
+	},
+	popularArticle: {
+		type: Boolean, 
+		default: false
+	},
 	category: String,
+	tag: String,
+	url: String,
 	body: String,
 	footer: String,
 	read: {
