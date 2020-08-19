@@ -8,7 +8,7 @@
 				      	<h1 class="main-title font-italic"><%= post.title %></h1>
 				      	<p class="lead my-3"><%= post.body.substring(0, 200) %>...</p>
 				      	<p class="lead mb-0">
-				      		<a href="/posts/<%= post.id %>" class="text-white font-weight-bold stretched-link">
+				      		<a href="/blog/<%= post.id %>" class="text-white font-weight-bold stretched-link">
 				      			Continue reading
 				      		</a>
 				      	</p>
@@ -27,7 +27,7 @@
 			          			<h2 class="mb-0"><%= post.title %></h2>
 			          			<div class="mb-1 text-muted"><small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small></div>
 			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
-			          			<a href="/posts/<%= post.id %>" class="stretched-link">Continue reading</a>
+			          			<a href="/blog/<%= post.id %>" class="stretched-link">Continue reading</a>
 			        		</div>
 			        		<div class="col-auto d-none d-lg-block">
 			        			<% post.images.forEach(function(image){ %>	
@@ -80,7 +80,7 @@
 						        </section>
 						        <footer class="blog-post-footer">
 						        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
-						        	<a href="/posts/<%= post.id %>" class="">
+						        	<a href="/blog/<%= post.id %>" class="">
 						        		Continue reading
 						        	</a>
 						        </footer>

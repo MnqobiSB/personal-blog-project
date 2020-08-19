@@ -1,47 +1,131 @@
 <% layout('layouts/boilerplate') -%>
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-header">
+		    		<img 
+		    			src="<%= currentUser.image.secure_url %>" 
+		    			alt="<%= currentUser.username %>'s profile image"
+		    			class="profile-image"
+		    			title="<%= currentUser.username %>'s profile image"
+				        loading="lazy"
+		    		/> 
+		    		#<%= currentUser.username %>'s Profile
+		    	</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
 
-<h1><img src="<%= currentUser.image.secure_url %>" alt="<%= currentUser.username %>'s profile image" class="profile-image"><%= currentUser.username %>'s Profile</h1>
-
-<p>Recent Posts:</p>
-
-<% posts.forEach(function(post) { %>
-	<div>
-		<a href="/posts/<%= post.id %>"><%= post.title %></a>
+<main id="main" class="main" tabindex="-1" role="main">
+	<div class="container">
+		<h2>Recent Posts:</h2>
+		<% posts.forEach(function(post) { %>
+			<ul>
+				<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+			</ul>
+		<% }); %>
+		<h2>Update Info:</h2>
+		<form 
+			action="/profile?_method=PUT" 
+			method="POST" 
+			class="form"
+			enctype="multipart/form-data"
+		>
+		<div class="form-group">
+				<label for="username">Username</label>
+				<input 
+					type="text"
+					name="username"  
+					id="username" 
+					class="form-control"
+					maxlength="30" 
+					pattern="[A-Za-z]{2,}" 
+					title="Username must be a series of alphabetic characters only (min 2, max 30)."
+					value="<%= currentUser.username %>" 
+					placeholder="John" 
+					required
+					autofocus
+				/>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input 
+					type="email" 
+					name="email"
+					id="email" 
+					class="form-control"
+					maxlength="150"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+					title="Email must follow this pattern: you@example.com"
+					placeholder="you@example.com" 
+					value="<%= currentUser.email %>"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="new-password">New Password</label>
+				<input 
+					type="password" 
+					id="new-password" 
+					name="newPassword" 
+					class="form-control"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
+					placeholder="********" 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password-confirmation">Password Confirmation</label>
+				<input 
+					type="password" 
+					id="password-confirmation" 
+					name="passwordConfirmation" 
+					class="form-control"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
+					placeholder="********" 
+				/>
+			</div>
+			<div id="validation-message">
+			</div>
+			<div class="form-group">
+				<label for="image">Profile Image (optional)</label>
+				<small>(this deletes existing)</small>
+				<input 
+					type="file" 
+					id="image" 
+					name="image"
+					class="form-control" 
+					title="Image file format must be: JPEG, PNG or SVG."
+					accept="images/*"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="current-password">Current Password (required to update profile)</label>
+				<input 
+					type="password" 
+					id="current-password" 
+					name="currentPassword" 
+					class="form-control"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
+					placeholder="********" 
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn">
+					Update Profile
+				</button>
+			</div>
+		</form>
 	</div>
-<% }); %>
-
-<p>Update Info:</p>
-
-<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>" autofocus required>
-	</div>
-	<div>
-		<label for="current-password">Current Password (required to update profile):</label>
-		<input type="password" id="current-password" name="currentPassword" placeholder="current password" required>
-	</div>
-	<div>
-		<label for="new-password">New Password:</label>
-		<input type="password" id="new-password" name="newPassword" placeholder="new password">
-	</div>
-	<div>
-		<label for="password-confirmation">Password Confirmation:</label>
-		<input type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation">
-	</div>
-	<div id="validation-message">
-	</div>
-	<div>
-		<label for="email">Email:</label>
-		<input type="text" id="email" name="email" placeholder="email" value="<%= currentUser.email %>">
-	</div>
-	<div>
-		<label for="image">Image:</label>
-		<small>(this deletes existing)</small>
-		<input type="file" id="image" name="image">
-	</div>
-
-	<input type="submit" id="update-profile">
-</form>
+</main>
 
 <script src="/javascripts/profile.js"></script>

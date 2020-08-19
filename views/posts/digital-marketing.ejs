@@ -1,0 +1,56 @@
+<% layout('layouts/boilerplate') -%>
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-header">#Digital Marketing Insights</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
+
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main">
+  	<div class="row">
+    	<div class="col-md-8 blog-main">
+      		<div class="blog-post">
+      			<% posts.docs.forEach(function(post){ %>
+      				<% if (post.category === 'Digital Marketing') { %>
+		      			<article>
+		      				<header class="blog-post-header">
+				        		<h2 class="blog-post-title"><%= post.title %></h2>
+				        		<p class="article-meta text-muted">
+				        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+				        		</p>
+				        		<small class="article-meta">
+					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+					        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+				        		</small>
+							</header>
+							<section class="blog-post-body">	
+			        			<p><%= post.body.substring(0, 500) %>...</p>
+					        </section>
+					        <footer class="blog-post-footer">
+					        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
+					        	<a href="/blog/<%= post.id %>" class="">Continue reading...</a>
+					        </footer>
+				        </article>
+			        <% } %>
+		        <% }); %>
+      		</div><!-- /.blog-post -->
+			<% include ../partials/paginatePosts %>
+    	</div><!-- /.blog-main -->
+
+    	<aside class="col-md-4 blog-sidebar">
+    		<% include ../partials/sidebar %>	
+    	</aside><!-- /.blog-sidebar -->
+  	</div><!-- /.row -->
+</main><!-- /.container -->
+
+<script>
+	var posts = { features: <%- JSON.stringify(posts) %> };
+</script>

@@ -78,6 +78,44 @@ module.exports = {
 			page: 'software' 
 		});
 	},
+	// Posts Digital-Marketing
+	async postDigitalMarketing(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/digital-marketing', { 
+			posts, 
+			title: 'Digital Marketing',
+			page: 'digital-marketing' 
+		});
+	},
+	// Posts Digital-Marketing
+	async postMakeMoneyOnline(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('posts/make-money-online', { 
+			posts, 
+			title: 'Make Money Online',
+			page: 'make-money-online' 
+		});
+	},
 	// Posts New
 	postNew(req, res, next) {
 		res.render('posts/new');

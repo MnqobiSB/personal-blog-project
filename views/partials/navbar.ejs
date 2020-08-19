@@ -5,6 +5,14 @@
         aria-label="site">
         <div class="container">
             <a class="navbar-brand mr-auto mr-lg-0" href="/">
+                <img 
+                    src="/images/logo.png" 
+                    alt="Suburban Digi Hustle Logo"
+                    class="logo"
+                    title="Suburban Digi Hustle Logo"
+                    loading="lazy"
+                    width="50" 
+                /> 
                 Suburban Digi Hustle
             </a>
             <button 
@@ -18,7 +26,7 @@
                 <form 
                     class="form-inline ml-4 my-2 my-lg-0"
                     method="GET"
-                    action="/posts"
+                    action="/blog"
                     role="search">
                     <input 
                         type="search"
@@ -44,7 +52,7 @@
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" 
-                            href="/posts">
+                            href="/blog">
                             Blog
                         </a>
                     </li>
@@ -86,7 +94,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <% if (currentUser.isAdmin) { %>
-                                <a class="dropdown-item" href="/posts/new">
+                                <a class="dropdown-item" href="/blog/new">
                                     <i class="fas fa-edit"></i> Create New Post
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -108,11 +116,11 @@
 <section id="secondary-nav">
     <div class="nav-scroller container py-1 mb-2">
         <nav class="nav d-flex justify-content-between" aria-label="site">
-            <a class="p-2 text-muted" href="/posts/web-development">#Web Development</a>
-            <a class="p-2 text-muted" href="/posts/social-media">#Social Media</a>
-            <a class="p-2 text-muted" href="/posts/software">#Software</a>
-            <a class="p-2 text-muted" href="/posts/digital-marketing">#Digital Marketing</a>
-            <a class="p-2 text-muted" href="/posts/make-money">#Make Money Online</a>
+            <a class="p-2 text-muted" href="/blog/web-development">#Web Development</a>
+            <a class="p-2 text-muted" href="/blog/social-media">#Social Media</a>
+            <a class="p-2 text-muted" href="/blog/software">#Software</a>
+            <a class="p-2 text-muted" href="/blog/digital-marketing">#Digital Marketing</a>
+            <a class="p-2 text-muted" href="/blog/make-money-online">#Make Money Online</a>
         </nav>
     </div>
 </section>

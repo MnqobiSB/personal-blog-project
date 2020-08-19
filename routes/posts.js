@@ -15,6 +15,8 @@ const {
 	postWeb, 
 	postSocial,
 	postSoftware,
+	postDigitalMarketing,
+	postMakeMoneyOnline,
 	postNew, 
 	postCreate,
 	postShow,
@@ -50,6 +52,20 @@ router.get(
 	'/software', 
 	asyncErrorHandler(searchAndFilterPosts), 
 	asyncErrorHandler(postSoftware)
+);
+
+/* GET posts Digital-Marketing /posts */
+router.get(
+	'/digital-marketing', 
+	asyncErrorHandler(searchAndFilterPosts), 
+	asyncErrorHandler(postDigitalMarketing)
+);
+
+/* GET posts Digital-Marketing /posts */
+router.get(
+	'/make-money-online', 
+	asyncErrorHandler(searchAndFilterPosts), 
+	asyncErrorHandler(postMakeMoneyOnline)
 );
 
 /* GET posts New /posts/new */
