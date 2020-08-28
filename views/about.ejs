@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate') -%>
+<!-- PAGE HEADER -->
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-title">About Us</h1>
+		    	<p class="lead">Get to know us better and understand why we do what we do.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
+<!-- PAGE HEADER -->
+
+<!-- MAIN SECTION START -->
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main"
+>
+  	<div class="row"><!-- ROW -->
+  		<!-- MAIN CONTENT START -->
+    	<div class="col-md-8 main-content">
+    		<!-- who we are starts -->
+      		<h2 class="section-title">Who We Are</h2>
+      		<p>Subrban Digi Hustle is a platform that aims to provide best insights, tips, guides and tools to help grow your business and personal brand on the digital scope. We specialize in Web Development, Digital Marketing, Social Media Platforms, Productivity Software, and How To Monetize your brand. We are very passionate about the online digital world, not to mention the opportunities that it presents. We are determined and excited to share with our audience the best insights, knowledge and information we have gained over the years. We aim to become a one stop platform for all your business and personal brand success digitally!</p>
+      		<!-- who we are ends -->
+
+      		<!-- what we do starts -->
+      		<h2 class="section-title">What We Do</h2>
+      		<p>After years of doing research and studying the Digital World, we have to the conclusion to instead of just providing digital services to our customers, we decided to also provide insights, knowledge and information to help brands learn and grow. On this platform we aim to take all the knowledge we possess and put in such a way that is relevant and easy to implement for anyone who is just starting out. We take from our personal experinces and provide insights on how to reach one's goals in the most optimal way posible.</p>
+      		<!-- what we do starts -->
+      		<h2 class="section-title">About The Founder</h2>
+      		<!-- about the author starts -->
+      		<p>My name is Mnqobi and I am from South Africa. I am the founder of <a href="/">Suburban Digi Hustle</a>. I am a professional web developer and digital marketing consultant. My journey that led me to starting this platform may sound cliché, but it is the real story. Being a South African I would say is one of the inspirations for me to decide to blog about my passion and knowledge. This is because in my local environment, the knowledge that I posses is not very effective and the society and small business owners are still catching up to the real digital world potential.</p> 
+      		<p>So I figured that my knowledge is better of shared online where my audience that want it can access it. I have spend years of my time researching the market and being part of the market and I find most fullfillment in sharing my knowledge. I am still learning more as a person and want to make sure that I provide my audience with the best and latest insights possible.</p>
+
+      		<!-- founder bio -->
+      		<div class="card" style="width: 18rem;">
+			  	<img 
+			  		src="/images/founder1.JPG" 
+			  		class="card-img-top" 
+			  		alt="Amandla's Bio Image"
+			  		title="Amandla's Bio Image"
+			  		loading="lazy" 
+			  	>
+			  	<div class="card-body">
+			    	<h3 class="card-title">Mnqobi Mzolo</h3>
+			    	<p class="card-text">Web Developer, Digital Marketing Consultant and Blogger.</p>
+			  	</div>
+			  	<div class="card-body">
+			    	<a href="#" class="card-link">Twitter</a>
+			    	<a href="#" class="card-link">Facebook</a>
+			  	</div>
+			</div>
+
+			<!-- about the author ends -->
+    	</div>
+    	<!-- MAIN CONTENT END -->
+
+    	<!-- SIDEBAR START -->
+    	<aside class="col-md-4 sidebar">
+    		<% include ./partials/sidebar %>	
+    	</aside>
+    	<!-- SIDEBAR END -->
+  	</div><!-- ROW -->
+</main>
+<!-- MAIN SECTION END -->
+
+<script>
+	const posts = { features: <%- JSON.stringify(posts) %> };
+</script>

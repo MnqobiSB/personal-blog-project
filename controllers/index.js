@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const Tool = require('../models/tool');
 const passport = require('passport');
 const util = require('util');
 const { cloudinary } = require('../cloudinary');
@@ -10,30 +11,172 @@ const nodemailer = require('nodemailer');
 module.exports = {
 	// GET /
 	async landingPage(req, res, next) {
+		// find all posts
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 5,
+			limit: 1000,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
+		// find all tools
+		let tools = await Tool.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 8,
+			sort: '_id'
+		});
+		// render page/file
 		res.render('index', { 
-			posts, 
 			title: 'Suburban Digi Hustle - Get Valuable Digital Hustle Insights',
-			page: 'home'
+			page: 'home',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts,
+			tools
 		});
 	},
+	// POST /
+	async downloadEbook(req, res, next) {
+		const subscribeData = `
+		  	<h1>You Have a New User Newsletters Subscription</h1>
+		  	<h2>User Email:</h2>
+		  	<ul>
+		  		<li>${req.body.firstName}</li>
+			    <li>${req.body.email}</li>
+		  	</ul>  
+		  	<h3>Message</h3>
+		  	<p>I Have Downloaded Free eBook and Want To Receive Newsletters</p>
+	  	`;
+
+	  	let smtpTransport = nodemailer.createTransport({
+		    service: 'Gmail', 
+			auth: {
+				user: 'amandlamm1@gmail.com',
+				pass: process.env.GMAILPW
+			},
+			tls: {
+				rejectUnauthorized: false
+			}
+	  	});
+
+	  	const mailOptions = {
+        	from: '"New Newsletters Subscription" <amandlamm1@gmail.com>',
+        	to: 'amandlamm1@gmail.com',
+        	subject: 'New Newsletters Subscription',
+        	html: subscribeData
+      	};
+
+      	await smtpTransport.sendMail(mailOptions);
+
+		req.session.success = `Thanks for requesting to download the Free eBook${req.body.firstName}, check your emails for the direct download link!`;
+		res.redirect('/');
+	},
+	// GET /about
+	async getAbout(req, res, next) {
+		const admins = await User.find({isAdmin: true});
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('about', { 
+			title: 'About Us',
+			page: 'about',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			admins,
+			posts
+		});
+	},
+	// GET /contact
+	async getContact(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+		res.render('contact', { 
+			title: 'Contact Us',
+			page: 'contact',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
+		});
+	},
+	// POST /contact
+	async postContact(req, res, next) {
+		const userQueryData = `
+		  	<h1>You Have a New Enquiry From User</h1>
+		  	<h2>Student Contact Details:</h2>
+		  	<ul>
+			    <li>Name: ${req.body.queryUsername}</li>
+			    <li>Email: ${req.body.queryEmail}</li>
+			    <li>Subjet: ${req.body.querySubject}</li>
+		  	</ul>  
+		  	<h3>Message</h3>
+		  	<p>${req.body.queryMessage}</p>
+	  	`;
+
+	  	let smtpTransport = nodemailer.createTransport({
+		    service: 'Gmail', 
+			auth: {
+				user: 'amandlamm1@gmail.com',
+				pass: process.env.GMAILPW
+			},
+			tls: {
+				rejectUnauthorized: false
+			}
+	  	});
+
+	  	const mailOptions = {
+        	from: '"Suburban Digi Hustle" <amandlamm1@gmail.com>',
+        	to: 'amandlamm1@gmail.com',
+        	subject: 'New General Enquiry',
+        	html: userQueryData
+      	};
+
+      	await smtpTransport.sendMail(mailOptions);
+
+		req.session.success = `Your enquiry has been successfully sent ${req.body.queryUsername}, a response will be sent to you soon!`;
+		res.redirect('/contact');
+	},
 	// GET /sign-up
-	getRegister(req, res, next) {
+	async getRegister(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
 		res.render('sign-up', { 
 			title: 'Sign Up',
 			page: 'sign-up', 
 			username: '', 
-			email: '' 
+			email: '',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts 
 		});
 	},
 	// POST /sign-up
@@ -58,6 +201,9 @@ module.exports = {
 			}
 			res.render('sign-up', { 
 				title: 'Sign Up', 
+				page: 'sign-up',
+				robots: 'index, follow',
+				googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 				username, 
 				email, 
 				error 
@@ -65,12 +211,26 @@ module.exports = {
 		}
 	},
 	// GET /sign-in
-	getLogin(req, res, next) {
+	async getLogin(req, res, next) {
 		if (req.isAuthenticated()) return res.redirect('/');
 		if (req.query.returnTo) req.session.redirectTo = req.headers.referer;
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
 		res.render('sign-in', { 
 			title: 'Sign In',
-			page: 'sign-in' 
+			page: 'sign-in',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// POST /sign-in
@@ -98,6 +258,8 @@ module.exports = {
 		res.render('profile', {
 			title: 'My Profile',
 			page: 'profile',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow',
 			posts
 		});
 	},
@@ -125,7 +287,9 @@ module.exports = {
 	getForgotPw(req, res, next) {
 		res.render('users/forgot', {
 			title: 'Forgot Password',
-			page: 'forgot'
+			page: 'forgot',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow'
 		});
 	},
 	// PUT /users/forgot
@@ -183,6 +347,8 @@ module.exports = {
 		res.render('users/reset', { 
 			title: 'Reset Password',
 			page: 'reset',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow',
 			token 
 		});
 	},
@@ -235,5 +401,80 @@ module.exports = {
 
 	  	req.session.success = 'Password reset successful!';
 	  	res.redirect('/');
+	},
+	// GET /terms
+	getSiteMap(req, res, next) {
+		res.render('site-map', { 
+			title: 'Site Map',
+			page: 'site-map',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow'
+		});
+	},
+	// GET /terms
+	async getTerms(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+
+		res.render('terms', { 
+			title: 'Terms Of Use',
+			page: 'terms',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow',
+			posts
+		});
+	},
+	// GET /disclaimer
+	async getDisclaimer(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+
+		res.render('disclaimer', { 
+			title: 'Legal Disclaimer',
+			page: 'disclaimer',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow',
+			posts
+		});
+	},
+	// GET /privacy
+	async getPrivacy(req, res, next) {
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+		posts.page = Number(posts.page);
+		if (!posts.docs.length && res.locals.query) {
+			res.locals.error = 'No results match that query.';
+		}
+
+		res.render('privacy-policy', { 
+			title: 'Privacy Policy',
+			page: 'privacy',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow',
+			posts
+		});
 	}
 }

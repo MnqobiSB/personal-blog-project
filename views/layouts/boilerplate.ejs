@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title><%= title %></title>
+  <!-- META TAGS -->
   <meta charset="UTF-8"/>
   <meta http-equiv="x-ua-compatible" content="ie=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-  <meta name="author" content="Dev Mnqobi"/>
-  <meta name="description" content="GET THE BEST INSIGHTS AND OFFERS TO HELP YOU GROW YOUR DIGITAL AND PERSONAL SELF."/>
+  <meta name="author" content="Mnqobi"/>
+  <meta name="description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media and Many More."/>
+  <meta name="robots" content="<%= robots %>">
+  <meta name="googlebot" content="<%= googlebot %>">
 
-  <title><%= title %></title>
+  <!-- SOCIAL MEDIA -->
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Suburban Digi Hustle | Digital Insights">
+  <meta property="og:description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media, Software & Make Money Online.">
+  <meta property="og:url" content="/http://localhost:3000/">
+  <meta property="og:image" content="/favicon.ico">
+  <meta property="og:site_name" content="Suburban Digi Hustle">
 
+  <meta name="twitter:title" content="Suburban Digi Hustle">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@HustleDigi" />
+  <meta name="twitter:creator" content="@HustleDigi" />
+
+  <!-- STRUCTURED DATA -->
+  <script type="application/ld+json">
+    {
+      "@context": "http://localhost:3000/",
+      "@type": "Website, Organization",
+      "name": "Suburban Digi Hustle | Blog",
+      "id": "http://localhost:3000/#website"
+    }
+  </script>
+
+  <!-- SITE DATA -->
   <link rel="manifest" href="/webmanifest.json">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="text/plain" href="/humans.txt" rel="author">
@@ -44,6 +71,8 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <meta name="theme-color" content="rgb(16, 172, 132)">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <!--[if lt IE 9]>

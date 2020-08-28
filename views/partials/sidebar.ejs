@@ -1,10 +1,12 @@
+<h2 class="sr-only">Side Bar</h2>
+
 <div class="p-4 mb-3 bg-light rounded">
 	<h3 class="font-italic">About</h3>
-	<p class="mb-0">Suburban Digi Hustle is platform that aims to help <em>Individuals and Businesses</em> to gain <strong>Digital</strong> skills and insights to grow their online presence and influence. We provide our audience valuable <em>Insights, Tips, Education, Hacks and Products</em> that will ultimately help them grow and reach their online and persornal goals!</p>
+	<p class="mb-0"><strong>Suburban Digi Hustle</strong> is a platform that aims to provide best insights, guides, tips and tools to help grow your <em>business and personal brand</em> on the digital scope. We specialize in Web Development, Digital Marketing, Social Media Platform, Productivity Software and How to make money online. We are passionate about the <em>online digital world</em> and excited to provide our audience with the best and most vuluable information. <a href="/about">Learn more!</a></p>
 </div>
 
 <div class="p-4">
-	<h3 class="font-italic">Resources</h3>
+	<h3 class="font-italic">Guides</h3>
 	<ul class="">
 	  	<li><a href="#">Free E-book</a></li>
 	  	<li><a href="#">Free E-book</a></li>
@@ -24,3 +26,50 @@
 		</ul>
 	</div>
 <% } %>
+
+<div class="p-4">
+	<h3 class="font-italic">Free eBook</h3>
+	<img 
+		src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30" 
+		alt="eBook image"
+		title="eBook image" 
+		loading="lazy"
+		class="img-responsive"
+		width="300" 
+	>
+	<form action="/" method="POST" class="">
+		<div class="form-group">
+			<label for="firstName">First Name</label>
+			<input 
+				type="text" 
+				name="firstName" 
+				id="firstName" 
+				class="form-control"
+				maxlength="30" 
+				pattern="[A-Za-z]{2,}" 
+				title="First name must be a series of alphabetic characters only (min 2, max 30)."  
+				placeholder="John" 
+				required
+				autofocus 
+			/>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+		  	<input 
+		  		type="email" 
+		  		class="form-control"
+		  		name="email"
+		  		maxlength="150"
+				pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+				title="Email must follow this pattern: characters@characters.domain (should include '@' sign, '.' followed by atleast 2 characters)."
+				placeholder="you@example.com" 
+		  		required 
+		  	/>
+		</div>
+	  	<div class="form-group">
+	    	<button class="btn" type="submit">
+	    		Download Now!
+	    	</button>
+	  	</div>
+	</form>
+</div>

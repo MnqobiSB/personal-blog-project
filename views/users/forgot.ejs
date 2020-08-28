@@ -1,13 +1,59 @@
 <% layout('layouts/boilerplate') -%>
-
-<h1>Forgot Password</h1>
-
-<form action="/forgot-password?_method=PUT" method="POST">
-	<div>
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" autofocus>
+<!-- PAGE HEADER -->
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-title">Forgot Password</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
 	</div>
-	<div>
-		<input type="submit" value="Reset Password">
+</header>
+<!-- PAGE HEADER -->
+
+<!-- MAIN SECTION START -->
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main"
+>
+		<!-- MAIN CONTENT START -->
+	<div class="main-content">
+  		<form 
+  			action="/forgot-password?_method=PUT" 
+  			method="POST"
+  			class="form forgot-password" 
+  		>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input 
+					type="email" 
+					id="email" 
+					name="email" 
+					class="form-control"
+					maxlength="150"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+					title="Email must follow this pattern: you@example.com"
+					placeholder="you@example.com" 
+					required
+					autofocus
+				/>
+			</div>
+
+			<div class="form-group">
+				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div><!-- RECAPTURE (CHANGE SITEKEY) -->
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn">
+					Reset Password
+				</button>
+			</div>
+		</form>
 	</div>
-</form>
+	<!-- MAIN CONTENT END -->
+</main>
+<!-- MAIN SECTION END -->
+

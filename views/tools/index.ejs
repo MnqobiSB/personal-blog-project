@@ -1,0 +1,74 @@
+<% layout('layouts/boilerplate') -%>
+<!-- PAGE HEADER -->
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-title">#Top Tools To Help You Start & Grow Your Online Business</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
+<!-- PAGE HEADER -->
+
+<!-- MAIN SECTION START -->
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main"
+>
+  	<div class="row"><!-- ROW -->
+
+  		<!-- PRODUCT SIDEBAR -->
+  		<div class="col-md-3">
+  			<% include ../partials/searchFilterTools %>
+  		</div>
+  		<!-- PRODUCT SIDEBAR -->
+
+  		<!-- MAIN CONTENT START -->
+    	<div class="col-md-6 blog-main">
+    		<!-- PRODUCT ROW -->
+      		<div class="row justify-content-center">
+      			<% tools.docs.forEach(function(tool){ %>
+	      				<div class="col-md-6 product"><!-- Product Container -->
+			      			<div class="card" style="width: 15rem;">
+			      				<% tool.images.forEach(function(image){ %>	
+				          			<img 
+				          				src="<%= image.url %>"
+				          				class="card-img-top img-responsive" 
+				          				alt="<%= tool.title %>'s image" 
+				          				title="<%= tool.title %>'s image"
+				          				loading="lazy"
+				          			/>
+			          			<% }) %>
+							  	<div class="card-body">
+							    	<h3 class="card-title"><%= tool.title %></h3>
+							    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
+							    	<a href="/tools/<%= tool.id %>" class="btn btn-primary">View Product</a>
+							  	</div>
+							</div>
+			      		</div><!-- Product Container -->
+		        <% }); %>
+      		</div>
+      		<!-- PRODUCT ROW -->
+
+      		<!-- PAGINATION -->
+			<% include ../partials/paginateTools %>
+    	</div>
+    	<!-- MAIN CONTENT END -->
+
+    	<!-- SIDEBAR START -->
+    	<aside class="col-md-3 blog-sidebar">
+    		<% include ../partials/sidebar %>	
+    	</aside>
+    	<!-- SIDEBAR END -->
+
+  	</div><!-- ROW -->
+</main>
+<!-- MAIN SECTION START -->
+
+<script>
+	var tools = { features: <%- JSON.stringify(tools) %> };
+</script>

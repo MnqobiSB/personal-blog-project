@@ -1,22 +1,28 @@
 <% layout('layouts/boilerplate') -%>
+<!-- PAGE HEADER -->
 <header id="page-header">
 	<div class="container">
 		<div class="jumbotron jumbotron-fluid">
 		  	<div class="container">
-		    	<h1 class="font-italic page-header">View All Of Our Awesome Posts</h1>
+		    	<h1 class="font-italic page-title">View All Of Our Awesome Posts</h1>
 		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
 		  	</div>
 		</div>
 	</div>
 </header>
+<!-- PAGE HEADER -->
+
+<!-- MAIN SECTION START -->
 <main
 	id="main" 
 	class="main container"
 	tabindex="-1"
-	role="main">
-  	<div class="row">
-    	<div class="col-md-8 blog-main">
-      		<div class="blog-post">
+	role="main"
+>
+  	<div class="row"><!-- ROW -->
+  		<!-- MAIN CONTENT START -->
+    	<div class="col-md-8 main-content">
+      		<div class="blog-post"><!-- ARTICLE CONTAINER -->
       			<% posts.docs.forEach(function(post) { %>
 	      			<article>
 	      				<header class="blog-post-header">
@@ -29,26 +35,39 @@
 				        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
 			        		</small>
 						</header>
+
 						<section class="blog-post-body">	
 		        			<p><%= post.body.substring(0, 500) %>...</p>
 				        </section>
+
 				        <footer class="blog-post-footer">
-				        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
+				        	<p class="blog-post-meta">
+				        		<small>
+				        			<i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %>
+				        		</small>
+				        	</p>
+				        	
 				        	<a href="/blog/<%= post.id %>" class="">
 				        		Continue reading
 				        	</a>
 				        </footer>
 			        </article>
 		        <% }); %>
-      		</div><!-- /.blog-post -->
+      		</div><!-- ARTICLE CONTAINER -->
+      		<!-- PAGINATION -->
 			<% include ../partials/paginatePosts %>
-    	</div><!-- /.blog-main -->
+    	</div>
+    	<!-- MAIN CONTENT END -->
 
+    	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
     		<% include ../partials/sidebar %>	
-    	</aside><!-- /.blog-sidebar -->
-  	</div><!-- /.row -->
-</main><!-- /.container -->
+    	</aside>
+    	<!-- SIDEBAR END -->
+    	
+  	</div><!-- ROW -->
+</main>
+<!-- MAIN SECTION START -->
 
 <script>
 	const posts = { features: <%- JSON.stringify(posts) %> };

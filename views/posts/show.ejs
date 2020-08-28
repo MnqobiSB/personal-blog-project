@@ -1,13 +1,17 @@
 <% layout('layouts/boilerplate') -%>
+<!-- MAIN SECTION START -->
 <main
 	id="main" 
 	class="main container"
 	tabindex="-1"
-	role="main">
-  	<div class="row">
-    	<div class="col-md-8 blog-main">
-      		<section class="single-blog-post">
-      			<div class="card mb-3">
+	role="main"
+>
+  	<div class="row"><!-- ROW -->
+  		<!-- MAIN CONTENT START -->
+    	<div class="col-md-8 main-content">
+    		<!-- ARTICLE START -->
+      		<section class="section">
+      			<div class="card mb-3 show-main"><!-- ARTICLE CONTAINER -->
       				<% post.images.forEach(function(image){ %>
 						<img 
 							src="<%= image.url %>" 
@@ -19,8 +23,8 @@
 					<% }) %>
 					<div class="card-body">
 		      			<article>
-		      				<header class="single-article-header">
-				        		<h1 class="card-title single-blog-post-title"><%= post.title %></h1>
+		      				<header class="blog-post-header">
+				        		<h1 class="card-title page-title"><%= post.title %></h1>
 				        		<p class="article-meta text-muted">
 				        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
 				        		</p>
@@ -29,23 +33,26 @@
 					        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
 				        		</small>
 							</header>
-							<section class="single-article-body">	
+
+							<section class="blog-post-body">	
 			        			<p><%- post.body %></p>
 					        </section>
-					        <footer class="single-article-footer">
+
+					        <footer class="blog-post-footer">
 					        	<p><%- post.footer %></p>
 					        </footer>
+
 					        <div class="admin-buttons">
 					        	<hr>
 								<% if (currentUser && post.author.equals(currentUser._id)) { %>
-									<a class="float-right" href="/posts/<%= post.id %>/edit">
+									<a class="float-right" href="/blog/<%= post.id %>/edit">
 										<button class="btn btn-sm btn-warning edit-post-btn">
 											<i class="fas fa-edit"></i> Edit post
 										</button>
 									</a>
 									<form 
 										class="float-right" 
-										action="/posts/<%= post.id %>?_method=DELETE" 
+										action="/blog/<%= post.id %>?_method=DELETE" 
 										method="POST"
 									>
 										<button class="btn btn-sm btn-danger delete-post-btn">
@@ -53,21 +60,26 @@
 										</button>
 									</form>
 								<% } %>
-					        	<a href="/posts">Go Back</a>
+					        	<a href="/blog">Go Back</a>
 					        </div>
 				        </article>
 			        </div>
 		        </div>
-      		</section><!-- /.blog-post -->
+      		</section>
+      		<!-- ARTICLE END -->
 
-      		<section class="comments">
+      		<!-- COMMENT SECTION START -->
+      		<section class="section">
 	      		<div class="card mb-3">
-	      				<h2 class="card-header section-header">Comments</h2>
+	      			<h2 class="card-header section-title">Comments</h2>
+
+	      			<!-- create comment -->
 				  	<div class="card-body comment-card-body">
 				  		<% if (currentUser) { %>
 							<p class="card-text"><i class="fas fa-pen-alt"></i> Leave a comment</p>
+
 							<form 
-								action="/posts/<%= post.id %>/reviews" 
+								action="/blog/<%= post.id %>/reviews" 
 								method="POST" 
 								class="post-comment-form"
 							>
@@ -84,13 +96,16 @@
 										required 
 									></textarea>
 								</div>
+
 								<div class="form-group">
 									<button class="btn btn-primary submit-comment-btn">
 										Submit
 									</button>
 								</div>
 							</form>
+
 							<hr class="comment-underline">
+
 						<% } else { %>
 							<p class="card-text">
 								<a href="/sign-in?returnTo=true">
@@ -98,12 +113,21 @@
 								</a>
 							</p>
 						<% } %>
+						<!-- create comment -->
+
 				    	<!-- display all reviews -->
-				    	<p class="recent-comments"><i class="fas fa-comments"></i> <strong>Recent Comments (<%= post.reviews.length %>)</strong></p>
+				    	<p class="recent-comments">
+				    		<i class="fas fa-comments"></i> <strong>Recent Comments (<%= post.reviews.length %>)</strong>
+				    	</p>
+
+				    	<!-- no reviews yet -->
 				    	<% if (post.reviews.length === 0) { %>
 							<em class="no-comments">No comments yet.</em>
 						<% } %>
+
+						<!-- single review -->
 						<% post.reviews.forEach(function(review) { %>
+							<!-- show reviews -->
 							<div class="media text-muted">
 								<img 
 									src="<%= review.author.image.secure_url %>"
@@ -111,21 +135,28 @@
 									alt="<%= review.author.username %>'s image" 
 				          			title="<%= review.author.username %>'s image"
 				          			loading="lazy"
-									width="32" 
-									height="32" 
+									width="40" 
+									height="40" 
 								/>
+
 						      	<p class="media-body mb-0 lh-125">
 						        	<strong class="d-block text-gray-dark username"><%= review.author.username %></strong>
 						        	<%= review.body %>
 						      	</p>
+
 						      	<span class="pull-right small"><%= moment(review.createdAt).fromNow() %></span>
 						    </div>
+						    <!-- show reviews -->
 
+						    <!-- edit review if author -->
 							<% if (currentUser && review.author.equals(currentUser._id)) { %>
 								<div>
+									<!-- edit button -->
 									<button class="btn btn-sm btn-warning float-right toggle-edit-form mb-2">Edit</button>
+
+									<!-- edit form -->
 									<form 
-										action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" 
+										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" 
 										method="POST" 
 										class="edit-comment-form"
 									>
@@ -141,19 +172,22 @@
 												required
 											><%= review.body %></textarea>
 										</div>
+
 										<div class="form-group">
 											<button class="btn btn-primary update-comment-btn">
-												Update
+												Update Comment
 											</button>
 										</div>
 									</form>
+									<!-- edit form -->
 
 									<script>
 										$('#edit-rate<%= review.rating %>').prop('checked', true);
 									</script>
 
+									<!-- delete review button -->
 									<form 
-										action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" 
+										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" 
 										method="POST"
 										class="float-right"
 									>
@@ -161,50 +195,63 @@
 											Delete
 										</button>
 									</form>
+									<!-- delete review form -->
 								</div>
 							<% }; %>
+							<!-- edit review if author -->
 							<hr>
 						<% }); %>
+						<!-- single review end -->
 				  	</div>
 				</div>
 			</section>
+			<!-- COMMENT SECTION END -->
 
+			<!-- RELATED POSTS SECTION START -->
 			<section class="related-posts">
-				<div class="card">
-					<h2 class="card-header section-header">Also Check Out</h2>
-					<div class="card-body">
-						<% relatedPosts.forEach(function(relatedPost){ %>
-							<div class="card mb-3" style="max-width: 640px;">
-							  	<div class="row no-gutters">
-							    	<div class="col-md-4">
-							    		<% relatedPost.images.forEach(function(image){ %>
-											<img 
-												src="<%= image.url %>" 
-												class="card-img img-responsive related-post-image" 
-												alt="<%= relatedPost.title %>'s image" 
-									          	title="<%= relatedPost.title %>'s image"
-									          	loading="lazy"
-											>
-										<% }) %>
-							    	</div>
-							    	<div class="col-md-8">
-							      		<div class="card-body">
-							        		<h3 class="card-title section-sub__header"><%= relatedPost.title %></h3>
-							        		<p class="card-text float-right"><span class="read text-muted"><%= post.read %> min read</span></p>
-							        		<p class="card-text"><a href="/posts/<%= relatedPost.id %>" class="stretched-link">Read Now</a></p>
-							      		</div>
-							    	</div>
-							  	</div>
-							</div>
-						<% }); %>
-					</div>
-				</div>
-			</section>
-    	</div><!-- /.blog-main -->
 
+				<h2 class="section-title">Also Check Out</h2>
+
+				<!-- related post -->
+				<% relatedPosts.forEach(function(relatedPost){ %>
+					<div class="card mb-3" style="max-width: 640px;">
+					  	<div class="row no-gutters">
+					    	<div class="col-md-4">
+					    		<% relatedPost.images.forEach(function(image){ %>
+									<img 
+										src="<%= image.url %>" 
+										class="card-img img-responsive related-post-image" 
+										alt="<%= relatedPost.title %>'s image" 
+							          	title="<%= relatedPost.title %>'s image"
+							          	loading="lazy"
+									>
+								<% }) %>
+					    	</div>
+					    	<div class="col-md-8">
+					      		<div class="card-body">
+					        		<h3 class="card-title section-sub__header"><%= relatedPost.title %></h3>
+					        		<p class="card-text float-right"><span class="read text-muted"><i class="far fa-clock"></i> <%= relatedPost.read %> min read</span></p>
+					        		<p class="card-text"><a href="/blog/<%= relatedPost.id %>" class="stretched-link">Read Now</a></p>
+					      		</div>
+					    	</div>
+					  	</div>
+					</div>
+				<% }); %>
+				<!-- related post -->
+			</section>
+			<!-- RELATED POSTS SECTION START -->
+    	</div>
+    	<!-- MAIN CONTENT END -->
+
+    	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
     		<% include ../partials/sidebar %>	
-    	</aside><!-- /.blog-sidebar -->
-  	</div><!-- /.row -->
-</main><!-- /.container -->
+    	</aside>
+    	<!-- SIDEBAR END -->
+  	</div><!-- ROW -->
+</main>
+<!-- MAIN SECTION END -->
 
+<script>
+	var post = <%- JSON.stringify(post) %>;
+</script>

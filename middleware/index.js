@@ -1,6 +1,8 @@
 const Review = require('../models/review');
 const User = require('../models/user');
 const Post = require('../models/post');
+const ToolReview = require('../models/toolReview');
+const Tool = require('../models/tool');
 const { cloudinary } = require('../cloudinary');
 
 function escapeRegExp(string) {
@@ -21,6 +23,14 @@ const middleware = {
 		req.session.error = 'bye bye';
 		return res.redirect('/');
 	},
+	isToolReviewAuthor: async (req, res, next) => {
+		let toolReview = await ToolReview.findById(req.params.toolReview_id);
+		if (toolReview.author.equals(req.user._id)) {
+			return next();
+		}
+		req.session.error = 'bye bye';
+		return res.redirect('/');
+	},
 	isLoggedIn: (req, res, next) => {
 		if (req.isAuthenticated()) return next();
 		req.session.error = 'You need to be signed in to do that!';
@@ -31,6 +41,15 @@ const middleware = {
 		const post = await Post.findById(req.params.id);
 		if (post.author.equals(req.user._id)) {
 			res.locals.post = post;
+			return next();
+		}
+		req.session.error = 'Access denied!';
+		res.redirect('back');
+	},
+	isToolAuthor: async (req, res, next) => {
+		const tool = await Tool.findById(req.params.id);
+		if (tool.author.equals(req.user._id)) {
+			res.locals.tool = tool;
 			return next();
 		}
 		req.session.error = 'Access denied!';
@@ -86,20 +105,51 @@ const middleware = {
 
 		if(queryKeys.length) {
 			const dbQueries = [];
-			let { search, price, avgRating, distance } = req.query;
+			let { search } = req.query;
+
+			if (search) {
+				search = new RegExp(escapeRegExp(search), 'gi');
+				dbQueries.push({ $or: [
+						{ title: search },
+						{ category: search },
+						{ tag: search },
+						{ body: search },
+						{ footer: search }
+					]
+				});
+			}
+
+			res.locals.dbQuery = dbQueries.length ? { $and: dbQueries } : {};
+		}
+
+		res.locals.query = req.query;
+
+		queryKeys.splice(queryKeys.indexOf('page'), 1);
+		const delimiter = queryKeys.length ? '&' : '?';
+		res.locals.paginateUrl = req.originalUrl.replace(/(\?|\&)page=\d+/g, '') + `${delimiter}page=`;
+
+		next();
+	},
+	async searchAndFilterTools(req, res, next) {
+		const queryKeys = Object.keys(req.query);
+
+		if(queryKeys.length) {
+			const dbQueries = [];
+			let { search, category, avgRating } = req.query;
 
 			if (search) {
 				search = new RegExp(escapeRegExp(search), 'gi');
 				dbQueries.push({ $or: [
 						{ title: search },
 						{ description: search },
+						{ category: search },
+						{ tag: search }
 					]
 				});
 			}
 
-			if (price) {
-				if (price.min) dbQueries.push({ price: { $gte: price.min } });
-				if (price.max) dbQueries.push({ price: { $lte: price.max } });
+			if (category) {
+				dbQueries.push({ category: { $in: category } });
 			}
 
 			if (avgRating) {

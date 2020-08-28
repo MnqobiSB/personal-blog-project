@@ -1,9 +1,10 @@
 <% layout('layouts/boilerplate') -%>
+<!-- PAGE HEADER -->
 <header>
 	<div class="container">
 		<div class="jumbotron jumbotron-fluid">
 		  	<div class="container">
-		    	<h1 class="font-italic page-header">
+		    	<h1 class="font-italic page-title">
 		    		<img 
 		    			src="<%= currentUser.image.secure_url %>" 
 		    			alt="<%= currentUser.username %>'s profile image"
@@ -18,23 +19,35 @@
 		</div>
 	</div>
 </header>
+<!-- PAGE HEADER -->
 
-<main id="main" class="main" tabindex="-1" role="main">
-	<div class="container">
-		<h2>Recent Posts:</h2>
+<!-- MAIN SECTION START -->
+<main 
+	id="main" 
+	class="main" 
+	tabindex="-1" 
+	role="main"
+>
+	<!-- MAIN CONTENT START -->
+	<div class="container main-content">
+		<!-- RECENT POSTS START -->
+		<h2 class="section-title">Recent Posts</h2>
 		<% posts.forEach(function(post) { %>
 			<ul>
 				<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
 			</ul>
 		<% }); %>
-		<h2>Update Info:</h2>
+		<!-- RECENT POSTS END -->
+
+		<!-- UPDATE PROFILE START -->
+		<h2 class="section-title">Update Profile</h2>
 		<form 
 			action="/profile?_method=PUT" 
 			method="POST" 
-			class="form"
+			class="profile-form"
 			enctype="multipart/form-data"
 		>
-		<div class="form-group">
+			<div class="form-group">
 				<label for="username">Username</label>
 				<input 
 					type="text"
@@ -50,6 +63,7 @@
 					autofocus
 				/>
 			</div>
+
 			<div class="form-group">
 				<label for="email">Email</label>
 				<input 
@@ -65,6 +79,7 @@
 					required
 				/>
 			</div>
+
 			<div class="form-group">
 				<label for="new-password">New Password</label>
 				<input 
@@ -77,6 +92,7 @@
 					placeholder="********" 
 				/>
 			</div>
+
 			<div class="form-group">
 				<label for="password-confirmation">Password Confirmation</label>
 				<input 
@@ -89,8 +105,10 @@
 					placeholder="********" 
 				/>
 			</div>
+
 			<div id="validation-message">
 			</div>
+
 			<div class="form-group">
 				<label for="image">Profile Image (optional)</label>
 				<small>(this deletes existing)</small>
@@ -103,6 +121,7 @@
 					accept="images/*"
 				/>
 			</div>
+
 			<div class="form-group">
 				<label for="current-password">Current Password (required to update profile)</label>
 				<input 
@@ -116,16 +135,21 @@
 					required
 				/>
 			</div>
+
 			<div class="form-group">
-				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div>
+				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div><!-- RECAPTURE (CHANGE SITEKEY) -->
 			</div>
+
 			<div class="form-group">
 				<button type="submit" class="btn">
 					Update Profile
 				</button>
 			</div>
 		</form>
+		<!-- UPDATE PROFILE END -->
 	</div>
+	<!-- MAIN CONTENT END -->
 </main>
+<!-- MAIN SECTION END -->
 
 <script src="/javascripts/profile.js"></script>

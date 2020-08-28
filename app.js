@@ -18,6 +18,8 @@ const methodOverride = require('method-override');
 const indexRouter 	= require('./routes/index');
 const postsRouter 	= require('./routes/posts');
 const reviewsRouter = require('./routes/reviews');
+const toolsRouter   = require('./routes/tools');
+const toolsReviewsRouter = require('./routes/toolsReviews');
 
 const app = express();
 
@@ -91,6 +93,8 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/blog', postsRouter);
 app.use('/blog/:id/reviews', reviewsRouter);
+app.use('/tools', toolsRouter);
+app.use('/tools/:id/toolsReviews', toolsReviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

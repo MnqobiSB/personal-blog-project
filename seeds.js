@@ -1,28 +1,28 @@
 const faker = require('faker');
 const Post = require('./models/post');
-const cities = require('./cities');
 
 async function seedPosts() {
 	await Post.deleteMany({});
 	for(const i of new Array(600)) {
-		const random1000 = Math.floor(Math.random() * 1000);
+		const random15 = 15;
 		const random5 = Math.floor(Math.random() * 6);
 		const title = faker.lorem.word();
-		const description = faker.lorem.text();
+		const category = faker.lorem.text();
+		const tag = faker.lorem.text();
+		const url = faker.lorem.text();
+		const body = faker.lorem.text();
+		const footer = faker.lorem.text();
 		const postData = {
 			title,
-			description,
-			location: `${cities[random1000].city}, ${cities[random1000].state}`,
-			geometry: {
-				type: 'Point',
-				coordinates: [cities[random1000].longitude, cities[random1000].latitude],
-			},
-			price: random1000,
-			avgRating: random5, 
-			author: '5eb8e1e027946b2c240ac928'
+			category,
+			tag,
+			url,
+			body,
+			footer,
+			read: random15,
+			author: '5f2a993fe6db1a0ea0c2aa24'
 		}
 		let post = new Post(postData);
-		post.properties.description = `<strong><a href="/posts/${post._id}">${title}</a></strong><p>${post.location}</p><p>${description.substring(0, 20)}...</p>`;
 		await post.save();
 	}
 	console.log('600 new posts created');

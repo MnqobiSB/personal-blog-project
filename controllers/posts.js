@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Tool = require('../models/tool');
 const { cloudinary } = require('../cloudinary');
 
 module.exports = {
@@ -8,17 +9,19 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 3,
+			limit: 10,
 			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/index', { 
-			posts,  
+		res.render('posts/index', {   
 			title: 'All Articles',
-			page: 'all-posts' 
+			page: 'all-posts',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// Posts Web-Development
@@ -34,10 +37,12 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/web-dev', { 
-			posts, 
+		res.render('posts/web-dev', {  
 			title: 'Web Development',
-			page: 'web-dev' 
+			page: 'web-dev',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts 
 		});
 	},
 	// Posts Social-Media
@@ -54,9 +59,11 @@ module.exports = {
 			res.locals.error = 'No results match that query.';
 		}
 		res.render('posts/social-media', { 
-			posts, 
 			title: 'Social Media',
-			page: 'social-media' 
+			page: 'social-media',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts,
 		});
 	},
 	// Posts Social-Media
@@ -73,9 +80,11 @@ module.exports = {
 			res.locals.error = 'No results match that query.';
 		}
 		res.render('posts/software', { 
-			posts, 
 			title: 'Software',
-			page: 'software' 
+			page: 'software',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// Posts Digital-Marketing
@@ -92,9 +101,11 @@ module.exports = {
 			res.locals.error = 'No results match that query.';
 		}
 		res.render('posts/digital-marketing', { 
-			posts, 
 			title: 'Digital Marketing',
-			page: 'digital-marketing' 
+			page: 'digital-marketing',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// Posts Digital-Marketing
@@ -110,15 +121,22 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/make-money-online', { 
-			posts, 
+		res.render('posts/make-money-online', {  
 			title: 'Make Money Online',
-			page: 'make-money-online' 
+			page: 'make-money-online' ,
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// Posts New
 	postNew(req, res, next) {
-		res.render('posts/new');
+		res.render('posts/new', {
+			title: 'New Post',
+			page: 'new-post' ,
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow'
+		});
 	},
 	// Posts Create
 	async postCreate(req, res, next) {
@@ -133,7 +151,7 @@ module.exports = {
 		let post = new Post(req.body.post);
 		await post.save();
 		req.session.success = 'Post created successfully!';
-		res.redirect(`/posts/${post.id}`);
+		res.redirect(`/blog/${post.id}`);
 	},
 	// Posts Show
 	async postShow(req, res, next) {
@@ -147,17 +165,21 @@ module.exports = {
 		});
 		let relatedPosts = await Post.find({ category: post.category });
 		res.render('posts/show', { 
-			post,
-			relatedPosts,
 			title: post.title,
-			page: 'post-show'
+			page: 'post-show',
+			robots: 'index, follow',
+			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			post,
+			relatedPosts
 		});
 	},
 	// Posts Edit
 	postEdit(req, res, next) {
 		res.render('posts/edit', {
 			title: 'Edit Post',
-			page: 'edit-post'
+			page: 'edit-post',
+			robots: 'noindex, nofollow',
+			googlebot: 'noindex, nofollow'
 		});
 	},
 	// Posts Update
@@ -210,7 +232,7 @@ module.exports = {
 		await post.save();
 		req.session.success = 'Post updated successfully!';
 		// redirect to show page
-		res.redirect(`/posts/${post.id}`);
+		res.redirect(`/blog/${post.id}`);
 	},
 	// Post Destroy
 	async postDestroy(req, res, next) {
@@ -220,6 +242,6 @@ module.exports = {
 		}
 		await post.remove();
 		req.session.success = 'Post deleted successfully!';
-		res.redirect('/posts');
+		res.redirect('/blog');
 	}
 }

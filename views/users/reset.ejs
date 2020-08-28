@@ -1,17 +1,72 @@
 <% layout('layouts/boilerplate') -%>
+<!-- PAGE HEADER -->
+<header>
+	<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+		  	<div class="container">
+		    	<h1 class="font-italic page-title">Reset Password</h1>
+		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		  	</div>
+		</div>
+	</div>
+</header>
+<!-- PAGE HEADER -->
 
-<h1>Reset Password</h1>
+<!-- MAIN SECTION START -->
+<main
+	id="main" 
+	class="main container"
+	tabindex="-1"
+	role="main"
+>
+		<!-- MAIN CONTENT START -->
+	<div class="main-content">
+		<form 
+			action="/reset/<%= token %>?_method=PUT" 
+			method="POST"
+			class="form forgot-password"
+		>
+			<div class="form-group">
+				<label for="password">New Password</label>
+				<input 
+					type="password" 
+					id="password" 	
+					name="password" 
+					class="form-control"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+					placeholder="New password" 
+					autofocus
+					required 
+				/>
+			</div>
 
-<form action="/reset/<%= token %>?_method=PUT" method="POST">
-	<div>
-		<label for="password">New Password:</label>
-		<input type="password" id="password" name="password" placeholder="new password" autofocus>
+			<div class="form-group">
+				<label for="confirm">Confirm Password</label>
+				<input 
+					type="password" 
+					id="confirm" 
+					name="confirm" 
+					class="form-control"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+					placeholder="Confirm password" 
+					autofocus
+					required 
+				/>
+			</div>
+
+			<div class="form-group">
+				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div><!-- RECAPTURE (CHANGE SITEKEY) -->
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn">
+					Update Password
+				</button>
+			</div>
+		</form>
 	</div>
-	<div>
-		<label for="confirm">Confirm Password:</label>
-		<input type="password" id="confirm" name="confirm" placeholder="confirm password" autofocus>
-	</div>
-	<div>
-		<input type="submit" value="Update Password">
-	</div>
-</form>
+	<!-- MAIN CONTENT END -->
+</main>
+<!-- MAIN SECTION END -->

@@ -58,14 +58,20 @@
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" 
-                            href="/products">
-                            Products
+                            href="/tools">
+                            Tools
                         </a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" 
                             href="/about">
-                            About Us
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" 
+                            href="/contact">
+                            Contact
                         </a>
                     </li>
                     <% if (!currentUser) { %>
@@ -97,6 +103,9 @@
                                 <a class="dropdown-item" href="/blog/new">
                                     <i class="fas fa-edit"></i> Create New Post
                                 </a>
+                                <a class="dropdown-item" href="/tools/new">
+                                    <i class="fas fa-edit"></i> Create New Tool
+                                </a>
                                 <div class="dropdown-divider"></div>
                             <% } %>
                             <a class="dropdown-item" href="/profile">
@@ -117,9 +126,9 @@
     <div class="nav-scroller container py-1 mb-2">
         <nav class="nav d-flex justify-content-between" aria-label="site">
             <a class="p-2 text-muted" href="/blog/web-development">#Web Development</a>
+            <a class="p-2 text-muted" href="/blog/digital-marketing">#Digital Marketing</a>
             <a class="p-2 text-muted" href="/blog/social-media">#Social Media</a>
             <a class="p-2 text-muted" href="/blog/software">#Software</a>
-            <a class="p-2 text-muted" href="/blog/digital-marketing">#Digital Marketing</a>
             <a class="p-2 text-muted" href="/blog/make-money-online">#Make Money Online</a>
         </nav>
     </div>

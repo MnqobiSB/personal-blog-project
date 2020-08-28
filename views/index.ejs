@@ -1,14 +1,21 @@
 <% layout('layouts/boilerplate') -%>
+<!-- FEATURED POST SECTION -->
 <section id="featured">
 	<div class="container">
-		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+		<!-- MAIN POST START -->
+		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark main-post">
 			<% posts.docs.forEach(function(post){ %>
 				<% if (post.mainPost) { %>
 				    <div class="col-md-7 px-0">
-				      	<h1 class="main-title font-italic"><%= post.title %></h1>
+				    	<header class="page-header">
+				      		<h1 class="page-title font-italic"><%= post.title %></h1>
+				      	</header>
 				      	<p class="lead my-3"><%= post.body.substring(0, 200) %>...</p>
 				      	<p class="lead mb-0">
-				      		<a href="/blog/<%= post.id %>" class="text-white font-weight-bold stretched-link">
+				      		<a 
+				      			href="/blog/<%= post.id %>" 
+				      			class="text-white font-weight-bold stretched-link"
+				      		>
 				      			Continue reading
 				      		</a>
 				      	</p>
@@ -16,7 +23,9 @@
 			    <% } %>
 		    <% }); %>
 		</div>
+		<!-- MAIN POST END -->
 
+		<!-- FEATURED POST START -->
 	  	<div class="row mb-2">
 	  		<% posts.docs.forEach(function(post){ %>
 				<% if (post.featuredPost) { %>
@@ -25,7 +34,9 @@
 			        		<div class="col p-4 d-flex flex-column position-static">
 			          			<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
 			          			<h2 class="mb-0"><%= post.title %></h2>
-			          			<div class="mb-1 text-muted"><small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small></div>
+			          			<div class="mb-1 text-muted">
+			          				<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+			          			</div>
 			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
 			          			<a href="/blog/<%= post.id %>" class="stretched-link">Continue reading</a>
 			        		</div>
@@ -46,22 +57,28 @@
 	    		<% } %>
 		    <% }); %>
 	  	</div>
+	  	<!-- FEATURED POST END -->
 	</div>
 </section>
+<!-- FEATURED POST SECTION -->
 
+<!-- MAIN SECTION START -->
 <main
 	id="main" 
 	class="main container"
 	tabindex="-1"
-	role="main">
-  	<div class="row">
-    	<div class="col-md-8 main-div">
-    		<section class="trending-posts">
-	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-header">
+	role="main"
+>
+  	<div class="row"><!-- ROW -->
+  		<!-- MAIN CONTENT START -->
+    	<div class="col-md-8 main-content">
+    		<!-- HOME ARTICLES SECTION START -->
+    		<section class="section home-articles">
+	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
 	        		Featured Articles!
 	      		</h2>
 
-	      		<div class="trending-article">
+	      		<div class="blog-post"><!-- ARTICLE CONTAINER -->
 	      			<% posts.docs.forEach(function(post){ %>
 		      			<% if (post.homeArticle) { %>
 		      				<article>
@@ -75,11 +92,18 @@
 						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
 					        		</small>
 								</header>
+
 				        		<section class="blog-post-body">	
 				        			<p><%= post.body.substring(0, 300) %>...</p>
 						        </section>
+
 						        <footer class="blog-post-footer">
-						        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
+						        	<p class="blog-post-meta">
+						        		<small>
+						        			<i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %>
+						        		</small>
+						        	</p>
+						        	
 						        	<a href="/blog/<%= post.id %>" class="">
 						        		Continue reading
 						        	</a>
@@ -87,38 +111,52 @@
 					        </article>
 						<% } %>
 			        <% }); %>
-	      		</div><!-- /.blog-post -->
+	      		</div><!-- ARTICLE CONTAINER -->
 			</section>
-			<section class="top-products">
-	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-header">
-	        		Top Products!
-	      		</h2>
-				
-	      		<div class="product">
-	      			<div class="card" style="width: 18rem;">
-					  	<img 
-					  		src="https://images.unsplash.com/photo-1543185377-99cd16011803?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30" 
-					  		class="card-img-top" 
-					  		class="img-responsive"
-							title="Product image"
-							loading="lazy"
-					  		alt="Product image"
-					  	/>
-					  	<div class="card-body">
-					    	<h3 class="card-title">Video Maker</h3>
-					    	<p class="card-text">Make awesome, professional videos easily for your YouTube channel or anything you want.</p>
-					    	<a href="#" class="btn btn-primary">View Product</a>
-					  	</div>
-					</div>
-	      		</div><!-- /.blog-post -->
-			</section>
-    	</div><!-- /.main-div -->
+			<!-- HOME ARTICLES SECTION END -->
 
+			<!-- HOME TOOLS SECTION START -->
+    		<section class="section featured-tools">
+	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
+	        		Top Tools!
+	      		</h2>
+	      		<div class="row justify-content-center">
+	      			<% tools.docs.forEach(function(tool){ %>
+		      			<% if (tool.topTool) { %>
+		      				<div class="col-md-6 product">
+				      			<div class="card" style="width: 18rem;">
+				      				<% tool.images.forEach(function(image){ %>	
+					          			<img 
+					          				src="<%= image.url %>"
+					          				class="card-img-top img-responsive" 
+					          				alt="<%= tool.title %>'s image" 
+					          				title="<%= tool.title %>'s image"
+					          				loading="lazy"
+					          			/>
+				          			<% }) %>
+								  	<div class="card-body">
+								    	<h3 class="card-title"><%= tool.title %></h3>
+								    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
+								    	<a href="/tools/<%= tool.id %>" class="btn btn-primary">View Product</a>
+								  	</div>
+								</div>
+				      		</div>
+						<% } %>
+			        <% }); %>
+	      		</div>
+			</section>
+			<!-- HOME TOOLS SECTION END -->
+    	</div>
+    	<!-- MAIN CONTENT END -->
+
+    	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
     		<% include ./partials/sidebar %>	
-    	</aside><!-- /.blog-sidebar -->
-  	</div><!-- /.row -->
-</main><!-- /.container -->
+    	</aside>
+    	<!-- SIDEBAR END -->
+  	</div><!-- ROW -->
+</main>
+<!-- MAIN SECTION END -->
 
 <script>
 	const posts = { features: <%- JSON.stringify(posts) %> };

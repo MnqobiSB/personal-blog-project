@@ -1,0 +1,121 @@
+<% layout('layouts/boilerplate') -%>
+<main>
+	<div class="container">
+		<h1>Edit Tool!</h1>
+		<form 
+			action="/tools/<%= tool.id %>?_method=PUT"
+			method="POST" 
+			id="toolEditForm"
+			enctype="multipart/form-data"
+		>
+			<div class="form-group">
+				<label for="title">Tool Title</label>
+				<input 
+					type="text"
+					name="tool[title]"
+					id="title"
+					class="form-control"  
+					placeholder="Title"
+					value="<%= tool.title %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="imageUpload">Image</label>
+				<input 
+					type="file" 
+					name="images"
+					id="imageUpload"
+					class="form-control"
+					accept="images/*"  
+					multiple
+				/>
+				<div>
+					<% tool.images.forEach(function(image, i) { %>
+						<img 
+							src="<%= image.url %>" 
+							class="img-responsive" 
+							alt="<%= tool.title %>'s image" 
+				          	title="<%= tool.title %>'s image"
+				          	loading="lazy"
+							width="80px" 
+						/>
+						<label for="image<%= i %>">Delete</label>
+						<input 
+							type="checkbox" 
+							name="deleteImages[]" 
+							class="imageDeleteCheckbox" 
+							id="image<%= i %>" 
+							value="<%= image.public_id %>"
+						/>
+					<% }); %>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="top">Is Top Tool?</label>
+				<select 
+					name="tool[topTool]" 
+					id="top"
+					class="form-control">
+					<option selected value="<%= tool.topTool %>"><%= tool.topTool %></option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="category">Category</label>
+				<select 
+					name="tool[category]" 
+					id="category"
+					class="form-control">
+					<option selected value="<%= tool.category %>"><%= tool.category %></option>
+					<option value="Web Development">Web Development</option>
+					<option value="Social Media">Social Media</option>
+					<option value="Sofware">Sofware</option>
+					<option value="Digital Marketing">Digital Marketing</option>
+					<option value="Make Money Online">Make Money Online</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="tag">Tag</label>
+				<input 
+					type="text"
+					name="tool[tag]"
+					id="tag"
+					class="form-control"  
+					placeholder="Tag"
+					value="<%= tool.tag %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="url">Url</label>
+				<input 
+					type="text"
+					name="tool[url]"
+					id="url"
+					class="form-control"  
+					placeholder="Url"
+					value="<%= tool.url %>"
+					required 
+				/>
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea 
+					name="tool[description]"
+					id="description"
+					class="form-control"
+					rows="5" 
+					placeholder="Post Description"><%= tool.description %></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn">
+					Update Tool!
+				</button>
+			</div>
+		</form>
+	</div>
+</main>
+
+<script src="/javascripts/tool-edit.js"></script>
