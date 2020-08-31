@@ -65,6 +65,7 @@ module.exports = {
 			}
 		});
 		const floorRating = tool.calculateAvgRating();
+		
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		// const floorRating = tool.avgRating;
@@ -74,7 +75,7 @@ module.exports = {
 			sort: '-_id'
 		});
 		res.render('tools/show', { 
-			title: 'View tool',
+			title: tool.title,
 			page: 'tool-show',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',

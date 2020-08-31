@@ -41,6 +41,7 @@ module.exports = {
 	},
 	// POST /
 	async downloadEbook(req, res, next) {
+		await download()
 		const subscribeData = `
 		  	<h1>You Have a New User Newsletters Subscription</h1>
 		  	<h2>User Email:</h2>
@@ -254,7 +255,7 @@ module.exports = {
 	},
 	// GET /profile
 	async getProfile(req, res, next) {
-		const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
+		const posts = await Post.find().where('author').equals(req.user._id).limit(1000).exec();
 		res.render('profile', {
 			title: 'My Profile',
 			page: 'profile',

@@ -3,7 +3,7 @@
 <section id="featured">
 	<div class="container">
 		<!-- MAIN POST START -->
-		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark main-post">
+		<div class="jumbotron p-4 p-md-5 main-post">
 			<% posts.docs.forEach(function(post){ %>
 				<% if (post.mainPost) { %>
 				    <div class="col-md-7 px-0">
@@ -30,7 +30,7 @@
 	  		<% posts.docs.forEach(function(post){ %>
 				<% if (post.featuredPost) { %>
 	    			<div class="col-md-6"> 		
-			      		<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			      		<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative featuredPost">
 			        		<div class="col p-4 d-flex flex-column position-static">
 			          			<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
 			          			<h2 class="mb-0"><%= post.title %></h2>
@@ -40,17 +40,16 @@
 			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
 			          			<a href="/blog/<%= post.id %>" class="stretched-link">Continue reading</a>
 			        		</div>
-			        		<div class="col-auto d-none d-lg-block">
-			        			<% post.images.forEach(function(image){ %>	
+			        		<div class="col-auto d-none d-lg-block featuredPost-image">
+			        				
 				          			<img 
-				          				src="<%= image.url %>"
-				          				class="img-responsive" 
-				          				width="200" height="250" 
+				          				src="<%= post.images[0].url %>"
+				          				class="card-img-right img-responsive" 
 				          				alt="<%= post.title %>'s image" 
 				          				title="<%= post.title %>'s image"
 				          				loading="lazy"
 				          			/>
-			          			<% }) %>
+			          			
 			        		</div>
 			      		</div>
 	    			</div>
@@ -93,9 +92,9 @@
 					        		</small>
 								</header>
 
-				        		<section class="blog-post-body">	
+				        		<div class="blog-post-body">	
 				        			<p><%= post.body.substring(0, 300) %>...</p>
-						        </section>
+						        </div>
 
 						        <footer class="blog-post-footer">
 						        	<p class="blog-post-meta">
@@ -124,7 +123,7 @@
 	      			<% tools.docs.forEach(function(tool){ %>
 		      			<% if (tool.topTool) { %>
 		      				<div class="col-md-6 product">
-				      			<div class="card" style="width: 18rem;">
+				      			<div class="card tool-card" style="width: 15rem;">
 				      				<% tool.images.forEach(function(image){ %>	
 					          			<img 
 					          				src="<%= image.url %>"
@@ -137,7 +136,7 @@
 								  	<div class="card-body">
 								    	<h3 class="card-title"><%= tool.title %></h3>
 								    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
-								    	<a href="/tools/<%= tool.id %>" class="btn btn-primary">View Product</a>
+								    	<a href="/tools/<%= tool.id %>" class="btn">View Tool</a>
 								  	</div>
 								</div>
 				      		</div>

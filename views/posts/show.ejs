@@ -11,16 +11,14 @@
     	<div class="col-md-8 main-content">
     		<!-- ARTICLE START -->
       		<section class="section">
-      			<div class="card mb-3 show-main"><!-- ARTICLE CONTAINER -->
-      				<% post.images.forEach(function(image){ %>
-						<img 
-							src="<%= image.url %>" 
-							class="card-img-top img-responsive single-blog-post-image" 
-							alt="<%= post.title %>'s image" 
-				          	title="<%= post.title %>'s image"
-				          	loading="lazy"
-						>
-					<% }) %>
+      			<div class="card mb-3 show-main"><!-- ARTICLE CONTAINER --> 
+					<img 
+						src="<%= post.images[1].url %>" 
+						class="card-img-top img-responsive single-blog-post-image" 
+						alt="<%= post.title %>'s image" 
+			          	title="<%= post.title %>'s image"
+			          	loading="lazy"
+					>
 					<div class="card-body">
 		      			<article>
 		      				<header class="blog-post-header">
@@ -34,9 +32,9 @@
 				        		</small>
 							</header>
 
-							<section class="blog-post-body">	
+							<div class="blog-post-body">	
 			        			<p><%- post.body %></p>
-					        </section>
+					        </div>
 
 					        <footer class="blog-post-footer">
 					        	<p><%- post.footer %></p>
@@ -214,7 +212,7 @@
 
 				<!-- related post -->
 				<% relatedPosts.forEach(function(relatedPost){ %>
-					<div class="card mb-3" style="max-width: 640px;">
+					<div class="card mb-3" style="max-width: auto;">
 					  	<div class="row no-gutters">
 					    	<div class="col-md-4">
 					    		<% relatedPost.images.forEach(function(image){ %>
@@ -230,7 +228,14 @@
 					    	<div class="col-md-8">
 					      		<div class="card-body">
 					        		<h3 class="card-title section-sub__header"><%= relatedPost.title %></h3>
-					        		<p class="card-text float-right"><span class="read text-muted"><i class="far fa-clock"></i> <%= relatedPost.read %> min read</span></p>
+
+					        		<small class="article-meta">
+						        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+						        		<span class="read text-muted d-blockt float-right"><i class="far fa-clock"></i> <%= relatedPost.read %> min read</span>
+					        		</small>
+
+
 					        		<p class="card-text"><a href="/blog/<%= relatedPost.id %>" class="stretched-link">Read Now</a></p>
 					      		</div>
 					    	</div>
@@ -254,4 +259,5 @@
 
 <script>
 	var post = <%- JSON.stringify(post) %>;
+	var posts = <%- JSON.stringify(posts) %>;
 </script>

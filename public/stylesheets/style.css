@@ -3,11 +3,76 @@ article, aside, footer, header, nav, section {
         display: block;
     }
 
-
-body {
-  padding-top: 78px;
+/* GLOBAL STYLES */
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
+/* CUSTOM PROPERTIES */
+:root {
+  /* font-family */
+  --ff-body: 'Roboto', sans-serif;
+  --ff-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --ff-heading-sec: 'Roboto', sans-serif;
+
+  /* font-size */
+  --fs-h1: 2.5rem;
+    --fs-h2: 1.75rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1rem;
+    --fs-small: .8rem;
+
+  /* font-wheight */
+  --fw-reg: 300;
+  --fw-header: 700;
+  --fw-sub-header: 500;
+
+  /* colors */
+  --clr-dark: rgb(34, 47, 62);
+  --clr-light: rgb(236, 240, 241);
+  --clr-green: rgb(39, 174, 96);
+  --clr-blue: rgb(41, 128, 185);
+  --clr-orange: rgb(255, 159, 67);
+
+  /* rbga colors */
+  --clr-dark-rgba: rgba(34, 47, 62, .9);
+  --clr-light-rgba: rgba(236, 240, 241, .2);
+  --clr-blue-rgba: rgba(52, 31, 151, .8);
+
+  /* box-shadow */
+  --bs: 0.25em 0.25em 0.75em rgba(34, 47, 62,.25),
+      0.125em 0.125em 0.25em rgba(34, 47, 62,.15);
+
+  --br: 3px;
+}
+
+
+
+/***************************************************/
+
+/* TAG STYLES */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-top: 92px;
+  font-family: var(--ff-body), verdana, Calibri, Helvetica, Arial, sans-serif;
+  font-size: var(--fs-body)!important;
+  font-weight: var(--fw-reg);
+  color: var(--clr-dark)!important;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-heading), Georgia, "Times New Roman", serif;
+}
+
+/****************************************************************/
+
+/* ACCESSIBILITY STYLES */
 .skip-link {
     color: #fff;
     left: -100%;
@@ -19,7 +84,74 @@ body {
     top: 0;
 }
 
-.blog-header {
+
+/* PRIMARY CLASS STYLES */
+
+.form-control:focus {
+    border: 2px solid var(--clr-green)!important;
+    box-shadow: 0 0 5px var(--clr-green)!important;
+}
+
+
+.btn {
+  background-color: var(--clr-green)!important;
+  color: var(--clr-light)!important;
+  transition: all 200ms ease-in-out;
+}
+
+.btn:hover {
+  opacity: .8;
+}
+
+
+.text-gray {
+  color: rgba(34, 47, 62, .7);
+}
+
+/************************************************************/
+
+/* MAIN NAVBAR MOBILE STYLES */
+.navbar {
+  background-color: var(--clr-light);
+  box-shadow: var(--bs);
+}
+
+.navbar-brand {
+  margin-right: auto;
+}
+
+.logo {
+  width: 10rem;
+}
+
+.navbar-toggler {
+  padding: 0!important;
+  border: none!important;
+}
+
+/*search button*/
+.search-btn {
+  border: 1px solid var(--clr-green)!important;
+  color: var(--clr-green)!important;
+  transition: all 200ms ease-in-out;
+  background-color: transparent!important;
+}
+
+.search-btn:hover {
+  background-color: var(--clr-green)!important;
+  color: var(--clr-light)!important;
+}
+
+.nav-link {
+  color: var(--clr-dark)!important;
+}
+
+.nav-link:hover {
+  color: var(--clr-green)!important;
+}
+
+.active {
+  color: var(--clr-green)!important;
 }
 
 @media (max-width: 991.98px) {
@@ -45,23 +177,9 @@ body {
   }
 }
 
-.blog-header-logo:hover {
-  text-decoration: none;
-}
+/******************************************************************/
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-}
-
-.display-4 {
-  font-size: 2.5rem;
-}
-@media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
-}
-
+/* SECONDARY NAV STYLES */
 .nav-scroller {
   position: relative;
   z-index: 2;
@@ -82,15 +200,40 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-overflow-scrolling: touch;
 }
 
-.nav-scroller .nav-link {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: .875rem;
+.category-nav:hover {
+  color: var(--clr-green);
+}
+
+
+/*************************************************/
+
+/* MAIN POST*/
+.main-post {
+  border-radius: var(--br);
+  color: var(--clr-light);
+  background-color: var(--clr-dark-rgba)!important;
+  background-image: url(https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30);
+  background-blend-mode: multiply;
+  background-size: cover;
+}
+
+
+/* FEATURED CARD STYLES */
+.featuredPost {
+  border-radius: var(--br);
+  max-height: 320px;
+}
+
+.featuredPost-image {
+  background-color: var(--clr-dark-rgba)!important;
+  background-blend-mode: multiply;
 }
 
 .card-img-right {
   height: 100%;
+  width: 200px; 
   border-radius: 0 3px 3px 0;
+  opacity: .75;
 }
 
 .flex-auto {
@@ -100,12 +243,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .h-250 { height: 250px; }
 @media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
+  .h-md-250 { height: 300px; }
 }
 
+/***********************************************************/
+
+/* BLOG STYLES */
 /*
  * Blog name and description
  */
+article {
+  margin-bottom: 4rem;
+}
+
 .blog-title {
   margin-bottom: 0;
   font-size: 2rem;
@@ -120,14 +270,6 @@ h1, h2, h3, h4, h5, h6 {
   .blog-title {
     font-size: 3.5rem;
   }
-}
-
-/* Pagination */
-.blog-pagination {
-  margin-bottom: 4rem;
-}
-.blog-pagination > .btn {
-  border-radius: 2rem;
 }
 
 /*
@@ -145,25 +287,56 @@ h1, h2, h3, h4, h5, h6 {
   color: #999;
 }
 
+/*********************************************************/
+
+
+/* Tool Card */
+.tool-card {
+  margin-bottom: 4rem;
+}
+
+/**********************************************************/
+
+
 /*
  * Footer
  */
 .blog-footer {
-  padding: 2.5rem 0;
-  color: #999;
-  text-align: center;
-  background-color: #f9f9f9;
+  padding: 2.5rem 0 0 0;
+  color: var(--clr-green);
+  background-color: var(--clr-dark-rgba);
   border-top: .05rem solid #e5e5e5;
 }
-.blog-footer p:last-child {
-  margin-bottom: 0;
+
+.footer-heading {
+  font-family: var(--ff-heading-sec);
+  
+  font-size: 1.5rem;
+}
+
+.footer-link {
+  color: var(--clr-light);
+}
+
+.copyright {
+  padding-top: 1rem;
+  background-color: var(--clr-dark);
+}
+
+.copyright-container {
+  display: flex;
+  flex-direction: row;
+  font-size: var(--fs-small);
+}
+
+.copyright-p {
+  flex: auto;
 }
 
 
-.profile-image {
-	width: 100px;
-	border-radius: 50%;
-}
+/******************************************************/
+
+/* ACCESSIBILITY STYLES */
 
 .visuallyHidden {
     border: 0;

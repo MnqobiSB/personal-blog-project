@@ -108,7 +108,7 @@ module.exports = {
 			posts
 		});
 	},
-	// Posts Digital-Marketing
+	// Posts Make Money Online
 	async postMakeMoneyOnline(req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
@@ -163,13 +163,24 @@ module.exports = {
 				model: 'User'
 			}
 		});
-		let relatedPosts = await Post.find({ category: post.category });
+
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 10,
+			sort: '-_id'
+		});
+
+		let relatedPosts = await Post.find().where('category').equals(post.category).limit(5).exec();
+		
 		res.render('posts/show', { 
 			title: post.title,
 			page: 'post-show',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			post,
+			posts,
 			relatedPosts
 		});
 	},

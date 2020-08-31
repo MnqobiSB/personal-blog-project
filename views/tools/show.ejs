@@ -25,6 +25,21 @@
 		      			<article>
 		      				<header class="blog-post-header">
 				        		<h1 class="card-title page-title"><%= tool.title %></h1>
+				        		<p>
+									<% for(let i = 0; i < 5; i++) { %>
+										<% if(i < floorRating) { %>
+											<!-- display a full star -->
+											<i class="fas fa-star"></i>
+										<% } else if((tool.avgRating - i) > 0 && (tool.avgRating - i) < 1) { %>
+											<!-- display a half star -->
+											<i class="fas fa-star-half-alt"></i>
+										<% } else { %>
+											<!-- display and empty star -->
+											<i class="far fa-star"></i>
+										<% } %> 
+									<% } %>
+									<%= `${tool.avgRating} star${tool.avgRating === 1 ? '' : 's'}`  %> (<%= tool.toolReviews.length %>)
+								</p>
 				        		<p class="article-meta text-muted">
 				        			<small><i class="far fa-calendar-alt"></i> <%= moment(tool.createdAt).format('MMMM DD, YYYY') %></small>
 				        		</p>
@@ -74,8 +89,12 @@
       		<section class="review-card">
       			<div class="card">
       				<h2 class="card-header section-title">Reviews</h2>
-
 				  	<div class="card-body comment-card-body">
+				  		<!-- no reviews yet -->
+				    	<% if (tool.toolReviews.length === 0) { %>
+							<p><em class="no-comments">No reviews yet.</em></p>
+						<% } %>
+
 				    	<% tool.toolReviews.forEach(function(toolReview) { %>
 				    		<!-- SHOW REVIEW -->
 				    		<div class="media text-muted">

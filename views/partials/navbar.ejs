@@ -1,28 +1,27 @@
 <header class="blog-header">
     <a class="skip-link" href="#main">Skip to main</a>
     <nav 
-        class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" 
+        class="navbar navbar-expand-lg fixed-top navbar-light" 
         aria-label="site">
         <div class="container">
-            <a class="navbar-brand mr-auto mr-lg-0" href="/">
+            <a class="navbar-brand" href="/">
                 <img 
                     src="/images/logo.png" 
                     alt="Suburban Digi Hustle Logo"
                     class="logo"
                     title="Suburban Digi Hustle Logo"
-                    loading="lazy"
-                    width="50" 
+                    loading="lazy" 
                 /> 
-                Suburban Digi Hustle
             </a>
             <button 
-                class="navbar-toggler p-0 border-0" 
+                class="navbar-toggler" 
                 type="button" 
                 data-toggle="offcanvas">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <!-- search form -->
                 <form 
                     class="form-inline ml-4 my-2 my-lg-0"
                     method="GET"
@@ -33,50 +32,55 @@
                         name="search"
                         id="search-query" 
                         class="form-control mr-sm-2"  
-                        placeholder="Search" 
+                        placeholder="Search articles.." 
                         value="<%= typeof page !== 'undefined' && page === 'all-posts' ? query.search : '' %>"
                         aria-label="Search"
-                        autofocus 
+                        maxlength="100" 
+                        pattern="[A-Za-z]{2,}" 
+                        required
+                        autofocus
                     />
                     <button 
-                        class="btn btn-outline-success my-2 my-sm-0" 
+                        class="btn search-btn my-2 my-sm-0" 
                         type="submit">Search
                     </button>
                 </form>
+
+                <!-- Nav links -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a  class="nav-link" 
+                    <li class="nav-item">
+                        <a  class="nav-link <%= typeof page !== 'undefined' && page === 'home' ? 'active' : '' %>" 
                             href="/">
                             Home <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" 
+                        <a  class="nav-link <%= typeof page !== 'undefined' && page === 'all-posts' ? 'active' : '' %>" 
                             href="/blog">
                             Blog
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" 
+                        <a  class="nav-link <%= typeof page !== 'undefined' && page === 'tools' ? 'active' : '' %>" 
                             href="/tools">
                             Tools
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" 
+                        <a  class="nav-link <%= typeof page !== 'undefined' && page === 'about' ? 'active' : '' %>" 
                             href="/about">
                             About
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" 
+                        <a  class="nav-link <%= typeof page !== 'undefined' && page === 'contact' ? 'active' : '' %>" 
                             href="/contact">
                             Contact
                         </a>
                     </li>
                     <% if (!currentUser) { %>
                         <li class="nav-item">
-                            <a  class="nav-link" 
+                            <a  class="nav-link <%= typeof page !== 'undefined' && page === 'sign-up' ? 'active' : '' %>" 
                                 href="/sign-up">
                                 Sign Up
                             </a>
@@ -84,7 +88,11 @@
                     <% } %>
                 </ul>
                 <% if (!currentUser) { %>
-                    <a class="btn btn-primary" href="/sign-in" role="button">
+                    <a 
+                        class="btn" 
+                        href="/sign-in" 
+                        role="button"
+                    >
                         <i class="fas fa-sign-in-alt"></i> Sign In
                     </a>
                 <% } else { %>
@@ -92,11 +100,11 @@
                         <button
                             type="button" 
                             id="dropdownMenuButton" 
-                            class="btn btn-secondary dropdown-toggle" 
+                            class="btn dropdown-toggle" 
                             data-toggle="dropdown" 
                             aria-haspopup="true" 
                             aria-expanded="false">
-                            <%= currentUser.username %>
+                            <i class="fas fa-user"></i> <%= currentUser.username %>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <% if (currentUser.isAdmin) { %>
@@ -125,11 +133,37 @@
 <section id="secondary-nav">
     <div class="nav-scroller container py-1 mb-2">
         <nav class="nav d-flex justify-content-between" aria-label="site">
-            <a class="p-2 text-muted" href="/blog/web-development">#Web Development</a>
-            <a class="p-2 text-muted" href="/blog/digital-marketing">#Digital Marketing</a>
-            <a class="p-2 text-muted" href="/blog/social-media">#Social Media</a>
-            <a class="p-2 text-muted" href="/blog/software">#Software</a>
-            <a class="p-2 text-muted" href="/blog/make-money-online">#Make Money Online</a>
+            <a 
+                class="p-2 text-gray category-nav  <%= typeof page !== 'undefined' && page === 'web-dev' ? 'active' : '' %>" 
+                href="/blog/web-development"
+            >
+                #Web Development
+            </a>
+
+            <a 
+                class="p-2 text-gray category-nav  <%= typeof page !== 'undefined' && page === 'digital-marketing' ? 'active' : '' %>" 
+                href="/blog/digital-marketing"
+            >
+                #Digital Marketing
+            </a>
+            <a 
+                class="p-2 text-gray category-nav <%= typeof page !== 'undefined' && page === 'social-media' ? 'active' : '' %>" 
+                href="/blog/social-media"
+            >
+                #Social Media
+            </a>
+            <a 
+                class="p-2 text-gray category-nav <%= typeof page !== 'undefined' && page === 'software' ? 'active' : '' %>" 
+                href="/blog/software"
+            >
+                #Marketing Software
+            </a>
+            <a 
+                class="p-2 text-gray category-nav <%= typeof page !== 'undefined' && page === 'make-money-online' ? 'active' : '' %>" 
+                href="/blog/make-money-online"
+            >
+                #Make Money Online
+            </a>
         </nav>
     </div>
 </section>

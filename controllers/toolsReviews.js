@@ -11,7 +11,7 @@ module.exports = {
 			return toolReview.author.equals(req.user._id);
 		}).length;
 		if (haveReviewed) {
-			req.session.error = 'Sorry, you can only create one toolReview per tool.';
+			req.session.error = 'Sorry, you can only create one review per tool.';
 			return res.redirect(`/tools/${tool.id}`);
 		}
 		// create the toolReview
@@ -22,13 +22,13 @@ module.exports = {
 		// save the tool
 		await tool.save();
 		// redirect to the tool
-		req.session.success = 'ToolReview created successfully!';
+		req.session.success = 'Review created successfully!';
 		res.redirect(`/tools/${tool.id}`)
 	},
 	// toolReviews Update
 	async toolReviewUpdate(req, res, next) {
 		await ToolReview.findByIdAndUpdate(req.params.toolReview_id, req.body.toolReview);
-		req.session.success = 'ToolReview updated successfully!';
+		req.session.success = 'Review updated successfully!';
 		res.redirect(`/tools/${req.params.id}`);
 	},
 	// toolReviews Destroy
@@ -37,7 +37,7 @@ module.exports = {
 			$pull: { toolReviews: req.params.toolReview_id }
 		});
 		await ToolReview.findByIdAndRemove(req.params.toolReview_id);
-		req.session.success = 'ToolReview deleted successfully!';
+		req.session.success = 'Review deleted successfully!';
 		res.redirect(`/tools/${req.params.id}`);
 	}
 }
