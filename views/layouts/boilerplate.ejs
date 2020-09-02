@@ -147,8 +147,15 @@
   </script>
 
   <script>
+    CKEDITOR.plugins.addExternal('a11ychecker', 'https://ckeditor.com/docs/ckeditor4/4.14.1/examples/assets/plugins/a11ychecker/', 'plugin.js');
+
+    // Performance optimization:
+    // Send a request for tests JSON file ASAP, so it's likely to be ready when the user runs Acessibility Checker.
+    $.getJSON('https://ckeditor.com/docs/vendors/4.14.1/ckeditor/assets/plugins/a11ychecker/libs/quail/tests.json');
+    
     CKEDITOR.replace('description', {
-      plugins: 'wysiwygarea, toolbar, basicstyles, link'
+      extraPlugins: 'a11ychecker',
+      height: 500
     });
   </script>
 

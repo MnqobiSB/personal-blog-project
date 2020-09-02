@@ -1,12 +1,15 @@
-const User = require('../models/user');
-const Post = require('../models/post');
-const Tool = require('../models/tool');
-const passport = require('passport');
-const util = require('util');
+const User 			= require('../models/user');
+const Post 			= require('../models/post');
+const Tool 			= require('../models/tool');
+const passport 		= require('passport');
+const util 			= require('util');
 const { cloudinary } = require('../cloudinary');
 const { deleteProfileImage } = require('../middleware');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const crypto 		= require('crypto');
+const https 		= require('https');
+const fs 			= require('fs');
+const path 			= require('path');
+const nodemailer 	= require('nodemailer');
 
 module.exports = {
 	// GET /
@@ -41,39 +44,70 @@ module.exports = {
 	},
 	// POST /
 	async downloadEbook(req, res, next) {
-		await download()
+		// send me email
 		const subscribeData = `
 		  	<h1>You Have a New User Newsletters Subscription</h1>
-		  	<h2>User Email:</h2>
+		  	<h2>User data:</h2>
 		  	<ul>
 		  		<li>${req.body.firstName}</li>
 			    <li>${req.body.email}</li>
 		  	</ul>  
 		  	<h3>Message</h3>
-		  	<p>I Have Downloaded Free eBook and Want To Receive Newsletters</p>
+		  	<p>New user Subscription, add user to maillist.</p>
+	  	`;
+
+	  	const subscribeDataUser = `
+		  	<h1>Download your free eBook!</h1>
+		  	<img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30" width="150"/>
+		  	<h2>Thanks for requesting our free eBook ${req.body.firstName}</h2> 
+		  	<p>Here is a link to your free <a href="http://localhost:3000/download">eBook download</a>, Enjoy!</p>
 	  	`;
 
 	  	let smtpTransport = nodemailer.createTransport({
-		    service: 'Gmail', 
-			auth: {
-				user: 'amandlamm1@gmail.com',
-				pass: process.env.GMAILPW
-			},
-			tls: {
-				rejectUnauthorized: false
-			}
+		    host: 'smtpout.secureserver.net', 
+		    port: 465,
+		    secure: true,
+		    auth: {
+		        user: 'admin@suburbandigihustle.com',
+		        pass: process.env.GMAILPW
+		    },
+		    tls: {
+		        rejectUnauthorized: false
+	      	}
+	  	});
+
+	  	let smtpTransportUser = nodemailer.createTransport({
+		    host: 'smtpout.secureserver.net', 
+		    port: 465,
+		    secure: true,
+		    auth: {
+		        user: 'admin@suburbandigihustle.com',
+		        pass: process.env.GMAILPW
+		    },
+		    tls: {
+		        rejectUnauthorized: false
+	      	}
 	  	});
 
 	  	const mailOptions = {
-        	from: '"New Newsletters Subscription" <amandlamm1@gmail.com>',
-        	to: 'amandlamm1@gmail.com',
-        	subject: 'New Newsletters Subscription',
+        	from: '"New Newsletters Subscription" <admin@suburbandigihustle.com>',
+        	to: 'admin@suburbandigihustle.com',
+        	subject: 'New User Subscription',
         	html: subscribeData
       	};
 
-      	await smtpTransport.sendMail(mailOptions);
+      	const mailOptionsUser = {
+        	from: '"Free eBook download request" <admin@suburbandigihustle.com>',
+        	to: req.body.email,
+        	subject: 'Download eBook',
+        	html: subscribeDataUser
+      	};
 
-		req.session.success = `Thanks for requesting to download the Free eBook${req.body.firstName}, check your emails for the direct download link!`;
+      	await smtpTransport.sendMail(mailOptions, mailOptionsUser);
+
+      	await smtpTransportUser.sendMail(mailOptionsUser);
+
+		req.session.success = `Thanks for requesting to download the Free eBook ${req.body.firstName}, check your email - ${req.body.email}, for the direct download link!`;
 		res.redirect('/');
 	},
 	// GET /about

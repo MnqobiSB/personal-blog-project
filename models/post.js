@@ -35,7 +35,6 @@ const PostSchema = new Schema({
 	tag: String,
 	url: String,
 	body: String,
-	footer: String,
 	read: {
         type: Number,
         min: 1,

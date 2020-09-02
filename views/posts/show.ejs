@@ -35,11 +35,7 @@
 							<div class="blog-post-body">	
 			        			<p><%- post.body %></p>
 					        </div>
-
-					        <footer class="blog-post-footer">
-					        	<p><%- post.footer %></p>
-					        </footer>
-
+					        
 					        <div class="admin-buttons">
 					        	<hr>
 								<% if (currentUser && post.author.equals(currentUser._id)) { %>

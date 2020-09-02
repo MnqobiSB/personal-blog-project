@@ -96,6 +96,19 @@ app.use('/blog/:id/reviews', reviewsRouter);
 app.use('/tools', toolsRouter);
 app.use('/tools/:id/toolsReviews', toolsReviewsRouter);
 
+// set up download route
+const http = require('http').Server(app);
+
+app.get('/download', async function (req, res) {
+  await res.download(__dirname + '/public/ebook_folder/ebook.pdf', 'ebook.pdf', function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Download success');
+    }
+  });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

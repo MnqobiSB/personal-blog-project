@@ -236,7 +236,6 @@ module.exports = {
 		post.tag = req.body.post.tag;
 		post.url = req.body.post.url;
 		post.body = req.body.post.body;
-		post.footer = req.body.post.footer;
 		post.read = req.body.post.read;
 		
 		// save the updated post into the db
