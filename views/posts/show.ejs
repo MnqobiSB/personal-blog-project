@@ -124,75 +124,70 @@
 							<!-- show reviews -->
 							<div class="media text-muted">
 								<img 
-									src="<%= review.author.image.secure_url %>"
-									class="mr-2 rounded mt-2 review-author-img" 
-									alt="<%= review.author.username %>'s image" 
-				          			title="<%= review.author.username %>'s image"
-				          			loading="lazy"
-									width="40" 
+									src="<%= review.author.image.secure_url %>" 
+									class="mr-2 rounded mt-2 review-author-img"
+									alt="<%= review.author.username %>'s profile image"
+						  			title="<%= review.author.username %>'s profile image"
+						  			loading="lazy"
+						  			width="40" 
 									height="40" 
 								/>
 
-						      	<p class="media-body mb-0 lh-125">
-						        	<strong class="d-block text-gray-dark username"><%= review.author.username %></strong>
-						        	<%= review.body %>
-						      	</p>
+								<p class="media-body mb-0 lh-125">
+									<strong class="d-block text-gray-dark username">
+										<%= review.author.username %>
+									</strong>
+									<%= review.body %>
+								</p>
 
-						      	<span class="pull-right small"><%= moment(review.createdAt).fromNow() %></span>
-						    </div>
-						    <!-- show reviews -->
+								<span class="pull-right small"><%= moment(review.createdAt).fromNow() %></span>
+							</div>
+							<!-- SHOW REVIEW END-->
 
-						    <!-- edit review if author -->
+							<!-- EDIT REVIEW -->
 							<% if (currentUser && review.author.equals(currentUser._id)) { %>
-								<div>
+								<div class="edit-review-container">
 									<!-- edit button -->
-									<button class="btn btn-sm btn-warning float-right toggle-edit-form mb-2">Edit</button>
+									<button class="btn-sm edit-tool-btn toggle-edit-form mb-2">Edit</button>
 
-									<!-- edit form -->
+									<!-- delete button -->
+									<form 
+										class="d-inline" 
+										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" 
+										method="POST"
+									>
+										<button class="delete-tool-btn btn-sm" type="submit">Delete</button>
+									</form>
+
+									<!-- edit review form -->
 									<form 
 										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" 
 										method="POST" 
 										class="edit-comment-form"
-									>
-										<div class="form-group">
-											<textarea 
-												name="review[body]"
-												id="edit-comment" 
-												class="form-control" 
-												maxlength="1000" 
-												pattern="[a-zA-Z\s0-9]{10,}" 
-												title="Message can be a series of alphabetic and numeric characters only (min 10, max 1000)."
-												rows="4" 
-												required
-											><%= review.body %></textarea>
-										</div>
-
-										<div class="form-group">
-											<button class="btn btn-primary update-comment-btn">
-												Update Comment
-											</button>
+									>	
+										<div class="card edit-review-card">
+										  	<div class="card-body">
+												<div class="form-group">
+													<label class="form-label" for="edit-review">Edit Comment</label>
+													<textarea 
+														id="edit-review"
+														class="form-control"
+														name="review[body]" 
+														maxlength="1000" 
+														pattern="[a-zA-Z\s0-9]{10,}" 
+														title="Message can be a series of alphabetic and numeric characters only (min 10, max 1000)."
+														rows="4" 
+														required
+													><%= review.body %></textarea>
+												</div>
+												<button class="btn btn-sm update-btn">Update Comment</button>
+										  	</div>
 										</div>
 									</form>
-									<!-- edit form -->
-
-									<script>
-										$('#edit-rate<%= review.rating %>').prop('checked', true);
-									</script>
-
-									<!-- delete review button -->
-									<form 
-										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" 
-										method="POST"
-										class="float-right"
-									>
-										<button class="btn btn-sm btn-danger delete-comment-btn">
-											Delete
-										</button>
-									</form>
-									<!-- delete review form -->
+									<!-- edit review form -->
 								</div>
+								<!-- EDIT REVIEW -->
 							<% }; %>
-							<!-- edit review if author -->
 							<hr>
 						<% }); %>
 						<!-- single review end -->
@@ -211,15 +206,13 @@
 					<div class="card mb-3" style="max-width: auto;">
 					  	<div class="row no-gutters">
 					    	<div class="col-md-4">
-					    		<% relatedPost.images.forEach(function(image){ %>
-									<img 
-										src="<%= image.url %>" 
-										class="card-img img-responsive related-post-image" 
-										alt="<%= relatedPost.title %>'s image" 
-							          	title="<%= relatedPost.title %>'s image"
-							          	loading="lazy"
-									>
-								<% }) %>
+								<img 
+									src="<%= relatedPost.images[1].url %>" 
+									class="card-img img-responsive related-post-image" 
+									alt="<%= relatedPost.title %>'s image" 
+						          	title="<%= relatedPost.title %>'s image"
+						          	loading="lazy"
+								>
 					    	</div>
 					    	<div class="col-md-8">
 					      		<div class="card-body">

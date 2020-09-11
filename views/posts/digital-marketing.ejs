@@ -2,10 +2,10 @@
 <!-- PAGE HEADER -->
 <header>
 	<div class="container">
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid digital-marketing-jumbotron">
 		  	<div class="container">
 		    	<h1 class="font-italic page-header">Digital Marketing Insights</h1>
-		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		    	<p class="lead">Get best insights on SEO Optimization, Backlinks, and Web Traffic to help you grow your brand.</p>
 		  	</div>
 		</div>
 	</div>
@@ -37,9 +37,9 @@
 				        		</small>
 							</header>
 
-							<section class="blog-post-body">	
-			        			<p><%= post.body.substring(0, 500) %>...</p>
-					        </section>
+							<div class="blog-post-body">	
+			        			<p><%- post.body.substring(0, 500) %>...</p>
+					        </div>
 					        
 					        <footer class="blog-post-footer">
 					        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>

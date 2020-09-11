@@ -1,6 +1,7 @@
 {
   "name": "suburban-digi-hustle",
   "version": "1.0.0",
+  "description": "A blog that provides insight about growing your business or personal brand",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"

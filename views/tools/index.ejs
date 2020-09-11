@@ -2,10 +2,10 @@
 <!-- PAGE HEADER -->
 <header>
 	<div class="container">
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid tools-jumbotron">
 		  	<div class="container">
-		    	<h1 class="font-italic page-title">#Top Tools To Help You Start & Grow Your Online Business</h1>
-		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		    	<h1 class="font-italic page-title">Tools to help you grown your brand</h1>
+		    	<p class="lead">Be ahead of your competition with our top recommended tools to boost your hustle.</p>
 		  	</div>
 		</div>
 	</div>
@@ -20,20 +20,13 @@
 	role="main"
 >
   	<div class="row"><!-- ROW -->
-
-  		<!-- PRODUCT SIDEBAR -->
-  		<div class="col-md-3">
-  			<% include ../partials/searchFilterTools %>
-  		</div>
-  		<!-- PRODUCT SIDEBAR -->
-
   		<!-- MAIN CONTENT START -->
-    	<div class="col-md-6 blog-main">
+    	<div class="col-md-8 blog-main">
     		<!-- PRODUCT ROW -->
       		<div class="row justify-content-center">
       			<% tools.docs.forEach(function(tool){ %>
 	      				<div class="col-md-6 product"><!-- Product Container -->
-			      			<div class="card" style="width: 15rem;">
+			      			<div class="card" style="width: 18rem;">
 			      				<% tool.images.forEach(function(image){ %>	
 				          			<img 
 				          				src="<%= image.url %>"
@@ -46,7 +39,7 @@
 							  	<div class="card-body">
 							    	<h3 class="card-title"><%= tool.title %></h3>
 							    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
-							    	<a href="/tools/<%= tool.id %>" class="btn btn-primary">View Tool</a>
+							    	<a href="/tools/<%= tool.id %>" class="btn btn-alt">View Tool</a>
 							  	</div>
 							</div>
 			      		</div><!-- Product Container -->
@@ -60,7 +53,7 @@
     	<!-- MAIN CONTENT END -->
 
     	<!-- SIDEBAR START -->
-    	<aside class="col-md-3 blog-sidebar">
+    	<aside class="col-md-4 blog-sidebar">
     		<% include ../partials/sidebar %>	
     	</aside>
     	<!-- SIDEBAR END -->

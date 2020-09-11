@@ -19,22 +19,18 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 1000,
+			limit: 10,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
 		// find all tools
 		let tools = await Tool.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 8,
-			sort: '_id'
+			limit: 10,
+			sort: '-_id'
 		});
 		// render page/file
 		res.render('index', { 
-			title: 'Suburban Digi Hustle - Get Valuable Digital Hustle Insights',
+			title: 'Suburban Digi Hustle - Insights To Help Grow Your Brand Online',
 			page: 'home',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
@@ -44,9 +40,9 @@ module.exports = {
 	},
 	// POST /
 	async downloadEbook(req, res, next) {
-		// send me email
+		// send Suburban Digi Hustle an email
 		const subscribeData = `
-		  	<h1>You Have a New User Newsletters Subscription</h1>
+		  	<h1>You Have a New User Newsletters Subscription!</h1>
 		  	<h2>User data:</h2>
 		  	<ul>
 		  		<li>${req.body.firstName}</li>
@@ -57,10 +53,21 @@ module.exports = {
 	  	`;
 
 	  	const subscribeDataUser = `
-		  	<h1>Download your free eBook!</h1>
+		  	<h1>Welcome Digital Hustler!</h1>
+
+		  	<p>Hey ${req.body.firstName},</p>
+
+		  	<p><b>Thank you for joining our cool community of Digital Hustlers looking to find success online.</b></p>
+
+		  	<p>We are all about providing valuable information to our community through the blog. We aim to help business and personal brands grow online. We provide insights on Web Development, Digital Marketing, Social Media, Marketing Software and How To Make Money Online.</p>
+
+		  	<p>Enjoy our free eBook gift to you that will help you get started on your mission to finding success online.</p>
+
 		  	<img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExODA5M30" width="150"/>
-		  	<h2>Thanks for requesting our free eBook ${req.body.firstName}</h2> 
-		  	<p>Here is a link to your free <a href="http://localhost:3000/download">eBook download</a>, Enjoy!</p>
+
+		  	<p>Here is your exclusive free guide to: <a href="http://localhost:3000/download"><b>How To Find Success Online</b></a> eBook. Follow this guide and get started on your journey!</p>
+
+		  	<p>We will be sending you our latest posts updates that will provide you with more value. Good Luck!</p>
 	  	`;
 
 	  	let smtpTransport = nodemailer.createTransport({
@@ -97,9 +104,9 @@ module.exports = {
       	};
 
       	const mailOptionsUser = {
-        	from: '"Free eBook download request" <admin@suburbandigihustle.com>',
+        	from: '"Suburban Digi Hustle" <admin@suburbandigihustle.com>',
         	to: req.body.email,
-        	subject: 'Download eBook',
+        	subject: 'Welcome to Suburban Digi Hustle Newsletter List',
         	html: subscribeDataUser
       	};
 
@@ -120,10 +127,7 @@ module.exports = {
 			limit: 1000,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
+
 		res.render('about', { 
 			title: 'About Us',
 			page: 'about',
@@ -142,10 +146,7 @@ module.exports = {
 			limit: 1000,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
+
 		res.render('contact', { 
 			title: 'Contact Us',
 			page: 'contact',
@@ -169,20 +170,22 @@ module.exports = {
 	  	`;
 
 	  	let smtpTransport = nodemailer.createTransport({
-		    service: 'Gmail', 
-			auth: {
-				user: 'amandlamm1@gmail.com',
-				pass: process.env.GMAILPW
-			},
-			tls: {
-				rejectUnauthorized: false
-			}
+		    host: 'smtpout.secureserver.net', 
+		    port: 465,
+		    secure: true,
+		    auth: {
+		        user: 'admin@suburbandigihustle.com',
+		        pass: process.env.GMAILPW
+		    },
+		    tls: {
+		        rejectUnauthorized: false
+	      	}
 	  	});
 
 	  	const mailOptions = {
-        	from: '"Suburban Digi Hustle" <amandlamm1@gmail.com>',
-        	to: 'amandlamm1@gmail.com',
-        	subject: 'New General Enquiry',
+        	from: '"Suburban Digi Hustle - New Enquiry" <admin@suburbandigihustle.com>',
+        	to: 'admin@suburbandigihustle.com',
+        	subject: 'New Enquiry From Blog',
         	html: userQueryData
       	};
 
@@ -200,10 +203,7 @@ module.exports = {
 			limit: 1000,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
+
 		res.render('sign-up', { 
 			title: 'Sign Up',
 			page: 'sign-up', 
@@ -256,10 +256,7 @@ module.exports = {
 			limit: 1000,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
+
 		res.render('sign-in', { 
 			title: 'Sign In',
 			page: 'sign-in',
@@ -290,7 +287,8 @@ module.exports = {
 	// GET /profile
 	async getProfile(req, res, next) {
 		const posts = await Post.find().where('author').equals(req.user._id).limit(1000).exec();
-		res.render('profile', {
+		
+			res.render('profile', {
 			title: 'My Profile',
 			page: 'profile',
 			robots: 'noindex, nofollow',
@@ -341,20 +339,22 @@ module.exports = {
 		await user.save();
 
 		const smtpTransport = nodemailer.createTransport({
-			service: 'Gmail', 
-			auth: {
-				user: 'amandlamm1@gmail.com',
-				pass: process.env.GMAILPW
-			},
-			tls: {
-				rejectUnauthorized: false
-			}
+			host: 'smtpout.secureserver.net', 
+		    port: 465,
+		    secure: true,
+		    auth: {
+		        user: 'admin@suburbandigihustle.com',
+		        pass: process.env.GMAILPW
+		    },
+		    tls: {
+		        rejectUnauthorized: false
+	      	}
 		});
 
 		const msg = {
 			to: email,
-			from: '"Suburban Digi Hustle Admin" <amandlamm1@gmail.com>',
-			subject: 'Suburban Digi Hustle - Forgot Password / Reset',
+			from: '"Admin - Suburban Digi Hustle " <admin@suburbandigihustle.com>',
+			subject: 'Forgot Password / Reset',
 			text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           		'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           		'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -413,20 +413,22 @@ module.exports = {
 		}
 
 		const smtpTransport = nodemailer.createTransport({
-			service: 'Gmail', 
-			auth: {
-				user: 'amandlamm1@gmail.com',
-				pass: process.env.GMAILPW
-			},
-			tls: {
-				rejectUnauthorized: false
-			}
+			host: 'smtpout.secureserver.net', 
+		    port: 465,
+		    secure: true,
+		    auth: {
+		        user: 'admin@suburbandigihustle.com',
+		        pass: process.env.GMAILPW
+		    },
+		    tls: {
+		        rejectUnauthorized: false
+	      	}
 		});
 
 		const msg = {
 	    to: user.email,
-	    from: '"Suburban Digi Hustle Admin" <amandlamm1@gmail.com>',
-	    subject: 'Suburban Digi Hustle - Password Reset successful!',
+	    from: '"Admin - Suburban Digi Hustle " <admin@suburbandigihustle.com>',
+	    subject: 'Password Reset successful!',
 	    text: `Hello,
 		  	This email is to confirm that the password for your account has just been changed.
 		  	If you did not make this change, please hit reply and notify us at once.`.replace(/		  	/g, '')
@@ -437,13 +439,23 @@ module.exports = {
 	  	req.session.success = 'Password reset successful!';
 	  	res.redirect('/');
 	},
-	// GET /terms
-	getSiteMap(req, res, next) {
+	// GET /site-map
+	async getSiteMap(req, res, next) {
+		// find all posts
+		const { dbQuery } = res.locals;
+		delete res.locals.dbQuery;
+		let posts = await Post.paginate(dbQuery, {
+			page: req.query.page || 1,
+			limit: 1000,
+			sort: '-_id'
+		});
+
 		res.render('site-map', { 
 			title: 'Site Map',
 			page: 'site-map',
 			robots: 'noindex, nofollow',
-			googlebot: 'noindex, nofollow'
+			googlebot: 'noindex, nofollow',
+			posts
 		});
 	},
 	// GET /terms
@@ -452,13 +464,9 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 1000,
+			limit: 10,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
 
 		res.render('terms', { 
 			title: 'Terms Of Use',
@@ -474,13 +482,9 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 1000,
+			limit: 10,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
 
 		res.render('disclaimer', { 
 			title: 'Legal Disclaimer',
@@ -496,13 +500,9 @@ module.exports = {
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
 			page: req.query.page || 1,
-			limit: 1000,
+			limit: 10,
 			sort: '-_id'
 		});
-		posts.page = Number(posts.page);
-		if (!posts.docs.length && res.locals.query) {
-			res.locals.error = 'No results match that query.';
-		}
 
 		res.render('privacy-policy', { 
 			title: 'Privacy Policy',

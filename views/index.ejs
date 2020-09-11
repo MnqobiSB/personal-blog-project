@@ -37,19 +37,17 @@
 			          			<div class="mb-1 text-muted">
 			          				<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 			          			</div>
-			          			<p class="card-text mb-auto"><%= post.body.substring(0, 50) %>...</p>
+			          			<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>...</p>
 			          			<a href="/blog/<%= post.id %>" class="stretched-link">Continue reading</a>
 			        		</div>
-			        		<div class="col-auto d-none d-lg-block featuredPost-image">
-			        				
-				          			<img 
-				          				src="<%= post.images[0].url %>"
-				          				class="card-img-right img-responsive" 
-				          				alt="<%= post.title %>'s image" 
-				          				title="<%= post.title %>'s image"
-				          				loading="lazy"
-				          			/>
-			          			
+			        		<div class="col-auto d-none d-lg-block featuredPost-image">	
+			          			<img 
+			          				src="<%= post.images[0].url %>"
+			          				class="card-img-right img-responsive" 
+			          				alt="<%= post.title %>'s image" 
+			          				title="<%= post.title %>'s image"
+			          				loading="lazy"
+			          			/>
 			        		</div>
 			      		</div>
 	    			</div>
@@ -93,7 +91,7 @@
 								</header>
 
 				        		<div class="blog-post-body">	
-				        			<p><%= post.body.substring(0, 300) %>...</p>
+				        			<p><%- post.body.substring(0, 300) %>...</p>
 						        </div>
 
 						        <footer class="blog-post-footer">
@@ -119,7 +117,7 @@
 	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
 	        		Top Tools!
 	      		</h2>
-	      		<div class="row justify-content-center">
+	      		<div class="row tool-row">
 	      			<% tools.docs.forEach(function(tool){ %>
 		      			<% if (tool.topTool) { %>
 		      				<div class="col-md-6 product">
@@ -134,9 +132,9 @@
 					          			/>
 				          			<% }) %>
 								  	<div class="card-body">
-								    	<h3 class="card-title"><%= tool.title %></h3>
+								    	<h3 class="card-title footer-heading"><%= tool.title %></h3>
 								    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
-								    	<a href="/tools/<%= tool.id %>" class="btn">View Tool</a>
+								    	<a href="/tools/<%= tool.id %>" class="btn btn-alt">View Tool &raquo;</a>
 								  	</div>
 								</div>
 				      		</div>

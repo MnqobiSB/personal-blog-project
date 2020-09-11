@@ -87,7 +87,7 @@ router.get('/reset/:token', asyncErrorHandler(getReset));
 router.put('/reset/:token', asyncErrorHandler(putReset));
 
 /* GET /terms-of-use */
-router.get('/site-map', getSiteMap);
+router.get('/site-map', asyncErrorHandler(getSiteMap));
 
 /* GET /terms-of-use */
 router.get('/terms-of-use', asyncErrorHandler(getTerms));

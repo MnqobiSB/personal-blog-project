@@ -232,6 +232,7 @@ module.exports = {
 		post.featuredPost = req.body.post.featuredPost;
 		post.homeArticle = req.body.post.homeArticle;
 		post.popularArticle = req.body.post.popularArticle;
+		post.guideArticle = req.body.post.guideArticle;
 		post.category = req.body.post.category;
 		post.tag = req.body.post.tag;
 		post.url = req.body.post.url;

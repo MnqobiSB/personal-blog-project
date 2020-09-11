@@ -103,6 +103,23 @@ h1, h2, h3, h4, h5, h6 {
   opacity: .8;
 }
 
+.btn-alt {
+  background-color: var(--clr-dark)!important;
+  color: var(--clr-light);
+  transition: all 200ms ease-in-out;
+}
+
+.jumbotron {
+  border-radius: var(--br)!important;
+  color: var(--clr-light);
+  background-color: var(--clr-dark-rgba)!important;
+  background-blend-mode: multiply;
+  background-size: cover;
+}
+
+.form-btn {
+  width: 100%;
+}
 
 .text-gray {
   color: rgba(34, 47, 62, .7);
@@ -131,15 +148,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /*search button*/
 .search-btn {
-  border: 1px solid var(--clr-green)!important;
-  color: var(--clr-green)!important;
+  border: 1px solid var(--clr-dark)!important;
+  color: var(--clr-dark)!important;
   transition: all 200ms ease-in-out;
   background-color: transparent!important;
 }
 
 .search-btn:hover {
-  background-color: var(--clr-green)!important;
-  color: var(--clr-light)!important;
+  background-color: var(--clr-dark)!important;
+  color: var(--clr-green)!important;
 }
 
 .nav-link {
@@ -298,6 +315,31 @@ article {
 /**********************************************************/
 
 
+/* Side Bar */
+.side-about p {
+  margin-bottom: 1rem;
+}
+
+.side-about p:last-child {
+  margin-bottom: 0px;
+}
+
+.about-img {
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+.side-list li{
+  margin-bottom: .2rem;
+}
+
+.ebook {
+  margin-bottom: 1rem;
+}
+
+/**********************************************************/
+
+
 /*
  * Footer
  */
@@ -316,6 +358,15 @@ article {
 
 .footer-link {
   color: var(--clr-light);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--clr-green);
+}
+
+.social:hover {
+  text-decoration: none;
 }
 
 .copyright {
@@ -331,6 +382,67 @@ article {
 
 .copyright-p {
   flex: auto;
+}
+
+a[href="/site-map"] {
+  float: right;
+}
+
+/******************************************************/
+
+/* Page Jumbotrons */
+
+/* blog */
+.blog-jumbotron {
+  background-image: url(../images/blog-page.jpg);
+  background-position: 0 -250px;
+}
+
+/* web dev */
+.web-dev-jumbotron {
+  background-image: url(../images/web-dev2.jpg);
+  background-position: 0 -250px;
+}
+
+/* digital marketing */
+.digital-marketing-jumbotron {
+  background-image: url(../images/digital-marketing4.jpg);
+  background-position: 0 -280px;
+}
+
+/* social media */
+.social-media-jumbotron {
+  background-image: url(../images/social-media.jpg);
+  background-position: 0 -160px;
+}
+
+/* marketing software */
+.marketing-software-jumbotron {
+  background-image: url(../images/marketing-software.jpg);
+  background-position: 0 -250px;
+}
+
+/* make money online */
+.make-money-jumbotron {
+  background-image: url(../images/make-money.jpg);
+  background-position: 0 -250px;
+}
+
+/* tools */
+.tools-jumbotron {
+  background-image: url(../images/tools.jpg);
+  background-position: 0 -250px;
+}
+
+/* about us*/
+.about-jumbotron {
+  background-image: url(../images/tagline.png);
+  background-position: 0 -200px;
+}
+
+.page-jumbotron {
+  background-image: url(../images/background.jpg);
+  background-position: 0 -200px;
 }
 
 

@@ -31,6 +31,10 @@ const PostSchema = new Schema({
 		type: Boolean, 
 		default: false
 	},
+	guideArticle: {
+		type: Boolean, 
+		default: false
+	},
 	category: String,
 	tag: String,
 	url: String,
