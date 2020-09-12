@@ -16,9 +16,10 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/index', {   
+		res.render('posts/index', {
 			title: 'All Articles',
 			page: 'all-posts',
+			url: 'blog',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
@@ -37,12 +38,13 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/web-dev', {  
+		res.render('posts/web-dev', {
 			title: 'Web Development',
 			page: 'web-dev',
+			url: 'web-development',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
-			posts 
+			posts
 		});
 	},
 	// Posts Social-Media
@@ -58,9 +60,10 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/social-media', { 
+		res.render('posts/social-media', {
 			title: 'Social Media',
 			page: 'social-media',
+			url: 'social-media',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts,
@@ -79,8 +82,8 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/software', { 
-			title: 'Software',
+		res.render('posts/software', {
+			title: 'Marketing Software',
 			page: 'software',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
@@ -100,9 +103,10 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/digital-marketing', { 
+		res.render('posts/digital-marketing', {
 			title: 'Digital Marketing',
 			page: 'digital-marketing',
+			url: 'digital-marketing',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
@@ -121,7 +125,7 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/make-money-online', {  
+		res.render('posts/make-money-online', {
 			title: 'Make Money Online',
 			page: 'make-money-online' ,
 			robots: 'index, follow',
@@ -173,8 +177,8 @@ module.exports = {
 		});
 
 		let relatedPosts = await Post.find().where('category').equals(post.category).limit(5).exec();
-		
-		res.render('posts/show', { 
+
+		res.render('posts/show', {
 			title: post.title,
 			page: 'post-show',
 			robots: 'index, follow',
@@ -223,7 +227,7 @@ module.exports = {
 					url: file.secure_url,
 					public_id: file.public_id
 				});
-			} 
+			}
 		}
 		// update the post with any new properties
 		post.title = req.body.post.title;
@@ -235,10 +239,10 @@ module.exports = {
 		post.guideArticle = req.body.post.guideArticle;
 		post.category = req.body.post.category;
 		post.tag = req.body.post.tag;
-		post.url = req.body.post.url;
+		post.categoryUrl = req.body.post.categoryUrl;
 		post.body = req.body.post.body;
 		post.read = req.body.post.read;
-		
+
 		// save the updated post into the db
 		await post.save();
 		req.session.success = 'Post updated successfully!';

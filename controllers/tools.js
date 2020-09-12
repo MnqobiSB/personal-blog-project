@@ -21,20 +21,20 @@ module.exports = {
 			limit: 5,
 			sort: '-_id'
 		});
-		res.render('tools/index', { 
+		res.render('tools/index', {
 			title: 'Our tools',
 			page: 'tools',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			tools,
-			posts 
+			posts
 		});
 	},
 	// tools New
 	toolNew(req, res, next) {
-		res.render('tools/new', { 
+		res.render('tools/new', {
 			title: 'Create New tool',
-			page: 'new-tool', 
+			page: 'new-tool',
 			robots: 'noindex, nofollow',
 			googlebot: 'noindex, nofollow'
 		});
@@ -65,7 +65,7 @@ module.exports = {
 			}
 		});
 		const floorRating = tool.calculateAvgRating();
-		
+
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		// const floorRating = tool.avgRating;
@@ -74,19 +74,20 @@ module.exports = {
 			limit: 5,
 			sort: '-_id'
 		});
-		res.render('tools/show', { 
+
+		res.render('tools/show', {
 			title: tool.title,
-			page: 'tool-show',
+			page: 'tools',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			tool,
-			posts, 
-			floorRating 
+			posts,
+			floorRating
 		});
 	},
 	// tools Edit
 	toolEdit(req, res, next) {
-		res.render('tools/edit', { 
+		res.render('tools/edit', {
 			title: 'Edit tool',
 			page: 'edit-tool',
 			robots: 'noindex, nofollow',
@@ -123,7 +124,7 @@ module.exports = {
 					url: file.secure_url,
 					public_id: file.public_id
 				});
-			} 
+			}
 		}
 		// update the tool with any new properties
 		tool.title = req.body.tool.title;

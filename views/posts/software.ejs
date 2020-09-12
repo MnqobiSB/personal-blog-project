@@ -14,11 +14,20 @@
 
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a class="color-blue" href="/">Home</a></li>
+    		<li class="breadcrumb-item"><a class="color-blue" href="/blog">Blog</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">Marketing Software</li>
+  		</ol>
+	</nav>
+
   	<div class="row"><!-- ROW -->
   		<!-- MAIN CONTENT START -->
     	<div class="col-md-8 main-content">
@@ -28,22 +37,22 @@
 		      			<article>
 		      				<header class="blog-post-header">
 				        		<h2 class="blog-post-title"><%= post.title %></h2>
-				        		<p class="article-meta text-muted">
-				        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+				        		<p class="article-meta text-gray">
+				        			<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-gray"><i class="icon far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
 				        		</p>
 				        		<small class="article-meta">
-					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-					        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+					        		<strong class="post-category">#<%= post.category %></strong>
+					        		<strong class="post-tag">#<%= post.tag %></strong>
 				        		</small>
 							</header>
 
-							<div class="blog-post-body">	
-			        			<p><%- post.body.substring(0, 500) %>...</p>
+							<div class="blog-post-body">
+			        			<p><%- post.body.substring(0, 300) %>[...]</p>
 					        </div>
-					        
+
 					        <footer class="blog-post-footer">
-					        	<p class="blog-post-meta"><small><i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
-					        	<a href="/blog/<%= post.id %>" class="">Continue reading...</a>
+					        	<p class="blog-post-meta"><small><i class="icon fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
+					        	<a class="color-blue" href="/blog/<%= post.id %>" class="">Read more</a>
 					        </footer>
 				        </article>
 			        <% } %>
@@ -56,7 +65,7 @@
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
-    		<% include ../partials/sidebar %>	
+    		<% include ../partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
   	</div><!-- ROW -->

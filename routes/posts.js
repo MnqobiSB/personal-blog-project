@@ -4,21 +4,21 @@ const Post = require('../models/post');
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
-const { 
-	asyncErrorHandler, 
-	isLoggedIn, 
-	isAuthor, 
+const {
+	asyncErrorHandler,
+	isLoggedIn,
+	isAuthor,
 	isRegisteredAdmin,
-	searchAndFilterPosts 
+	searchAndFilterPosts
 } = require('../middleware');
-const { 
+const {
 	postIndex,
-	postWeb, 
+	postWeb,
 	postSocial,
 	postSoftware,
 	postDigitalMarketing,
 	postMakeMoneyOnline,
-	postNew, 
+	postNew,
 	postCreate,
 	postShow,
 	postEdit,
@@ -29,43 +29,43 @@ const {
 
 /* GET posts Index /posts */
 router.get(
-	'/', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postIndex)
 );
 
 /* GET posts Web-Development /posts */
 router.get(
-	'/web-development', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/web-development',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postWeb)
 );
 
 /* GET posts Social-Media /posts */
 router.get(
-	'/social-media', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/social-media',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postSocial)
 );
 
 /* GET posts Software /posts */
 router.get(
-	'/software', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/marketing-software',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postSoftware)
 );
 
 /* GET posts Digital-Marketing /posts */
 router.get(
-	'/digital-marketing', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/digital-marketing',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postDigitalMarketing)
 );
 
 /* GET posts Digital-Marketing /posts */
 router.get(
-	'/make-money-online', 
-	asyncErrorHandler(searchAndFilterPosts), 
+	'/make-money-online',
+	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postMakeMoneyOnline)
 );
 

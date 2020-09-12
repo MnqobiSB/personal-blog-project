@@ -5,45 +5,45 @@ const mongoosePaginate = require('mongoose-paginate');
 
 const PostSchema = new Schema({
 	title: String,
-	createdAt: { 
-		type: Date, 
-		default: Date.now 
+	createdAt: {
+		type: Date,
+		default: Date.now
 	},
-	images: [ 
+	images: [
 		{
-			url: String,  
+			url: String,
 			public_id: String
-		} 
+		}
 	],
 	mainPost: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	},
 	featuredPost: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	},
 	homeArticle: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	},
 	popularArticle: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	},
 	guideArticle: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	},
 	category: String,
 	tag: String,
-	url: String,
+	categoryUrl: String,
 	body: String,
 	read: {
         type: Number,
         min: 1,
-        max: 15,  
-        validate: {      
+        max: 15,
+        validate: {
             validator: Number.isInteger,
             message: "{VALUE} is not an integer value."
         }

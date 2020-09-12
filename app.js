@@ -24,16 +24,16 @@ const toolsReviewsRouter = require('./routes/toolsReviews');
 const app = express();
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/suburban-digi-hustle', {
-	useNewUrlParser: true, 
-	useUnifiedTopology: true,
-	useCreateIndex: true
+mongoose.connect(process.env.DATABASEURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('We\'re Connected to the DB!');
+	console.log('We\'re Connected to the DB!');
 });
 
 // use ejs-locals for all ejs templates:
@@ -54,9 +54,9 @@ app.use(methodOverride('_method'));
 
 // configure passport and sessions
 app.use(session({
-  secret: 'skate is life',
-  resave: false,
-  saveUninitialized: true
+	secret: 'blogger 4 life',
+	resave: false,
+	saveUninitialized: true
 }));
 
 app.use(passport.initialize());
@@ -68,25 +68,25 @@ passport.deserializeUser(User.deserializeUser());
 
 // set local variables middleware
 app.use(function(req, res, next) {
-  //require moment
-  app.locals.moment = require('moment');
-  // req.user = {
-  //   '_id' : '5eb4439c7f321211888ea8b9',
-  //   // '_id' : '5eb4f6dd36cefc1e10a23e49',
-  //   // '_id' : '5eb661922ac90909547cc2f1',
-  //   'username' : 'mnqobi'
-  // }
-  res.locals.currentUser = req.user;
-  // set default page title
-  res.locals.title = 'Suburban Digi Hustle';
-  // set success flash message
-  res.locals.success = req.session.success || '';
-  delete req.session.success;
-  // set error flash message
-  res.locals.error = req.session.error || '';
-  delete req.session.error;
-  // continue on to next function in middleware chain
-  next();
+	//require moment
+	app.locals.moment = require('moment');
+	// req.user = {
+	//   '_id' : '5eb4439c7f321211888ea8b9',
+	//   // '_id' : '5eb4f6dd36cefc1e10a23e49',
+	//   // '_id' : '5eb661922ac90909547cc2f1',
+	//   'username' : 'mnqobi'
+	// }
+	res.locals.currentUser = req.user;
+	// set default page title
+	res.locals.title = 'Suburban Digi Hustle';
+	// set success flash message
+	res.locals.success = req.session.success || '';
+	delete req.session.success;
+	// set error flash message
+	res.locals.error = req.session.error || '';
+	delete req.session.error;
+	// continue on to next function in middleware chain
+	next();
 });
 
 // mount routes
@@ -100,32 +100,32 @@ app.use('/tools/:id/toolsReviews', toolsReviewsRouter);
 const http = require('http').Server(app);
 
 app.get('/download', async function (req, res) {
-  await res.download(__dirname + '/public/ebook_folder/ebook.pdf', 'ebook.pdf', function(err) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Download success');
-    }
-  });
+	await res.download(__dirname + '/public/ebook_folder/ebook.pdf', 'ebook.pdf', function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('Download success');
+		}
+	});
 });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	// res.locals.message = err.message;
+	// res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  // res.status(err.status || 500);
-  // res.render('error');
-  console.log(err);
-  req.session.error = err.message;
-  res.redirect('back');
+	// render the error page
+	// res.status(err.status || 500);
+	// res.render('error');
+	console.log(err);
+	req.session.error = err.message;
+	res.redirect('back');
 });
 
 module.exports = app;

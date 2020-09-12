@@ -1,168 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-    gtag('config', 'UA-176753624-1');
-  </script>
-  
-  <title><%= title %></title>
-  
-  <!-- META TAGS -->
-  <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <meta name="author" content="Mnqobi" />
-  <meta name="description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media and Many More." />
-  <meta name="robots" content="<%= robots %>" />
-  <meta name="googlebot" content="<%= googlebot %>" />
+		gtag('config', 'UA-176753624-1');
+	</script>
 
-  <!-- SOCIAL MEDIA -->
-  <meta property="og:locale" content="en" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Suburban Digi Hustle | Digital Insights" />
-  <meta property="og:description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media, Software & Make Money Online." />
-  <meta property="og:url" content="/http://localhost:3000/" />
-  <meta property="og:image" content="/favicon.ico" />
-  <meta property="og:site_name" content="Suburban Digi Hustle" />
+	<title><%= title %></title>
 
-  <meta name="twitter:title" content="Suburban Digi Hustle" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@HustleDigi"  />
-  <meta name="twitter:creator" content="@HustleDigi"  />
+	<!-- META TAGS -->
+	<meta charset="UTF-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+	<meta name="author" content="Mnqobi" />
+	<meta name="description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media and Many More." />
+	<meta name="robots" content="<%= robots %>" />
+	<meta name="googlebot" content="<%= googlebot %>" />
 
-  <!-- STRUCTURED DATA -->
-  <script type="application/ld+json">
-    {
-      "@context": "http://localhost:3000/",
-      "@type": "Website, Organization",
-      "name": "Suburban Digi Hustle | Blog",
-      "id": "http://localhost:3000/#website"
-    }
-  </script>
+	<!-- SOCIAL MEDIA -->
+	<meta property="og:locale" content="en" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Suburban Digi Hustle | Digital Insights" />
+	<meta property="og:description" content="Get Best Insights To Help Grow Your Business And Personal Brand On The Digital World. Find Guides For Web Development, Digital Marketing, Social Media, Software & Make Money Online." />
+	<meta property="og:url" content="/http://localhost:3000/" />
+	<meta property="og:image" content="/favicon.ico" />
+	<meta property="og:site_name" content="Suburban Digi Hustle" />
 
-  <!-- SITE DATA -->
-  <link rel="manifest" href="/webmanifest.json" />
-  <link rel="apple-touch-icon" href="/favicon.ico" />
-  <link rel="text/plain" href="/humans.txt" rel="author" />
-  <link rel="canonical" href="http://localhost:3000/" />
-  
-  <!-- CUSTOM STYLES -->
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <link rel="stylesheet" href="/stylesheets/post-show.css" />
-  <link rel="stylesheet" href="/stylesheets/register.css" />
-  <link rel="stylesheet" href="/stylesheets/profile.css" />
-  
-  <!-- VENDOR STYLESHEETS -->
-  <link rel="stylesheet" href="/stylesheets/vendor/normalize.css" />
-  <link rel="stylesheet" href="/stylesheets/vendor/bootstrap.min.css" />
-  <link rel="stylesheet" href="/stylesheets/vendor/starability-basic.min.css" />
-  
-  <!-- GOOGLE FONTS -->
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@700&family=Roboto+Slab:wght@700&family=Roboto:wght@300;500;700&family=Rowdies:wght@700&display=swap" 
-    rel="stylesheet"
-  />
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Domine:wght@700&display=swap" 
-    rel="stylesheet"
-  />
+	<meta name="twitter:title" content="Suburban Digi Hustle" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@HustleDigi"  />
+	<meta name="twitter:creator" content="@HustleDigi"  />
 
-  <!-- ANIMATE ON SCROLL -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  
-  <!-- FONT AWESOME -->
-  <script src="https://kit.fontawesome.com/4d0ba224e6.js" crossorigin="anonymous"></script>
+	<!-- STRUCTURED DATA -->
+	<script type="application/ld+json">
+		{
+			"@context": "http://localhost:3000/",
+			"@type": "Website, Organization",
+			"name": "Suburban Digi Hustle | Blog",
+			"id": "http://localhost:3000/#website"
+		}
+	</script>
 
-  <!-- GOOGLE RECAPTURE -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<!-- SITE DATA -->
+	<link rel="manifest" href="/manifest.json" />
+	<link rel="apple-touch-icon" href="/favicon.ico" />
+	<link rel="text/plain" href="/humans.txt" rel="author" />
+	<link rel="canonical" href="http://localhost:3000/" />
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176753624-1"></script>
+	<!-- CUSTOM STYLES -->
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="/stylesheets/post-show.css" />
+	<link rel="stylesheet" href="/stylesheets/register.css" />
+	<link rel="stylesheet" href="/stylesheets/profile.css" />
+	<link rel="stylesheet" href="/stylesheets/media-queries.css" />
 
-  <!-- THEME COLOR -->
-  <meta name="theme-color" content="rgb(16, 172, 132)">
+	<!-- VENDOR STYLESHEETS -->
+	<link rel="stylesheet" href="/stylesheets/vendor/normalize.css" />
+	<link rel="stylesheet" href="/stylesheets/vendor/bootstrap.min.css" />
+	<link rel="stylesheet" href="/stylesheets/vendor/starability-basic.min.css" />
 
-  <!-- SHOTCUT ICON -->
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<!-- GOOGLE FONTS -->
+	<link
+		href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@700&family=Roboto+Slab:wght@700&family=Roboto:wght@300;500;700&family=Rowdies:wght@700&display=swap"
+		rel="stylesheet"
+	/>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Domine:wght@700&display=swap"
+		rel="stylesheet"
+	/>
+
+	<!-- ANIMATE ON SCROLL -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/4d0ba224e6.js" crossorigin="anonymous"></script>
+
+	<!-- GOOGLE RECAPTURE -->
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+	<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-176753624-1"></script>
+
+	<!-- THEME COLOR -->
+	<meta name="theme-color" content="rgb(16, 172, 132)">
+
+	<!-- SHOTCUT ICON -->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!--[if lt IE 9]>
-    <script>
-      document.createElement("article");
-      document.createElement("aside");
-      document.createElement("footer");
-      document.createElement("header");
-      document.createElement("nav");
-      document.createElement("section");
-      document.createElement("time");
-    </script>
-  <![endif]-->
-  <noscript>
-    <p><strong>This web page requires JavaScript to be enabled.</strong></p>
-    <p>JavaScript is an object-oriented computer programming language 
-      commonly used to create interactive effects within web browsers.</p>
-    <p><a href="https://goo.gl/koeeaJ">How to enable JavaScript?</a></p>
-  </noscript>
+	<!--[if lt IE 9]>
+		<script>
+			document.createElement("article");
+			document.createElement("aside");
+			document.createElement("footer");
+			document.createElement("header");
+			document.createElement("nav");
+			document.createElement("section");
+			document.createElement("time");
+		</script>
+	<![endif]-->
+	<noscript>
+		<p><strong>This web page requires JavaScript to be enabled.</strong></p>
+		<p>JavaScript is an object-oriented computer programming language
+			commonly used to create interactive effects within web browsers.</p>
+		<p><a href="https://goo.gl/koeeaJ">How to enable JavaScript?</a></p>
+	</noscript>
 
-  <% include ../partials/navbar %>
-  <% include ../partials/flash-messages %>
-  <%- body -%>
-  <% include ../partials/footer %>
-  
-  <!-- Vendor scripts -->
-  <script src="/javascripts/vendor/modernizr-3.7.1.min.js"></script>
-  <script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+	<% include ../partials/navbar %>
+	<% include ../partials/flash-messages %>
+	<%- body -%>
+	<% include ../partials/footer %>
 
-  <!-- Bootstrap scripts -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
-    crossorigin="anonymous">
-  </script>
-  <script src="/javascripts/vendor/bootstrap.min.js"></script>
-  
-  <!-- Local scripts -->
-  <script src="/javascripts/plugins.js"></script>
-  <script src="/javascripts/main.js"></script>
-  <script src="/javascripts/post-show.js"></script>
+	<!-- Vendor scripts -->
+	<script src="/javascripts/vendor/modernizr-3.7.1.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 
-  <!-- AOS -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      offset: 200,
-      duration: 1000
-    });
-  </script>
+	<!-- Bootstrap scripts -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous">
+	</script>
+	<script src="/javascripts/vendor/bootstrap.min.js"></script>
 
-  <!-- CKEditor -->
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.14.1/ckeditor.js" 
-    integrity="sha256-bEIQpI72w9NJuIVhTLFUF2/8uxl0u5800r8ddViuv+o=" 
-    crossorigin="anonymous">  
-  </script>
+	<!-- Local scripts -->
+	<script src="/javascripts/plugins.js"></script>
+	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/post-show.js"></script>
 
-  <script>
-    CKEDITOR.plugins.addExternal('a11ychecker', 'https://ckeditor.com/docs/ckeditor4/4.14.1/examples/assets/plugins/a11ychecker/', 'plugin.js');
+	<!-- AOS -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({
+			offset: 200,
+			duration: 1000
+		});
+	</script>
 
-    // Performance optimization:
-    // Send a request for tests JSON file ASAP, so it's likely to be ready when the user runs Acessibility Checker.
-    $.getJSON('https://ckeditor.com/docs/vendors/4.14.1/ckeditor/assets/plugins/a11ychecker/libs/quail/tests.json');
-    
-    CKEDITOR.replace('description', {
-      extraPlugins: 'a11ychecker',
-      height: 500
-    });
-  </script>
+	<!-- CKEditor -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.14.1/ckeditor.js"
+		integrity="sha256-bEIQpI72w9NJuIVhTLFUF2/8uxl0u5800r8ddViuv+o="
+		crossorigin="anonymous">
+	</script>
 
-  <!-- POST SHOW JS -->
-  <% if (title === 'Post') { %>
-    <script src="/javascripts/post-show.js"></script>
-  <% } %> 
+	<script>
+		CKEDITOR.plugins.addExternal('a11ychecker', 'https://ckeditor.com/docs/ckeditor4/4.14.1/examples/assets/plugins/a11ychecker/', 'plugin.js');
+
+		// Performance optimization:
+		// Send a request for tests JSON file ASAP, so it's likely to be ready when the user runs Acessibility Checker.
+		$.getJSON('https://ckeditor.com/docs/vendors/4.14.1/ckeditor/assets/plugins/a11ychecker/libs/quail/tests.json');
+
+		CKEDITOR.replace('description', {
+			extraPlugins: 'a11ychecker',
+			height: 500
+		});
+	</script>
+
+	<!-- POST SHOW JS -->
+	<% if (title === 'Post') { %>
+		<script src="/javascripts/post-show.js"></script>
+	<% } %>
 </body>
 </html>

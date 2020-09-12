@@ -3,19 +3,19 @@
 <div class="p-4 mb-3 bg-light rounded side-about">
 	<h3 class="font-italic">About</h3>
 	<!-- About -->
-	<img 
+	<img
 		src="/images/tagline.png"
 		class="image-responsive about-img"
 		alt="Suburban Digi Hustle About Tag Line Image"
 	    title="Suburban Digi Hustle About Tag Line Image"
-	    loading="lazy" 
+	    loading="lazy"
 	/>
 
 	<p><strong>Suburban Digi Hustle</strong> provides its community with best insights, guides, tips and tools to help them grow their <em>business and personal brand</em> online.</P>
 
 	<P>We specialize in Web Development, Digital Marketing, Social Media Platforms, Marketing Software and strategies of How To Make Money Online.</p>
-	 
-	<p>We are passionate about the <em>digital world</em> and excited to provide our audience with the best and most vuluable information. <a href="/about">Learn more!</a></p>
+
+	<p>We are passionate about the <em>digital world</em> and excited to provide our audience with the best and most vuluable information. <a class="color-blue" href="/about">Learn more!</a></p>
 </div>
 
 <!-- Guides -->
@@ -24,8 +24,8 @@
 
 	<ul class="side-list">
 	  	<% posts.docs.forEach(function(post){ %>
-			<% if (post.guideArticle) { %>	
-				<li><a href="/blog/<%= post.id %>"><%= post.title %></a></li>
+			<% if (post.guideArticle) { %>
+				<li><a class="color-blue" href="/blog/<%= post.id %>"><%= post.title %></a></li>
 			<% } %>
 		<% }); %>
 	</ul>
@@ -36,8 +36,8 @@
 	<h3 class="font-italic">Popular Articles</h3>
 	<ul class="side-list">
 		<% posts.docs.forEach(function(post){ %>
-			<% if (post.popularArticle) { %>	
-				<li><a href="/blog/<%= post.id %>"><%= post.title %></a></li>
+			<% if (post.popularArticle) { %>
+				<li><a class="color-blue" href="/blog/<%= post.id %>"><%= post.title %></a></li>
 			<% } %>
 		<% }); %>
 	</ul>
@@ -49,40 +49,40 @@
 
 	<p class="lead">Subscribe To Our Newsletter And Get Your Free eBook!</p>
 
-	<img 
+	<img
 		src="/images/ebook.jpg"
 		alt="eBook image"
-		title="eBook image" 
+		title="eBook image"
 		loading="lazy"
 		class="img-responsive ebook"
-		width="300" 
+		width="300"
 	>
 	<form action="/" method="POST" id="subscribe">
 		<div class="form-group">
 			<label for="firstName">First Name</label>
-			<input 
-				type="text" 
-				name="firstName" 
-				id="firstName" 
+			<input
+				type="text"
+				name="firstName"
+				id="firstName"
 				class="form-control"
-				maxlength="30" 
-				pattern="[A-Za-z]{2,}" 
-				title="First name must be a series of alphabetic characters only (min 2, max 30)."  
-				placeholder="John" 
+				maxlength="30"
+				pattern="[A-Za-z]{2,}"
+				title="First name must be a series of alphabetic characters only (min 2, max 30)."
+				placeholder="John"
 				required
 			/>
 		</div>
 		<div class="form-group">
 			<label for="email">Email</label>
-		  	<input 
-		  		type="email" 
+		  	<input
+		  		type="email"
 		  		class="form-control"
 		  		name="email"
 		  		maxlength="150"
-				pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+				pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 				title="Email must follow this pattern: characters@characters.domain (should include '@' sign, '.' followed by atleast 2 characters)."
-				placeholder="you@example.com" 
-		  		required 
+				placeholder="you@example.com"
+		  		required
 		  	/>
 		</div>
 	  	<div class="form-group">

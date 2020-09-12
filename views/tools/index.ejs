@@ -14,11 +14,19 @@
 
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a class="color-blue" href="/">Home</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">Tools</li>
+  		</ol>
+	</nav>
+
   	<div class="row"><!-- ROW -->
   		<!-- MAIN CONTENT START -->
     	<div class="col-md-8 blog-main">
@@ -27,18 +35,18 @@
       			<% tools.docs.forEach(function(tool){ %>
 	      				<div class="col-md-6 product"><!-- Product Container -->
 			      			<div class="card" style="width: 18rem;">
-			      				<% tool.images.forEach(function(image){ %>	
-				          			<img 
+			      				<% tool.images.forEach(function(image){ %>
+				          			<img
 				          				src="<%= image.url %>"
-				          				class="card-img-top img-responsive" 
-				          				alt="<%= tool.title %>'s image" 
+				          				class="card-img-top img-responsive"
+				          				alt="<%= tool.title %>'s image"
 				          				title="<%= tool.title %>'s image"
 				          				loading="lazy"
 				          			/>
 			          			<% }) %>
 							  	<div class="card-body">
-							    	<h3 class="card-title"><%= tool.title %></h3>
-							    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
+							    	<h3 class="card-title footer-heading"><%= tool.title %></h3>
+							    	<p class="card-text"><%- tool.description.substring(0, 100) %>[...]</p>
 							    	<a href="/tools/<%= tool.id %>" class="btn btn-alt">View Tool</a>
 							  	</div>
 							</div>
@@ -54,7 +62,7 @@
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
-    		<% include ../partials/sidebar %>	
+    		<% include ../partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
 

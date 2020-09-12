@@ -5,30 +5,30 @@
 		<form action="/blog" method="POST" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">Post Title</label>
-				<input 
+				<input
 					type="text"
 					name="post[title]"
 					id="title"
-					class="form-control"  
+					class="form-control"
 					placeholder="Title"
-					required 
+					required
 				/>
 			</div>
 			<div class="form-group">
 				<label for="images">Image</label>
-				<input 
-					type="file" 
+				<input
+					type="file"
 					name="images"
 					id="images"
 					class="form-control"
-					accept="images/*"  
+					accept="images/*"
 					multiple
 				/>
 			</div>
 			<div class="form-group">
 				<label for="main">Is Main Post?</label>
-				<select 
-					name="post[mainPost]" 
+				<select
+					name="post[mainPost]"
 					id="main"
 					class="form-control">
 					<option disabled selected>Choose...</option>
@@ -38,8 +38,8 @@
 			</div>
 			<div class="form-group">
 				<label for="featured">Is Featured Post?</label>
-				<select 
-					name="post[featuredPost]" 
+				<select
+					name="post[featuredPost]"
 					id="featured"
 					class="form-control">
 					<option disabled selected>Choose...</option>
@@ -49,8 +49,8 @@
 			</div>
 			<div class="form-group">
 				<label for="homeArticle">Is Home Article?</label>
-				<select 
-					name="post[homeArticle]" 
+				<select
+					name="post[homeArticle]"
 					id="homeArticle"
 					class="form-control">
 					<option disabled selected>Choose...</option>
@@ -60,8 +60,8 @@
 			</div>
 			<div class="form-group">
 				<label for="popularArticle">Is Popular Article?</label>
-				<select 
-					name="post[popularArticle]" 
+				<select
+					name="post[popularArticle]"
 					id="popularArticle"
 					class="form-control">
 					<option disabled selected>Choose...</option>
@@ -71,8 +71,8 @@
 			</div>
 			<div class="form-group">
 				<label for="guideArticle">Is Guide Article?</label>
-				<select 
-					name="post[guideArticle]" 
+				<select
+					name="post[guideArticle]"
 					id="guideArticle"
 					class="form-control">
 					<option disabled selected>Choose...</option>
@@ -82,8 +82,8 @@
 			</div>
 			<div class="form-group">
 				<label for="category">Category</label>
-				<select 
-					name="post[category]" 
+				<select
+					name="post[category]"
 					id="category"
 					class="form-control">
 					<option disabled selected>Choose Category...</option>
@@ -96,51 +96,51 @@
 			</div>
 			<div class="form-group">
 				<label for="tag">Tag</label>
-				<input 
+				<input
 					type="text"
 					name="post[tag]"
 					id="tag"
-					class="form-control"  
+					class="form-control"
 					placeholder="Tag"
-					required 
+					required
 				/>
 			</div>
 			<div class="form-group">
-				<label for="url">Url</label>
-				<input 
+				<label for="categoryUrl">Category Url</label>
+				<input
 					type="text"
-					name="post[url]"
-					id="url"
-					class="form-control"  
-					placeholder="Url"
-					required 
+					name="post[categoryUrl]"
+					id="categoryUrl"
+					class="form-control"
+					placeholder="Category Url"
+					required
 				/>
 			</div>
 			<div class="form-group">
 				<label for="description">Body</label>
-				<textarea 
+				<textarea
 					name="post[body]"
 					id="description"
 					class="form-control"
-					rows="5" 
+					rows="5"
 					placeholder="Post Body"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="read">Read Time</label>
-				<input 
-					type="number" 
-					name="post[read]" 
+				<input
+					type="number"
+					name="post[read]"
 					id="read"
-					class="form-control" 
-					step="1" 
+					class="form-control"
+					step="1"
 					min="1"
-					max="15" 
+					max="15"
 					placeholder="Read time(min)"
-					required 
+					required
 				/>
 			</div>
 			<div class="form-group">
-				<button 
+				<button
 					type="submit"
 					id="submit">
 					Create Post!

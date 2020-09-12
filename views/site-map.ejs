@@ -2,7 +2,7 @@
 <!-- PAGE HEADER -->
 <header>
 	<div class="container">
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid page-jumbotron">
 		  	<div class="container">
 		    	<h1 class="font-italic page-title">Site Map</h1>
 		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
@@ -14,22 +14,104 @@
 
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="/">Home</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">Site Map</li>
+  		</ol>
+	</nav>
+
   	<div class="row"><!-- ROW -->
   		<!-- MAIN CONTENT START -->
+  		<h2 class="visuallyHidden">Site Map Categories</h2>
+
     	<div class="col-md-8 main-content">
-      		<h2 class="section-title">Who We Are</h2>
-      		<h2 class="section-title">What We Do</h2>
+    		<!-- web dev sitemaps -->
+    		<div class="category-holder">
+	    		<h3 class="site-map-sub-header"><a href="/blog/web-development">Web Development</a></h3>
+	    		<div class="row">
+		    		<% posts.docs.forEach(function(post){ %>
+						<% if (post.category === 'Web Development') { %>
+							<div class="col-md-6 site-map-link-holder">
+								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+		    				</div>
+						<% } %>
+					<% }); %>
+				</div>
+			</div>
+
+			<!-- digital marketing sitemaps -->
+			<div class="category-holder">
+				<h3 class="site-map-sub-header"><a href="/blog/digital-marketing">Digital Marketing</a></h3>
+	    		<div class="row">
+		    		<% posts.docs.forEach(function(post){ %>
+		    			<% if (post.category === 'Digital Marketing') { %>
+							<div class="col-md-6">
+								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+		    				</div>
+		    			<% } %>
+					<% }); %>
+				</div>
+			</div>
+
+			<!-- social media sitemaps -->
+			<div class="category-holder">
+				<h3 class="site-map-sub-header"><a href="/blog/social-media">Social Media</a></h3>
+	    		<div class="row">
+		    		<% posts.docs.forEach(function(post){ %>
+		    			<% if (post.category === 'Social Media') { %>
+							<div class="col-md-6">
+								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+		    				</div>
+		    			<% } %>
+					<% }); %>
+				</div>
+			</div>
+
+			<!-- marketing software sitemaps -->
+			<div class="category-holder">
+				<h3 class="site-map-sub-header"><a href="/blog/software">Marketing Software</a></h3>
+	    		<div class="row">
+		    		<% posts.docs.forEach(function(post){ %>
+		    			<% if (post.category === 'Software') { %>
+							<div class="col-md-6">
+								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+		    				</div>
+		    			<% } %>
+					<% }); %>
+				</div>
+			</div>
+
+			<!-- make money online sitemaps -->
+			<div class="category-holder">
+				<h3 class="site-map-sub-header"><a href="/blog/make-money-online">Make Money Online</a></h3>
+	    		<div class="row">
+		    		<% posts.docs.forEach(function(post){ %>
+		    			<% if (post.category === 'Make Money Online') { %>
+							<div class="col-md-6">
+								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+		    				</div>
+		    			<% } %>
+					<% }); %>
+				</div>
+			</div>
     	</div>
     	<!-- MAIN CONTENT END -->
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 sidebar">
-    		<% include ./partials/sidebar %>	
+    		<% include ./partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
   	</div><!-- ROW -->

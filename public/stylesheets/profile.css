@@ -2,3 +2,46 @@
 	width: 100px;
 	border-radius: 50%;
 }
+
+.profile-title {
+	text-align: center;
+}
+
+.form-holder {
+	margin: 2rem auto;
+	padding: 2rem;
+	max-width: 800px;
+	background-color: var(--clr-dark);
+	color: var(--clr-light);
+	border-radius: var(--br);
+}
+
+#validation-message {
+	margin-bottom: .75rem;
+}
+
+
+.color-red {
+	color: var(--clr-red);
+}
+
+.color-green {
+	color: var(--clr-green);
+}
+
+/******************************************************************/
+
+/* SIGN STYLES */
+
+.form-holder.sign-form {
+	margin-top: 0 !important;
+}
+
+.options {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.or {
+	margin: .5rem 0;
+}

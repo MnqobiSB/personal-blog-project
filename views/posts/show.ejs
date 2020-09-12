@@ -1,62 +1,72 @@
 <% layout('layouts/boilerplate') -%>
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a class="color-blue" href="/">Home</a></li>
+    		<li class="breadcrumb-item"><a class="color-blue" href="/blog">Blog</a></li>
+    		<li class="breadcrumb-item"><a class="color-blue" href="/blog/<%= post.categoryUrl %>"><%= post.category %></a></li>
+    		<li class="breadcrumb-item active" aria-current="page"><%= post.title %></li>
+  		</ol>
+	</nav>
+
   	<div class="row"><!-- ROW -->
   		<!-- MAIN CONTENT START -->
     	<div class="col-md-8 main-content">
     		<!-- ARTICLE START -->
-      		<section class="section">
-      			<div class="card mb-3 show-main"><!-- ARTICLE CONTAINER --> 
-					<img 
-						src="<%= post.images[1].url %>" 
-						class="card-img-top img-responsive single-blog-post-image" 
-						alt="<%= post.title %>'s image" 
-			          	title="<%= post.title %>'s image"
-			          	loading="lazy"
+      	<section class="section">
+      		<div class="card show-main"><!-- ARTICLE CONTAINER -->
+					<img
+						src="<%= post.images[1].url %>"
+						class="card-img-top img-responsive single-blog-post-image"
+						alt="<%= post.title %>'s image"
+			         title="<%= post.title %>'s image"
+			         loading="lazy"
 					>
 					<div class="card-body">
-		      			<article>
-		      				<header class="blog-post-header">
+		      		<article class="post-show-article">
+		      			<header class="blog-post-header">
 				        		<h1 class="card-title page-title"><%= post.title %></h1>
-				        		<p class="article-meta text-muted">
-				        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+				        		<p class="article-meta text-gray">
+				        			<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-gray"><i class="icon far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
 				        		</p>
 				        		<small class="article-meta">
-					        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-					        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+					        		<strong class="post-category">#<%= post.category %></strong>
+					        		<strong class="post-tag">#<%= post.tag %></strong>
 				        		</small>
 							</header>
 
-							<div class="blog-post-body">	
+							<div class="blog-post-body">
 			        			<p><%- post.body %></p>
+					      </div>
+
+					      <div class="admin-buttons">
+					      <hr>
+							<% if (currentUser && post.author.equals(currentUser._id)) { %>
+								<a class="float-right" href="/blog/<%= post.id %>/edit">
+									<button class="btn btn-sm edit-btn">
+										<i class="icon fas fa-edit"></i> Edit post
+									</button>
+								</a>
+								<form
+									class="float-right"
+									action="/blog/<%= post.id %>?_method=DELETE"
+									method="POST"
+								>
+									<button class="btn btn-sm delete-btn">
+										<i class="icon fas fa-trash"></i> Delete
+									</button>
+								</form>
+							<% } %>
+					        	<a class="color-blue" href="/blog">Go Back</a>
 					        </div>
-					        
-					        <div class="admin-buttons">
-					        	<hr>
-								<% if (currentUser && post.author.equals(currentUser._id)) { %>
-									<a class="float-right" href="/blog/<%= post.id %>/edit">
-										<button class="btn btn-sm btn-warning edit-post-btn">
-											<i class="fas fa-edit"></i> Edit post
-										</button>
-									</a>
-									<form 
-										class="float-right" 
-										action="/blog/<%= post.id %>?_method=DELETE" 
-										method="POST"
-									>
-										<button class="btn btn-sm btn-danger delete-post-btn">
-											<i class="fas fa-trash"></i> Delete
-										</button>
-									</form>
-								<% } %>
-					        	<a href="/blog">Go Back</a>
-					        </div>
-				        </article>
+				      </article>
 			        </div>
 		        </div>
       		</section>
@@ -64,35 +74,35 @@
 
       		<!-- COMMENT SECTION START -->
       		<section class="section">
-	      		<div class="card mb-3">
+	      		<div class="card comments-card">
 	      			<h2 class="card-header section-title">Comments</h2>
 
 	      			<!-- create comment -->
 				  	<div class="card-body comment-card-body">
 				  		<% if (currentUser) { %>
-							<p class="card-text"><i class="fas fa-pen-alt"></i> Leave a comment</p>
+							<p class="card-text"><i class="icon fas fa-pen-alt"></i> Leave a comment</p>
 
-							<form 
-								action="/blog/<%= post.id %>/reviews" 
-								method="POST" 
+							<form
+								action="/blog/<%= post.id %>/reviews"
+								method="POST"
 								class="post-comment-form"
 							>
 								<div class="form-group">
-									<textarea 
+									<textarea
 										name="review[body]"
-										id="comment" 
-										class="form-control" 
-										maxlength="1000" 
-										pattern="[a-zA-Z\s0-9]{10,}" 
+										id="comment"
+										class="form-control"
+										maxlength="1000"
+										pattern="[a-zA-Z\s0-9]{10,}"
 										title="Message can be a series of alphabetic and numeric characters only (min 10, max 1000)."
 										rows="4"
-										placeholder="Your comment" 
-										required 
+										placeholder="Your comment"
+										required
 									></textarea>
 								</div>
 
 								<div class="form-group">
-									<button class="btn btn-primary submit-comment-btn">
+									<button class="btn submit-btn">
 										Submit
 									</button>
 								</div>
@@ -102,8 +112,8 @@
 
 						<% } else { %>
 							<p class="card-text">
-								<a href="/sign-in?returnTo=true">
-									<i class="fas fa-pen-alt"></i> Leave a comment
+								<a class="color-blue" href="/sign-in?returnTo=true">
+									<i class="icon fas fa-pen-alt"></i> Leave a comment
 								</a>
 							</p>
 						<% } %>
@@ -111,7 +121,7 @@
 
 				    	<!-- display all reviews -->
 				    	<p class="recent-comments">
-				    		<i class="fas fa-comments"></i> <strong>Recent Comments (<%= post.reviews.length %>)</strong>
+				    		<i class="icon fas fa-comments"></i> <strong>Recent Comments <small>(<%= post.reviews.length %>)</small></strong>
 				    	</p>
 
 				    	<!-- no reviews yet -->
@@ -122,15 +132,15 @@
 						<!-- single review -->
 						<% post.reviews.forEach(function(review) { %>
 							<!-- show reviews -->
-							<div class="media text-muted">
-								<img 
-									src="<%= review.author.image.secure_url %>" 
+							<div class="media text-gray">
+								<img
+									src="<%= review.author.image.secure_url %>"
 									class="mr-2 rounded mt-2 review-author-img"
 									alt="<%= review.author.username %>'s profile image"
 						  			title="<%= review.author.username %>'s profile image"
 						  			loading="lazy"
-						  			width="40" 
-									height="40" 
+						  			width="40"
+									height="40"
 								/>
 
 								<p class="media-body mb-0 lh-125">
@@ -148,35 +158,35 @@
 							<% if (currentUser && review.author.equals(currentUser._id)) { %>
 								<div class="edit-review-container">
 									<!-- edit button -->
-									<button class="btn-sm edit-tool-btn toggle-edit-form mb-2">Edit</button>
+									<button class="btn btn-sm edit-btn toggle-edit-form">Edit</button>
 
 									<!-- delete button -->
-									<form 
-										class="d-inline" 
-										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" 
+									<form
+										class="d-inline"
+										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE"
 										method="POST"
 									>
-										<button class="delete-tool-btn btn-sm" type="submit">Delete</button>
+										<button class="btn delete-btn btn-sm" type="submit">Delete</button>
 									</form>
 
 									<!-- edit review form -->
-									<form 
-										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" 
-										method="POST" 
+									<form
+										action="/blog/<%= post.id %>/reviews/<%= review.id %>?_method=PUT"
+										method="POST"
 										class="edit-comment-form"
-									>	
+									>
 										<div class="card edit-review-card">
 										  	<div class="card-body">
 												<div class="form-group">
 													<label class="form-label" for="edit-review">Edit Comment</label>
-													<textarea 
+													<textarea
 														id="edit-review"
 														class="form-control"
-														name="review[body]" 
-														maxlength="1000" 
-														pattern="[a-zA-Z\s0-9]{10,}" 
+														name="review[body]"
+														maxlength="1000"
+														pattern="[a-zA-Z\s0-9]{10,}"
 														title="Message can be a series of alphabetic and numeric characters only (min 10, max 1000)."
-														rows="4" 
+														rows="4"
 														required
 													><%= review.body %></textarea>
 												</div>
@@ -203,15 +213,15 @@
 
 				<!-- related post -->
 				<% relatedPosts.forEach(function(relatedPost){ %>
-					<div class="card mb-3" style="max-width: auto;">
+					<div class="card related-post-card" style="">
 					  	<div class="row no-gutters">
 					    	<div class="col-md-4">
-								<img 
-									src="<%= relatedPost.images[1].url %>" 
-									class="card-img img-responsive related-post-image" 
-									alt="<%= relatedPost.title %>'s image" 
-						          	title="<%= relatedPost.title %>'s image"
-						          	loading="lazy"
+								<img
+									src="<%= relatedPost.images[1].url %>"
+									class="card-img img-responsive related-post-image"
+									alt="<%= relatedPost.title %>'s image"
+					          	title="<%= relatedPost.title %>'s image"
+					          	loading="lazy"
 								>
 					    	</div>
 					    	<div class="col-md-8">
@@ -221,11 +231,11 @@
 					        		<small class="article-meta">
 						        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
 						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
-						        		<span class="read text-muted d-blockt float-right"><i class="far fa-clock"></i> <%= relatedPost.read %> min read</span>
+						        		<span class="read text-gray d-blockt float-right"><i class="icon far fa-clock"></i> <%= relatedPost.read %> min read</span>
 					        		</small>
 
 
-					        		<p class="card-text"><a href="/blog/<%= relatedPost.id %>" class="stretched-link">Read Now</a></p>
+					        		<p class="card-text"><a class="color-blue" href="/blog/<%= relatedPost.id %>" class="stretched-link">Read Now</a></p>
 					      		</div>
 					    	</div>
 					  	</div>
@@ -239,7 +249,7 @@
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
-    		<% include ../partials/sidebar %>	
+    		<% include ../partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
   	</div><!-- ROW -->

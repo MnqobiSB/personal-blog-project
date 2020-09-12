@@ -10,13 +10,13 @@
 				    	<header class="page-header">
 				      		<h1 class="page-title font-italic"><%= post.title %></h1>
 				      	</header>
-				      	<p class="lead my-3"><%= post.body.substring(0, 200) %>...</p>
+				      	<p class="lead my-3"><%= post.body.substring(0, 200) %>[...]</p>
 				      	<p class="lead mb-0">
-				      		<a 
-				      			href="/blog/<%= post.id %>" 
+				      		<a
+				      			href="/blog/<%= post.id %>"
 				      			class="text-white font-weight-bold stretched-link"
 				      		>
-				      			Continue reading
+				      			Read more
 				      		</a>
 				      	</p>
 				    </div>
@@ -29,22 +29,22 @@
 	  	<div class="row mb-2">
 	  		<% posts.docs.forEach(function(post){ %>
 				<% if (post.featuredPost) { %>
-	    			<div class="col-md-6"> 		
+	    			<div class="col-md-6">
 			      		<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative featuredPost">
 			        		<div class="col p-4 d-flex flex-column position-static">
-			          			<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
+			          			<strong class="post-category">#<%= post.category %></strong>
 			          			<h2 class="mb-0"><%= post.title %></h2>
-			          			<div class="mb-1 text-muted">
-			          				<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+			          			<div class="mb-1 text-gray">
+			          				<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 			          			</div>
-			          			<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>...</p>
-			          			<a href="/blog/<%= post.id %>" class="stretched-link">Continue reading</a>
+			          			<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>[...]</p>
+			          			<a href="/blog/<%= post.id %>" class="color-blue stretched-link">Read more</a>
 			        		</div>
-			        		<div class="col-auto d-none d-lg-block featuredPost-image">	
-			          			<img 
+			        		<div class="col-auto d-none d-lg-block featuredPost-image">
+			          			<img
 			          				src="<%= post.images[0].url %>"
-			          				class="card-img-right img-responsive" 
-			          				alt="<%= post.title %>'s image" 
+			          				class="card-img-right img-responsive"
+			          				alt="<%= post.title %>'s image"
 			          				title="<%= post.title %>'s image"
 			          				loading="lazy"
 			          			/>
@@ -61,7 +61,7 @@
 
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
@@ -71,44 +71,44 @@
     	<div class="col-md-8 main-content">
     		<!-- HOME ARTICLES SECTION START -->
     		<section class="section home-articles">
-	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
+	      	<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
 	        		Featured Articles!
-	      		</h2>
+	      	</h2>
 
-	      		<div class="blog-post"><!-- ARTICLE CONTAINER -->
-	      			<% posts.docs.forEach(function(post){ %>
-		      			<% if (post.homeArticle) { %>
-		      				<article>
-			      				<header class="blog-post-header">
+	      	<div class="blog-post"><!-- ARTICLE CONTAINER -->
+	      		<% posts.docs.forEach(function(post){ %>
+	      			<% if (post.homeArticle) { %>
+	      				<article data-aos="fade-right">
+		      				<header class="blog-post-header">
 					        		<h3 class="blog-post-title"><%= post.title %></h3>
-					        		<p class="article-meta text-muted">
-					        			<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-muted"><i class="far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
+					        		<p class="article-meta text-gray">
+					        			<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMMM DD, YYYY') %> · <span class="read text-gray"><i class="icon far fa-clock"></i> <em><%= post.read %> min read</em></span></small>
 					        		</p>
 					        		<small class="article-meta">
-						        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
+						        		<strong class="post-category">#<%= post.category %></strong>
+						        		<strong class="post-tag">#<%= post.tag %></strong>
 					        		</small>
 								</header>
 
-				        		<div class="blog-post-body">	
-				        			<p><%- post.body.substring(0, 300) %>...</p>
-						        </div>
+				        		<div class="blog-post-body">
+				        			<p><%- post.body.substring(0, 300) %>[...]</p>
+						       </div>
 
-						        <footer class="blog-post-footer">
-						        	<p class="blog-post-meta">
+						      <footer class="blog-post-footer">
+						        	<p class="blog-post-meta text-gray">
 						        		<small>
-						        			<i class="fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %>
+						        			<i class="icon fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %>
 						        		</small>
 						        	</p>
-						        	
-						        	<a href="/blog/<%= post.id %>" class="">
-						        		Continue reading
+
+						        	<a href="/blog/<%= post.id %>" class="color-blue">
+						        		Read more
 						        	</a>
-						        </footer>
-					        </article>
+						      </footer>
+					      </article>
 						<% } %>
-			        <% }); %>
-	      		</div><!-- ARTICLE CONTAINER -->
+			       <% }); %>
+	      	</div><!-- ARTICLE CONTAINER -->
 			</section>
 			<!-- HOME ARTICLES SECTION END -->
 
@@ -122,18 +122,18 @@
 		      			<% if (tool.topTool) { %>
 		      				<div class="col-md-6 product">
 				      			<div class="card tool-card" style="width: 15rem;">
-				      				<% tool.images.forEach(function(image){ %>	
-					          			<img 
+				      				<% tool.images.forEach(function(image){ %>
+					          			<img
 					          				src="<%= image.url %>"
-					          				class="card-img-top img-responsive" 
-					          				alt="<%= tool.title %>'s image" 
+					          				class="card-img-top img-responsive"
+					          				alt="<%= tool.title %>'s image"
 					          				title="<%= tool.title %>'s image"
 					          				loading="lazy"
 					          			/>
 				          			<% }) %>
 								  	<div class="card-body">
 								    	<h3 class="card-title footer-heading"><%= tool.title %></h3>
-								    	<p class="card-text"><%- tool.description.substring(0, 80) %></p>
+								    	<p class="card-text"><%- tool.description.substring(0, 80) %>[..]</p>
 								    	<a href="/tools/<%= tool.id %>" class="btn btn-alt">View Tool &raquo;</a>
 								  	</div>
 								</div>
@@ -148,7 +148,7 @@
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 blog-sidebar">
-    		<% include ./partials/sidebar %>	
+    		<% include ./partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
   	</div><!-- ROW -->

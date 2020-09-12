@@ -13,11 +13,19 @@
 
 <!-- MAIN SECTION START -->
 <main
-	id="main" 
+	id="main"
 	class="main container"
 	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="/">Home</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">Disclaimer</li>
+  		</ol>
+	</nav>
+
   	<div class="row"><!-- ROW -->
   		<!-- MAIN CONTENT START -->
     	<div class="col-md-8 main-content">
@@ -47,7 +55,7 @@
 
     	<!-- SIDEBAR START -->
     	<aside class="col-md-4 sidebar">
-    		<% include ./partials/sidebar %>	
+    		<% include ./partials/sidebar %>
     	</aside>
     	<!-- SIDEBAR END -->
   	</div><!-- ROW -->

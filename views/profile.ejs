@@ -2,19 +2,19 @@
 <!-- PAGE HEADER -->
 <header>
 	<div class="container">
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid page-jumbotron">
 		  	<div class="container">
 		    	<h1 class="font-italic page-title">
-		    		<img 
-		    			src="<%= currentUser.image.secure_url %>" 
+		    		<img
+		    			src="<%= currentUser.image.secure_url %>"
 		    			alt="<%= currentUser.username %>'s profile image"
 		    			class="profile-image"
 		    			title="<%= currentUser.username %>'s profile image"
 				        loading="lazy"
-		    		/> 
+		    		/>
 		    		#<%= currentUser.username %>'s Profile
 		    	</h1>
-		    	<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+		    	<p class="lead">View and update your profile.</p>
 		  	</div>
 		</div>
 	</div>
@@ -22,130 +22,143 @@
 <!-- PAGE HEADER -->
 
 <!-- MAIN SECTION START -->
-<main 
-	id="main" 
-	class="main" 
-	tabindex="-1" 
+<main
+	id="main"
+	class="main container"
+	tabindex="-1"
 	role="main"
 >
+
+	<nav class="breadcrumbNav" aria-label="breadcrumb">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="/">Home</a></li>
+    		<li class="breadcrumb-item active" aria-current="page"><%= currentUser.username %></li>
+  		</ol>
+	</nav>
+
 	<!-- MAIN CONTENT START -->
 	<div class="container main-content">
 		<!-- RECENT POSTS START -->
-		<h2 class="section-title">Recent Posts</h2>
-		<% posts.forEach(function(post) { %>
-			<ul>
-				<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
-			</ul>
-		<% }); %>
+		<% if (currentUser.isAdmin) { %>
+			<h2 class="section-title">Recent Posts</h2>
+			<% posts.forEach(function(post) { %>
+				<ul>
+					<li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+				</ul>
+			<% }); %>
+		<% } %>
 		<!-- RECENT POSTS END -->
 
 		<!-- UPDATE PROFILE START -->
-		<h2 class="section-title">Update Profile</h2>
-		<form 
-			action="/profile?_method=PUT" 
-			method="POST" 
-			class="profile-form"
-			enctype="multipart/form-data"
-		>
-			<div class="form-group">
-				<label for="username">Username</label>
-				<input 
-					type="text"
-					name="username"  
-					id="username" 
-					class="form-control"
-					maxlength="30" 
-					pattern="[A-Za-z]{2,}" 
-					title="Username must be a series of alphabetic characters only (min 2, max 30)."
-					value="<%= currentUser.username %>" 
-					placeholder="John" 
-					required
-					autofocus
-				/>
-			</div>
+		<h2 class="section-title profile-title">Update Your Profile</h2>
 
-			<div class="form-group">
-				<label for="email">Email</label>
-				<input 
-					type="email" 
-					name="email"
-					id="email" 
-					class="form-control"
-					maxlength="150"
-					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-					title="Email must follow this pattern: you@example.com"
-					placeholder="you@example.com" 
-					value="<%= currentUser.email %>"
-					required
-				/>
-			</div>
+		<div class="form-holder">
+			<form
+				action="/profile?_method=PUT"
+				method="POST"
+				class="profile-form"
+				enctype="multipart/form-data"
+			>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="username"
+						class="form-control"
+						maxlength="30"
+						pattern="[A-Za-z]{2,}"
+						title="Username must be a series of alphabetic characters only (min 2, max 30)."
+						value="<%= currentUser.username %>"
+						placeholder="John"
+						required
+						autofocus
+					/>
+				</div>
 
-			<div class="form-group">
-				<label for="new-password">New Password</label>
-				<input 
-					type="password" 
-					id="new-password" 
-					name="newPassword" 
-					class="form-control"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-					placeholder="********" 
-				/>
-			</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input
+						type="email"
+						name="email"
+						id="email"
+						class="form-control"
+						maxlength="150"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+						title="Email must follow this pattern: you@example.com"
+						placeholder="you@example.com"
+						value="<%= currentUser.email %>"
+						required
+					/>
+				</div>
 
-			<div class="form-group">
-				<label for="password-confirmation">Password Confirmation</label>
-				<input 
-					type="password" 
-					id="password-confirmation" 
-					name="passwordConfirmation" 
-					class="form-control"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-					placeholder="********" 
-				/>
-			</div>
+				<div class="form-group">
+					<label for="new-password">New Password</label>
+					<input
+						type="password"
+						id="new-password"
+						name="newPassword"
+						class="form-control"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+						placeholder="********"
+					/>
+				</div>
 
-			<div id="validation-message">
-			</div>
+				<div class="form-group">
+					<label for="password-confirmation">Password Confirmation</label>
+					<input
+						type="password"
+						id="password-confirmation"
+						name="passwordConfirmation"
+						class="form-control"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+						placeholder="********"
+					/>
+				</div>
 
-			<div class="form-group">
-				<label for="image">Profile Image (optional)</label>
-				<small>(this deletes existing)</small>
-				<input 
-					type="file" 
-					id="image" 
-					name="image"
-					class="form-control" 
-					title="Image file format must be: JPEG, PNG or SVG."
-					accept="images/*"
-				/>
-			</div>
+				<div id="validation-message">
+				</div>
 
-			<div class="form-group">
-				<label for="current-password">Current Password (required to update profile)</label>
-				<input 
-					type="password" 
-					id="current-password" 
-					name="currentPassword" 
-					class="form-control"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-					title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-					placeholder="********" 
-					required
-				/>
-			</div>
+				<div class="form-group">
+					<label for="image">Profile Image (optional)</label>
+					<small>(this deletes existing)</small>
+					<input
+						type="file"
+						id="image"
+						name="image"
+						class="form-control"
+						title="Image file format must be: JPEG, PNG or SVG."
+						accept="images/*"
+					/>
+				</div>
 
-			<div class="form-group">
-				<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div><!-- RECAPTURE (CHANGE SITEKEY) -->
-			</div>
+				<div class="form-group">
+					<label for="current-password">Current Password (required to update profile)</label>
+					<input
+						type="password"
+						id="current-password"
+						name="currentPassword"
+						class="form-control"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+						placeholder="********"
+						required
+					/>
+				</div>
 
-			<div class="form-group">
-				<button type="submit" class="btn">
-					Update Profile
-				</button>
-			</div>
-		</form>
+				<div class="form-group">
+					<div class="g-recaptcha" data-sitekey="6LfeOrQZAAAAAPxAPffwXZhyd2taJA8M3EpiiZo9"></div><!-- RECAPTURE (CHANGE SITEKEY) -->
+				</div>
+
+				<div class="form-group">
+					<button type="submit" class="btn form-btn">
+						Update Profile
+					</button>
+				</div>
+			</form>
+		</div>
 		<!-- UPDATE PROFILE END -->
 	</div>
 	<!-- MAIN CONTENT END -->
