@@ -158,6 +158,10 @@ legend {
 	color: var(--clr-blue);
 }
 
+.edit-post-images {
+	width: 100px!important;
+}
+
 /************************************************************/
 
 /* MAIN NAVBAR MOBILE STYLES */

@@ -48,17 +48,17 @@
 
 							<div class="blog-post-body">
 			        			<p><%- post.body.substring(0, 300) %>[...]</p>
-					        </div>
+					      </div>
 
-					        <footer class="blog-post-footer">
+					      <footer class="blog-post-footer">
 					        	<p class="blog-post-meta"><small><i class="icon fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
 					        	<a class="color-blue" href="/blog/<%= post.id %>" class="">Read more</a>
-					        </footer>
-				        </article>
-			        <% } %>
-		        <% }); %>
-      		</div><!-- ARTICLE CONTAINER -->
-      		<!-- PAGINATION -->
+					      </footer>
+				      </article>
+			      <% } %>
+		      <% }); %>
+      	</div><!-- ARTICLE CONTAINER -->
+      	<!-- PAGINATION -->
 			<% include ../partials/paginatePosts %>
     	</div>
     	<!-- MAIN CONTENT START -->
