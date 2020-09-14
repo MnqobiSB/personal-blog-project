@@ -64,7 +64,7 @@
 									</button>
 								</form>
 							<% } %>
-					        	<a class="color-blue" href="/blog">Go Back</a>
+					        	<a class="color-blue" href="/blog/<%= post.categoryUrl %>">Go Back</a>
 					        </div>
 				      </article>
 			        </div>
@@ -229,9 +229,9 @@
 					        		<h3 class="card-title section-sub__header"><%= relatedPost.title %></h3>
 
 					        		<small class="article-meta">
-						        		<strong class="d-inline-block mb-2 text-primary">#<%= post.category %></strong>
-						        		<strong class="d-inline-block mb-2 text-success">#<%= post.tag %></strong>
-						        		<span class="read text-gray d-blockt float-right"><i class="icon far fa-clock"></i> <%= relatedPost.read %> min read</span>
+						        		<strong class="post-category">#<%= post.category %></strong>
+						        		<strong class="post-tag">#<%= post.tag %></strong>
+						        		<span class="read text-gray d-block float-right"><i class="icon far fa-clock"></i> <%= relatedPost.read %> min read</span>
 					        		</small>
 
 
