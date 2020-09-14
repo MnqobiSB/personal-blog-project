@@ -230,6 +230,8 @@ input[type="search"] {
 	input[type="search"] {
 		margin-left: 0;
 		margin-right: 0;
+		margin-bottom: 1rem;
+		width: 100%!important;
 	}
 	.search-btn {
 		border: 1px solid var(--clr-green)!important;
@@ -529,6 +531,21 @@ a[href="/site-map"] {
 }
 
 
+/******************************************************/
+
+/* ABOUT STYLES */
+.about-section {
+	margin-bottom: 4rem;
+}
+
+.card-body.social {
+	padding-top: 0;
+}
+
+.profile-icons {
+	font-size: 1.5rem;
+	color: var(--clr-orange);
+}
 
 /******************************************************/
 
