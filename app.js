@@ -1,15 +1,15 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const createError 	= require('http-errors');
-const engine        = require('ejs-mate');
-const express 		  = require('express');
-const path 			    = require('path');
+const engine        	= require('ejs-mate');
+const express 		  	= require('express');
+const path 			   = require('path');
 const cookieParser 	= require('cookie-parser');
-const logger 		    = require('morgan');
-const session 		  = require('express-session')
-const passport		  = require('passport');
-const User 			    = require('./models/user');
-const mongoose		  = require('mongoose');
+const logger 		   = require('morgan');
+const session 		  	= require('express-session')
+const passport		  	= require('passport');
+const User 			   = require('./models/user');
+const mongoose		  	= require('mongoose');
 const methodOverride = require('method-override');
 // const seedPosts     = require('./seeds');
 // seedPosts();
@@ -17,8 +17,8 @@ const methodOverride = require('method-override');
 // require routes
 const indexRouter 	= require('./routes/index');
 const postsRouter 	= require('./routes/posts');
-const reviewsRouter = require('./routes/reviews');
-const toolsRouter   = require('./routes/tools');
+const reviewsRouter 	= require('./routes/reviews');
+const toolsRouter   	= require('./routes/tools');
 const toolsReviewsRouter = require('./routes/toolsReviews');
 
 const app = express();
