@@ -72,6 +72,11 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: var(--ff-heading), Georgia, "Times New Roman", serif;
 }
 
+img {
+	width: 100%;
+  	height: auto;
+}
+
 legend {
 	font-size: var(--fs-body)!important;
 }
@@ -410,7 +415,6 @@ article {
 }
 
 .about-img {
-	width: 300px;
 	margin-bottom: 1rem;
 }
 
