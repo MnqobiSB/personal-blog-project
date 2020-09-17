@@ -6,22 +6,22 @@
 		<div class="jumbotron p-4 p-md-5 main-post">
 			<% posts.docs.forEach(function(post){ %>
 				<% if (post.mainPost) { %>
-				    <div class="col-md-7 px-0">
+				   <div class="col-md-7 px-0">
 				    	<header class="page-header">
-				      		<h1 class="page-title font-italic"><%= post.title %></h1>
-				      	</header>
-				      	<p class="lead my-3"><%- post.body.substring(0, 200) %>[...]</p>
-				      	<p class="lead mb-0">
-				      		<a
-				      			href="/blog/<%= post.id %>"
-				      			class="text-white font-weight-bold stretched-link"
-				      		>
-				      			Read more
-				      		</a>
-				      	</p>
-				    </div>
-			    <% } %>
-		    <% }); %>
+			      		<h1 class="page-title font-italic"><%= post.title %></h1>
+			      	</header>
+				      <p class="lead my-3"><%- post.body.substring(0, 200) %>[...]</p>
+				      <p class="lead mb-0">
+			      		<a
+			      			href="/blog/<%= post.id %>"
+			      			class="text-white font-weight-bold stretched-link"
+			      		>
+			      			Read more
+			      		</a>
+			      	</p>
+				   </div>
+			   <% } %>
+		   <% }); %>
 		</div>
 		<!-- MAIN POST END -->
 
@@ -30,29 +30,29 @@
 	  		<% posts.docs.forEach(function(post){ %>
 				<% if (post.featuredPost) { %>
 	    			<div class="col-md-6">
-			      		<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative featuredPost">
-			        		<div class="col p-4 d-flex flex-column position-static">
-			          			<strong class="post-category">#<%= post.category %></strong>
-			          			<h2 class="mb-0"><%= post.title %></h2>
-			          			<div class="mb-1 text-gray">
-			          				<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
-			          			</div>
-			          			<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>[...]</p>
-			          			<a href="/blog/<%= post.id %>" class="color-blue stretched-link">Read more</a>
+			      	<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative featuredPost">
+			        	<div class="col p-4 d-flex flex-column position-static">
+			          	<strong class="post-category">#<%= post.category %></strong>
+			          		<h2 class="mb-0"><%= post.title %></h2>
+			          		<div class="mb-1 text-gray">
+			          			<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
+			          		</div>
+			          		<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>[...]</p>
+			          		<a href="/blog/<%= post.id %>" class="color-blue stretched-link">Read more</a>
 			        		</div>
 			        		<div class="col-auto d-none d-lg-block featuredPost-image">
-			          			<img
-			          				src="<%= post.images[0].url %>"
-			          				class="card-img-right img-responsive"
-			          				alt="<%= post.title %>'s image"
-			          				title="<%= post.title %>'s image"
-			          				loading="lazy"
-			          			/>
+		          			<img
+		          				src="<%= post.images[0].url %>"
+		          				class="card-img-right img-responsive"
+		          				alt="<%= post.title %>'s image"
+		          				title="<%= post.title %>'s image"
+		          				loading="lazy"
+		          			/>
 			        		</div>
-			      		</div>
+			      	</div>
 	    			</div>
 	    		<% } %>
-		    <% }); %>
+		   <% }); %>
 	  	</div>
 	  	<!-- FEATURED POST END -->
 	</div>
@@ -114,33 +114,33 @@
 
 			<!-- HOME TOOLS SECTION START -->
     		<section class="section featured-tools">
-	      		<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
+	      	<h2 class="pb-4 mb-4 font-italic border-bottom section-title">
 	        		Top Tools!
-	      		</h2>
-	      		<div class="row tool-row">
-	      			<% tools.docs.forEach(function(tool){ %>
-		      			<% if (tool.topTool) { %>
-		      				<div class="col-md-6 product">
-				      			<div class="card tool-card" style="width: 15rem;">
-				      				<% tool.images.forEach(function(image){ %>
-					          			<img
-					          				src="<%= image.url %>"
-					          				class="card-img-top img-responsive"
-					          				alt="<%= tool.title %>'s image"
-					          				title="<%= tool.title %>'s image"
-					          				loading="lazy"
-					          			/>
-				          			<% }) %>
+	      	</h2>
+      		<div class="row tool-row">
+      			<% tools.docs.forEach(function(tool){ %>
+	      			<% if (tool.topTool) { %>
+	      				<div class="col-md-6 product">
+			      			<div class="card tool-card" style="width: 15rem;">
+			      				<% tool.images.forEach(function(image){ %>
+				          			<img
+				          				src="<%= image.url %>"
+				          				class="card-img-top img-responsive"
+				          				alt="<%= tool.title %>'s image"
+				          				title="<%= tool.title %>'s image"
+				          				loading="lazy"
+				          			/>
+			          			<% }) %>
 								  	<div class="card-body">
 								    	<h3 class="card-title footer-heading"><%= tool.title %></h3>
 								    	<p class="card-text"><%- tool.description.substring(0, 80) %>[..]</p>
 								    	<a href="/tools/<%= tool.id %>" class="btn btn-alt">View Tool &raquo;</a>
 								  	</div>
 								</div>
-				      		</div>
+				      	</div>
 						<% } %>
-			        <% }); %>
-	      		</div>
+			      <% }); %>
+	      	</div>
 			</section>
 			<!-- HOME TOOLS SECTION END -->
     	</div>

@@ -43,10 +43,10 @@
 							</header>
 
 							<div class="blog-post-body">
-			        			<p><%- post.body %></p>
+			        			<%- post.body %>
 					      </div>
-
-					      <div class="admin-buttons">
+				      </article>
+				      <div class="admin-buttons">
 					      <hr>
 							<% if (currentUser && post.author.equals(currentUser._id)) { %>
 								<a class="float-right" href="/blog/<%= post.id %>/edit">
@@ -64,9 +64,8 @@
 									</button>
 								</form>
 							<% } %>
-					        	<a class="color-blue" href="/blog/<%= post.categoryUrl %>">Go Back</a>
-					        </div>
-				      </article>
+					      <a class="color-blue" href="/blog/<%= post.categoryUrl %>">Go Back</a>
+					   </div>
 			        </div>
 		        </div>
       		</section>
