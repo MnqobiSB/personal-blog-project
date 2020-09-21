@@ -7,8 +7,8 @@
 		src="/images/tagline.png"
 		class="image-responsive about-img"
 		alt="Suburban Digi Hustle About Tag Line Image"
-	    title="Suburban Digi Hustle About Tag Line Image"
-	    loading="lazy"
+	   title="Suburban Digi Hustle About Tag Line Image"
+	   loading="lazy"
 	/>
 
 	<p><strong>Suburban Digi Hustle</strong> provides its community with best insights, guides, tips and tools to help them grow their <em>business and personal brand</em> online.</P>
@@ -18,18 +18,33 @@
 	<p>We are passionate about the <em>digital world</em> and excited to provide our audience with the best and most vuluable information. <a class="color-blue" href="/about">Learn more!</a></p>
 </div>
 
+
 <!-- Guides -->
 <div class="p-4">
-	<h3 class="font-italic">Guides</h3>
-
+	<h3 class="font-italic">Beginner Guides</h3>
 	<ul class="side-list">
-	  	<% posts.docs.forEach(function(post){ %>
+		<% posts.docs.forEach(function(post){ %>
 			<% if (post.guideArticle) { %>
-				<li><a class="color-blue" href="/blog/<%= post.id %>"><%= post.title %></a></li>
+				<% if (typeof page !== 'undefined' && page === 'web-dev') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'social-media') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'software') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'digital-marketing') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'make-money-online') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'post-show') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else { %>
+					<li><a class="color-blue" href="blog/<%= post.slug %>"><%= post.title %></a></li>
+				<% } %>
 			<% } %>
 		<% }); %>
 	</ul>
 </div>
+
 
 <!-- Popular Articles -->
 <div class="p-4">
@@ -37,11 +52,27 @@
 	<ul class="side-list">
 		<% posts.docs.forEach(function(post){ %>
 			<% if (post.popularArticle) { %>
-				<li><a class="color-blue" href="/blog/<%= post.id %>"><%= post.title %></a></li>
+				<% if (typeof page !== 'undefined' && page === 'web-dev') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'social-media') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'software') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'digital-marketing') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'make-money-online') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else if (typeof page !== 'undefined' && page === 'post-show') { %>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+				<% } else { %>
+					<li><a class="color-blue" href="blog/<%= post.slug %>"><%= post.title %></a></li>
+				<% } %>
 			<% } %>
 		<% }); %>
 	</ul>
 </div>
+
+
 
 <!-- Free Ebook -->
 <div class="p-4">
@@ -56,7 +87,7 @@
 		loading="lazy"
 		class="img-responsive ebook"
 		width="300"
-	>
+	/>
 	<form action="/" method="POST" id="subscribe">
 		<div class="form-group">
 			<label for="firstName">First Name</label>

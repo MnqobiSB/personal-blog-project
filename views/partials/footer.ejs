@@ -5,57 +5,74 @@
 		<div class="row">
 	      <div class="col-6 col-md">
 	        	<h3 class="footer-heading">Quick Links</h3>
-		        <ul class="list-unstyled">
-		          	<li><a class="footer-link" href="/">Home</a></li>
-		          	<li><a class="footer-link" href="/blog">Blog</a></li>
-		          	<li><a class="footer-link" href="/tools">Tools</a></li>
-		          	<li><a class="footer-link" href="/about">About</a></li>
-		          	<li><a class="footer-link" href="/contact">Contact</a></li>
-		          	<!-- if no user is logged in, show sign-up -->
-		          	<% if (!currentUser) { %>
+		       <ul class="list-unstyled">
+		          <li><a class="footer-link" href="/">Home</a></li>
+		          <li><a class="footer-link" href="/blog">Blog</a></li>
+		          <li><a class="footer-link" href="/tools">Tools</a></li>
+		          <li><a class="footer-link" href="/about">About</a></li>
+		          <li><a class="footer-link" href="/contact">Contact</a></li>
+		          <!-- if no user is logged in, show sign-up -->
+		         <% if (!currentUser) { %>
 		          	<li><a class="footer-link" href="/sign-up">Sign Up</a></li>
 		          	<% } %>
 		          	<!-- if no user is logged in, show sign-in -->
 		          	<% if (!currentUser) { %>
 		          	<li><a class="footer-link" href="/sign-in">Sign In</a></li>
 					<% } else { %>
-					<!-- if a user is signed in then show profile and sign-out -->
-					<li><a class="footer-link" href="/profile">Profile</a></li>
-					<li><a class="footer-link" href="/sign-out">Sign Out</a></li>
+						<!-- if a user is signed in then show profile and sign-out -->
+						<li><a class="footer-link" href="/profile">Profile</a></li>
+						<li><a class="footer-link" href="/sign-out">Sign Out</a></li>
 					<% } %>
-		        </ul>
-	      	</div>
-	      	<div class="col-6 col-md">
+		      </ul>
+	      </div>
+	      <div class="col-6 col-md">
 	        	<h3 class="footer-heading">Categories</h3>
 	        	<ul class="list-unstyled">
-	          		<li><a class="footer-link" href="/blog/web-development">Web Development</a></li>
-	          		<li><a class="footer-link" href="/blog/digital-marketing">Digital Marketing</a></li>
-	          		<li><a class="footer-link" href="/blog/social-media">Social Media</a></li>
-	          		<li><a class="footer-link" href="/blog/marketing-software">Marketing Software</a></li>
-	          		<li><a class="footer-link" href="/blog/make-money-online">Make Money Online</a></li>
+	          	<li><a class="footer-link" href="/blog/web-development">Web Development</a></li>
+	          	<li><a class="footer-link" href="/blog/digital-marketing">Digital Marketing</a></li>
+	          	<li><a class="footer-link" href="/blog/social-media">Social Media</a></li>
+	          	<li><a class="footer-link" href="/blog/marketing-software">Marketing Software</a></li>
+	          	<li><a class="footer-link" href="/blog/make-money-online">Make Money Online</a></li>
 	        	</ul>
-	      	</div>
-	      	<div class="col-6 col-md">
-	        	<h3 class="footer-heading">Guides</h3>
-	        	<ul class="list-unstyled">
-	          		<li><a class="footer-link" href="#">Resource</a></li>
-	          		<li><a class="footer-link" href="#">Resource name</a></li>
-	          		<li><a class="footer-link" href="#">Another resource</a></li>
-	          		<li><a class="footer-link" href="#">Final resource</a></li>
-	        	</ul>
-	      	</div>
-	      	<div class="col-6 col-md">
+	      </div>
+
+      	<div class="col-6 col-md">
+        		<h3 class="footer-heading">Beginner Guides</h3>
+        		<ul class="list-unstyled">
+          		<% posts.docs.forEach(function(post){ %>
+						<% if (post.guideArticle) { %>
+							<% if (typeof page !== 'undefined' && page === 'web-dev') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else if (typeof page !== 'undefined' && page === 'social-media') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else if (typeof page !== 'undefined' && page === 'software') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else if (typeof page !== 'undefined' && page === 'digital-marketing') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else if (typeof page !== 'undefined' && page === 'make-money-online') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else if (typeof page !== 'undefined' && page === 'post-show') { %>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+							<% } else { %>
+								<li><a class="footer-link" href="blog/<%= post.slug %>"><%= post.title %></a></li>
+							<% } %>
+						<% } %>
+					<% }); %>
+        		</ul>
+      	</div>
+
+	      <div class="col-6 col-md">
 	        	<h3 class="footer-heading">Follow Us</h3>
-	        		<ul class="list-unstyled">
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-google-plus-g"></i> Google+</a></li>
-	          		<li><a class="footer-link social" href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+        		<ul class="list-unstyled">
+          		<li><a class="footer-link social" href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+          		<li><a class="footer-link social" href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          		<li><a class="footer-link social" href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          		<li><a class="footer-link social" href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+          		<li><a class="footer-link social" href="#"><i class="fab fa-google-plus-g"></i> Google+</a></li>
+          		<li><a class="footer-link social" href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
 	        	</ul>
-	      	</div>
-	    </div>
+	      </div>
+	   </div>
 	    <!-- LINKS SECTION -->
   	</div>
   	<!-- LINKS SECTION -->

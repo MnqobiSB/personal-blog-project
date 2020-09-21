@@ -13,7 +13,7 @@
 				      <p class="lead my-3"><%- post.body.substring(0, 200) %>[...]</p>
 				      <p class="lead mb-0">
 			      		<a
-			      			href="/blog/<%= post.id %>"
+			      			href="/blog/<%= post.slug %>"
 			      			class="text-white font-weight-bold stretched-link"
 			      		>
 			      			Read more
@@ -38,7 +38,7 @@
 			          			<small><i class="icon far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 			          		</div>
 			          		<p class="card-text mb-auto"><%- post.body.substring(0, 50) %>[...]</p>
-			          		<a href="/blog/<%= post.id %>" class="color-blue stretched-link">Read more</a>
+			          		<a href="blog/<%= post.slug %>" class="color-blue stretched-link">Read more</a>
 			        		</div>
 			        		<div class="col-auto d-none d-lg-block featuredPost-image">
 		          			<img
@@ -101,7 +101,7 @@
 						        		</small>
 						        	</p>
 
-						        	<a href="/blog/<%= post.id %>" class="color-blue">
+						        	<a href="blog/<%= post.slug %>" class="color-blue">
 						        		Read more
 						        	</a>
 						      </footer>

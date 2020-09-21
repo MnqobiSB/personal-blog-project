@@ -39,7 +39,7 @@
 		    		<% posts.docs.forEach(function(post){ %>
 						<% if (post.category === 'Web Development') { %>
 							<div class="col-md-6 site-map-link-holder">
-								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<p><a href="blog/<%= post.slug %>" class="title-link"><%= post.title %></a></p>
 								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 		    				</div>
 						<% } %>
@@ -54,7 +54,7 @@
 		    		<% posts.docs.forEach(function(post){ %>
 		    			<% if (post.category === 'Digital Marketing') { %>
 							<div class="col-md-6">
-								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<p><a href="blog/<%= post.slug %>" class="title-link"><%= post.title %></a></p>
 								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 		    				</div>
 		    			<% } %>
@@ -69,7 +69,7 @@
 		    		<% posts.docs.forEach(function(post){ %>
 		    			<% if (post.category === 'Social Media') { %>
 							<div class="col-md-6">
-								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<p><a href="blog/<%= post.slug %>" class="title-link"><%= post.title %></a></p>
 								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 		    				</div>
 		    			<% } %>
@@ -84,7 +84,7 @@
 		    		<% posts.docs.forEach(function(post){ %>
 		    			<% if (post.category === 'Software') { %>
 							<div class="col-md-6">
-								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<p><a href="blog/<%= post.slug %>" class="title-link"><%= post.title %></a></p>
 								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 		    				</div>
 		    			<% } %>
@@ -99,7 +99,7 @@
 		    		<% posts.docs.forEach(function(post){ %>
 		    			<% if (post.category === 'Make Money Online') { %>
 							<div class="col-md-6">
-								<p><a href="/blog/<%= post.id %>" class="title-link"><%= post.title %></a></p>
+								<p><a href="blog/<%= post.slug %>" class="title-link"><%= post.title %></a></p>
 								<small><i class="far fa-calendar-alt"></i> <%= moment(post.createdAt).format('MMM DD') %></small>
 		    				</div>
 		    			<% } %>

@@ -155,11 +155,14 @@ module.exports = {
 		let post = new Post(req.body.post);
 		await post.save();
 		req.session.success = 'Post created successfully!';
-		res.redirect(`/blog/${post.id}`);
+		res.redirect(`/blog/${post.slug}`);
 	},
 	// Posts Show
 	async postShow(req, res, next) {
-		let post = await Post.findById(req.params.id).populate({
+		let post = await Post.findOne({
+			slug: req.params.slug,
+			slug2: req.params.slug2
+		}).populate({
 			path: 'reviews',
 			options: { sort: { '_id': -1 } },
 			populate: {
@@ -247,7 +250,7 @@ module.exports = {
 		await post.save();
 		req.session.success = 'Post updated successfully!';
 		// redirect to show page
-		res.redirect(`/blog/${post.id}`);
+		res.redirect(`/blog/${post.slug}`);
 	},
 	// Post Destroy
 	async postDestroy(req, res, next) {

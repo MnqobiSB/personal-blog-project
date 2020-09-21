@@ -76,7 +76,7 @@ router.get('/new', isLoggedIn, isRegisteredAdmin, postNew);
 router.post('/', isLoggedIn, isRegisteredAdmin, upload.array('images', 4), asyncErrorHandler(postCreate));
 
 /* GET posts show /posts/:id */
-router.get('/:id',asyncErrorHandler(postShow));
+router.get('/:slug',asyncErrorHandler(postShow));
 
 /* GET posts edit /posts/:id/edit */
 router.get('/:id/edit', isLoggedIn, isRegisteredAdmin, asyncErrorHandler(isAuthor), postEdit);

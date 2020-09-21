@@ -52,7 +52,7 @@
 
 				        	<footer class="blog-post-footer">
 				        		<p class="blog-post-meta"><small><i class="icon fas fa-comments"></i> <%= post.reviews.length %> <%= post.reviews.length === 1 ? 'Comment' : 'Comments' %></small></p>
-				        		<a class="color-blue" href="/blog/<%= post.id %>" class="">Read more</a>
+				        		<a class="color-blue" href="<%= post.slug %>" class="">Read more</a>
 				        	</footer>
 			        	</article>
 		        	<% } %>

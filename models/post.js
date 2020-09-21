@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Review = require('./review');
 const mongoosePaginate = require('mongoose-paginate');
+const slug = require('mongoose-slug-generator');
+
+mongoose.plugin(slug);
 
 const PostSchema = new Schema({
 	title: String,
+	slug: { type: String, slug: 'title' },
 	createdAt: {
 		type: Date,
 		default: Date.now
