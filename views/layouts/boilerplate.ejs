@@ -113,7 +113,9 @@
 	<% include ../partials/navbar %>
 	<% include ../partials/flash-messages %>
 	<%- body -%>
-	<% include ../partials/footer %>
+	<% if (page !== 'new-post' && page !== 'edit-post') { %>
+		<% include ../partials/footer %>
+	<% } %>
 
 	<!-- Vendor scripts -->
 	<script src="/javascripts/vendor/modernizr-3.7.1.min.js"></script>
