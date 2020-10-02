@@ -30,8 +30,8 @@
 	        	<ul class="list-unstyled">
 	          	<li><a class="footer-link" href="/blog/web-development">Web Development</a></li>
 	          	<li><a class="footer-link" href="/blog/digital-marketing">Digital Marketing</a></li>
-	          	<li><a class="footer-link" href="/blog/social-media">Social Media</a></li>
-	          	<li><a class="footer-link" href="/blog/marketing-software">Marketing Software</a></li>
+	          	<li><a class="footer-link" href="/blog/blogging">Blogging</a></li>
+	          	<li><a class="footer-link" href="/blog/productivity-software">Productivity Software</a></li>
 	          	<li><a class="footer-link" href="/blog/make-money-online">Make Money Online</a></li>
 	        	</ul>
 	      </div>
@@ -42,19 +42,19 @@
           		<% posts.docs.forEach(function(post){ %>
 						<% if (post.guideArticle) { %>
 							<% if (typeof page !== 'undefined' && page === 'web-dev') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else if (typeof page !== 'undefined' && page === 'social-media') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else if (typeof page !== 'undefined' && page === 'software') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else if (typeof page !== 'undefined' && page === 'digital-marketing') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else if (typeof page !== 'undefined' && page === 'make-money-online') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else if (typeof page !== 'undefined' && page === 'post-show') { %>
-								<li><a class="footer-link" href="<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } else { %>
-								<li><a class="footer-link" href="blog/<%= post.slug %>"><%= post.title %></a></li>
+								<li><a class="footer-link" href="blog/<%= post.slug %>"><%= post.shortTitle %></a></li>
 							<% } %>
 						<% } %>
 					<% }); %>

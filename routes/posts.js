@@ -14,7 +14,7 @@ const {
 const {
 	postIndex,
 	postWeb,
-	postSocial,
+	blogging,
 	postSoftware,
 	postDigitalMarketing,
 	postMakeMoneyOnline,
@@ -43,14 +43,14 @@ router.get(
 
 /* GET posts Social-Media /posts */
 router.get(
-	'/social-media',
+	'/blogging',
 	asyncErrorHandler(searchAndFilterPosts),
-	asyncErrorHandler(postSocial)
+	asyncErrorHandler(blogging)
 );
 
 /* GET posts Software /posts */
 router.get(
-	'/marketing-software',
+	'/productivity-software',
 	asyncErrorHandler(searchAndFilterPosts),
 	asyncErrorHandler(postSoftware)
 );

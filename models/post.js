@@ -39,6 +39,7 @@ const PostSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	shortTitle: String,
 	category: String,
 	tag: String,
 	categoryUrl: String,

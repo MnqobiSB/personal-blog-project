@@ -13,7 +13,7 @@
 
 	<p><strong>Suburban Digi Hustle</strong> provides its community with best insights, guides, tips and tools to help them grow their <em>business and personal brand</em> online.</P>
 
-	<P>We specialize in Web Development, Digital Marketing, Social Media Platforms, Marketing Software and strategies of How To Make Money Online.</p>
+	<P>We specialize in Web Development, Digital Marketing, Blogging, Productivity Software and strategies of How To Make Money Online.</p>
 
 	<p>We are passionate about the <em>digital world</em> and excited to provide our audience with the best and most vuluable information. <a class="color-blue" href="/about">Learn more!</a></p>
 </div>
@@ -26,19 +26,19 @@
 		<% posts.docs.forEach(function(post){ %>
 			<% if (post.guideArticle) { %>
 				<% if (typeof page !== 'undefined' && page === 'web-dev') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else if (typeof page !== 'undefined' && page === 'social-media') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else if (typeof page !== 'undefined' && page === 'software') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else if (typeof page !== 'undefined' && page === 'digital-marketing') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else if (typeof page !== 'undefined' && page === 'make-money-online') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else if (typeof page !== 'undefined' && page === 'post-show') { %>
-					<li><a class="color-blue" href="<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } else { %>
-					<li><a class="color-blue" href="blog/<%= post.slug %>"><%= post.title %></a></li>
+					<li><a class="color-blue" href="blog/<%= post.slug %>"><%= post.shortTitle %></a></li>
 				<% } %>
 			<% } %>
 		<% }); %>

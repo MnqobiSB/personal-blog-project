@@ -48,7 +48,7 @@ module.exports = {
 		});
 	},
 	// Posts Social-Media
-	async postSocial(req, res, next) {
+	async blogging(req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -60,10 +60,10 @@ module.exports = {
 		if (!posts.docs.length && res.locals.query) {
 			res.locals.error = 'No results match that query.';
 		}
-		res.render('posts/social-media', {
-			title: 'Social Media',
-			page: 'social-media',
-			url: 'social-media',
+		res.render('posts/blogging', {
+			title: 'Blogging',
+			page: 'blogging',
+			url: 'blogging',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts,
@@ -83,7 +83,7 @@ module.exports = {
 			res.locals.error = 'No results match that query.';
 		}
 		res.render('posts/software', {
-			title: 'Marketing Software',
+			title: 'Productivity Software',
 			page: 'software',
 			robots: 'index, follow',
 			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
@@ -240,6 +240,7 @@ module.exports = {
 		post.homeArticle = req.body.post.homeArticle;
 		post.popularArticle = req.body.post.popularArticle;
 		post.guideArticle = req.body.post.guideArticle;
+		post.shortTitle = req.body.post.shortTitle;
 		post.category = req.body.post.category;
 		post.tag = req.body.post.tag;
 		post.categoryUrl = req.body.post.categoryUrl;

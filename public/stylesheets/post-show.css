@@ -7,6 +7,10 @@
 	margin-bottom: 0;
 }
 
+.blog-post-body {
+
+}
+
 .delete-btn {
 	margin-right: 1rem;
 	background-color: var(--clr-red)!important;

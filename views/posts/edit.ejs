@@ -94,6 +94,18 @@
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="shortTitle">Short Title</label>
+				<input
+					type="text"
+					name="post[shortTitle]"
+					id="shortTitle"
+					class="form-control"
+					placeholder="Short Title"
+					value="<%= post.shortTitle %>"
+					required
+				/>
+			</div>
+			<div class="form-group">
 				<label for="category">Category</label>
 				<select
 					name="post[category]"
@@ -101,9 +113,9 @@
 					class="form-control">
 					<option selected value="<%= post.category %>"><%= post.category %></option>
 					<option value="Web Development">Web Development</option>
-					<option value="Social Media">Social Media</option>
-					<option value="Sofware">Sofware</option>
 					<option value="Digital Marketing">Digital Marketing</option>
+					<option value="Blogging">Blogging</option>
+					<option value="Productivity Sofware">Productivity Sofware</option>
 					<option value="Make Money Online">Make Money Online</option>
 				</select>
 			</div>
