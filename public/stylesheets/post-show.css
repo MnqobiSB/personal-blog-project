@@ -11,6 +11,13 @@
 
 }
 
+.blog-post-body blockquote {
+	margin-left: 2rem;
+	border-left: 3px solid var(--clr-green);
+	padding: .5rem 0 .1rem 1rem;
+	font-style: italic;
+}
+
 .delete-btn {
 	margin-right: 1rem;
 	background-color: var(--clr-red)!important;
