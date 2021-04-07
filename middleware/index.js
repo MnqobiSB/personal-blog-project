@@ -5,16 +5,14 @@ const ToolReview = require('../models/toolReview');
 const Tool = require('../models/tool');
 const { cloudinary } = require('../cloudinary');
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+function escapeRegExp (string) {
+	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
 const middleware = {
-	asyncErrorHandler: (fn) =>
-		(req, res, next) => {
-			Promise.resolve(fn(req, res, next))
-						 .catch(next);
-		},
+	asyncErrorHandler: (fn) => (req, res, next) => {
+		Promise.resolve(fn(req, res, next)).catch(next);
+	},
 	isReviewAuthor: async (req, res, next) => {
 		let review = await Review.findById(req.params.review_id);
 		if (review.author.equals(req.user._id)) {
@@ -62,7 +60,10 @@ const middleware = {
 		res.redirect('back');
 	},
 	isValidPassword: async (req, res, next) => {
-		const { user } = await User.authenticate()(req.user.username, req.body.currentPassword);
+		const { user } = await User.authenticate()(
+			req.user.username,
+			req.body.currentPassword
+		);
 		if (user) {
 			// add user to res.locals
 			res.locals.user = user;
@@ -74,11 +75,8 @@ const middleware = {
 		}
 	},
 	changePassword: async (req, res, next) => {
-		const {
-			newPassword,
-			passwordConfirmation
-		} = req.body;
-		
+		const { newPassword, passwordConfirmation } = req.body;
+
 		if (newPassword && !passwordConfirmation) {
 			middleware.deleteProfileImage(req);
 			req.session.error = 'Missing password confirmation!';
@@ -97,19 +95,20 @@ const middleware = {
 			next();
 		}
 	},
-	deleteProfileImage: async req => {
+	deleteProfileImage: async (req) => {
 		if (req.file) await cloudinary.v2.uploader.destroy(req.file.public_id);
 	},
-	async searchAndFilterPosts(req, res, next) {
+	async searchAndFilterPosts (req, res, next) {
 		const queryKeys = Object.keys(req.query);
 
-		if(queryKeys.length) {
+		if (queryKeys.length) {
 			const dbQueries = [];
 			let { search } = req.query;
 
 			if (search) {
 				search = new RegExp(escapeRegExp(search), 'gi');
-				dbQueries.push({ $or: [
+				dbQueries.push({
+					$or: [
 						{ title: search },
 						{ category: search },
 						{ tag: search },
@@ -126,20 +125,23 @@ const middleware = {
 
 		queryKeys.splice(queryKeys.indexOf('page'), 1);
 		const delimiter = queryKeys.length ? '&' : '?';
-		res.locals.paginateUrl = req.originalUrl.replace(/(\?|\&)page=\d+/g, '') + `${delimiter}page=`;
+		res.locals.paginateUrl =
+			req.originalUrl.replace(/(\?|\&)page=\d+/g, '') +
+			`${delimiter}page=`;
 
 		next();
 	},
-	async searchAndFilterTools(req, res, next) {
+	async searchAndFilterTools (req, res, next) {
 		const queryKeys = Object.keys(req.query);
 
-		if(queryKeys.length) {
+		if (queryKeys.length) {
 			const dbQueries = [];
 			let { search, category, avgRating } = req.query;
 
 			if (search) {
 				search = new RegExp(escapeRegExp(search), 'gi');
-				dbQueries.push({ $or: [
+				dbQueries.push({
+					$or: [
 						{ title: search },
 						{ description: search },
 						{ category: search },
@@ -163,7 +165,9 @@ const middleware = {
 
 		queryKeys.splice(queryKeys.indexOf('page'), 1);
 		const delimiter = queryKeys.length ? '&' : '?';
-		res.locals.paginateUrl = req.originalUrl.replace(/(\?|\&)page=\d+/g, '') + `${delimiter}page=`;
+		res.locals.paginateUrl =
+			req.originalUrl.replace(/(\?|\&)page=\d+/g, '') +
+			`${delimiter}page=`;
 
 		next();
 	}
