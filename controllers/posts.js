@@ -4,7 +4,7 @@ const { cloudinary } = require('../cloudinary');
 
 module.exports = {
 	// Posts Index
-	async postIndex(req, res, next) {
+	async postIndex (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -21,12 +21,13 @@ module.exports = {
 			page: 'all-posts',
 			url: 'blog',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
 		});
 	},
 	// Posts Web-Development
-	async postWeb(req, res, next) {
+	async postWeb (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -43,12 +44,13 @@ module.exports = {
 			page: 'web-dev',
 			url: 'web-development',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
 		});
 	},
 	// Posts Social-Media
-	async blogging(req, res, next) {
+	async blogging (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -65,12 +67,13 @@ module.exports = {
 			page: 'blogging',
 			url: 'blogging',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
-			posts,
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			posts
 		});
 	},
 	// Posts Social-Media
-	async postSoftware(req, res, next) {
+	async postSoftware (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -86,12 +89,13 @@ module.exports = {
 			title: 'Productivity Software',
 			page: 'software',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
 		});
 	},
 	// Posts Digital-Marketing
-	async postDigitalMarketing(req, res, next) {
+	async postDigitalMarketing (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -108,12 +112,13 @@ module.exports = {
 			page: 'digital-marketing',
 			url: 'digital-marketing',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
 		});
 	},
 	// Posts Make Money Online
-	async postMakeMoneyOnline(req, res, next) {
+	async postMakeMoneyOnline (req, res, next) {
 		const { dbQuery } = res.locals;
 		delete res.locals.dbQuery;
 		let posts = await Post.paginate(dbQuery, {
@@ -127,25 +132,26 @@ module.exports = {
 		}
 		res.render('posts/make-money-online', {
 			title: 'Make Money Online',
-			page: 'make-money-online' ,
+			page: 'make-money-online',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			posts
 		});
 	},
 	// Posts New
-	postNew(req, res, next) {
+	postNew (req, res, next) {
 		res.render('posts/new', {
 			title: 'New Post',
-			page: 'new-post' ,
+			page: 'new-post',
 			robots: 'noindex, nofollow',
 			googlebot: 'noindex, nofollow'
 		});
 	},
 	// Posts Create
-	async postCreate(req, res, next) {
+	async postCreate (req, res, next) {
 		req.body.post.images = [];
-		for(const file of req.files) {
+		for (const file of req.files) {
 			req.body.post.images.push({
 				url: file.secure_url,
 				public_id: file.public_id
@@ -158,13 +164,13 @@ module.exports = {
 		res.redirect(`/blog/${post.slug}`);
 	},
 	// Posts Show
-	async postShow(req, res, next) {
+	async postShow (req, res, next) {
 		let post = await Post.findOne({
 			slug: req.params.slug,
 			slug2: req.params.slug2
 		}).populate({
 			path: 'reviews',
-			options: { sort: { '_id': -1 } },
+			options: { sort: { _id: -1 } },
 			populate: {
 				path: 'author',
 				model: 'User'
@@ -179,20 +185,25 @@ module.exports = {
 			sort: '-_id'
 		});
 
-		let relatedPosts = await Post.find().where('category').equals(post.category).limit(5).exec();
+		let relatedPosts = await Post.find()
+			.where('category')
+			.equals(post.category)
+			.limit(5)
+			.exec();
 
 		res.render('posts/show', {
 			title: post.title,
 			page: 'post-show',
 			robots: 'index, follow',
-			googlebot: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+			googlebot:
+				'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
 			post,
 			posts,
 			relatedPosts
 		});
 	},
 	// Posts Edit
-	postEdit(req, res, next) {
+	postEdit (req, res, next) {
 		res.render('posts/edit', {
 			title: 'Edit Post',
 			page: 'edit-post',
@@ -201,7 +212,7 @@ module.exports = {
 		});
 	},
 	// Posts Update
-	async postUpdate(req, res, next) {
+	async postUpdate (req, res, next) {
 		// destructure post from res.locals
 		const { post } = res.locals;
 		// check if there's any images for deletion
@@ -209,11 +220,11 @@ module.exports = {
 			// assign deleteImages from req.body to its own variable
 			let deleteImages = req.body.deleteImages;
 			// loop over the deleteImages
-			for(const public_id of deleteImages) {
+			for (const public_id of deleteImages) {
 				// delete images from cloudinary
 				await cloudinary.v2.uploader.destroy(public_id);
 				// delete images from post.images
-				for(const image of post.images){
+				for (const image of post.images) {
 					if (image.public_id === public_id) {
 						let index = post.images.indexOf(image);
 						post.images.splice(index, 1);
@@ -222,9 +233,9 @@ module.exports = {
 			}
 		}
 		// check if there are any new images for upload
-		if(req.files) {
+		if (req.files) {
 			// upload images
-			for(const file of req.files) {
+			for (const file of req.files) {
 				// add images to post.images array
 				post.images.push({
 					url: file.secure_url,
@@ -235,7 +246,7 @@ module.exports = {
 		// update the post with any new properties
 		post.title = req.body.post.title;
 		post.createdAt = req.body.post.createdAt;
-		post.mainPostd = req.body.post.mainPostd;
+		post.mainPost = req.body.post.mainPost;
 		post.featuredPost = req.body.post.featuredPost;
 		post.homeArticle = req.body.post.homeArticle;
 		post.popularArticle = req.body.post.popularArticle;
@@ -254,13 +265,13 @@ module.exports = {
 		res.redirect(`/blog/${post.slug}`);
 	},
 	// Post Destroy
-	async postDestroy(req, res, next) {
+	async postDestroy (req, res, next) {
 		const { post } = res.locals;
-		for(const image of post.images) {
+		for (const image of post.images) {
 			await cloudinary.v2.uploader.destroy(image.public_id);
 		}
 		await post.remove();
 		req.session.success = 'Post deleted successfully!';
 		res.redirect('/blog');
 	}
-}
+};
