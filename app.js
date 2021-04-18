@@ -1,39 +1,37 @@
 require('dotenv').config();
 
-const createError 	= require('http-errors');
-const engine        	= require('ejs-mate');
-const express 		  	= require('express');
-const path 			   = require('path');
-const cookieParser 	= require('cookie-parser');
-const logger 		   = require('morgan');
-const session 		  	= require('express-session')
-const passport		  	= require('passport');
-const User 			   = require('./models/user');
-const mongoose		  	= require('mongoose');
+const createError = require('http-errors');
+const engine = require('ejs-mate');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session');
+const passport = require('passport');
+const User = require('./models/user');
+const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-// const seedPosts     = require('./seeds');
-// seedPosts();
 
 // require routes
-const indexRouter 	= require('./routes/index');
-const postsRouter 	= require('./routes/posts');
-const reviewsRouter 	= require('./routes/reviews');
-const toolsRouter   	= require('./routes/tools');
+const indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts');
+const reviewsRouter = require('./routes/reviews');
+const toolsRouter = require('./routes/tools');
 const toolsReviewsRouter = require('./routes/toolsReviews');
 
 const app = express();
 
 // connect to the database
 mongoose.connect(process.env.DATABASEURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true
 });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-	console.log('We\'re Connected to the DB!');
+	console.log("We're Connected to the DB!");
 });
 
 // use ejs-locals for all ejs templates:
@@ -53,11 +51,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 // configure passport and sessions
-app.use(session({
-	secret: 'blogger 4 life',
-	resave: false,
-	saveUninitialized: true
-}));
+app.use(
+	session({
+		secret: 'blogger 4 life',
+		resave: false,
+		saveUninitialized: true
+	})
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -67,7 +67,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // set local variables middleware
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	//require moment
 	app.locals.moment = require('moment');
 	// req.user = {
@@ -100,22 +100,26 @@ app.use('/tools/:id/toolsReviews', toolsReviewsRouter);
 const http = require('http').Server(app);
 
 app.get('/download', async function (req, res) {
-	await res.download(__dirname + '/public/ebook_folder/ebook.pdf', 'ebook.pdf', function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Download success');
+	await res.download(
+		__dirname + '/public/ebook_folder/ebook.pdf',
+		'ebook.pdf',
+		function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log('Download success');
+			}
 		}
-	});
+	);
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
 	// set locals, only providing error in development
 	// res.locals.message = err.message;
 	// res.locals.error = req.app.get('env') === 'development' ? err : {};
